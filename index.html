@@ -8,18 +8,21 @@
     <link rel="stylesheet" href="/src/output.css">
     <link rel="stylesheet" href="/src/animations.css">
     <title>Srijan | Portfolio</title>
-    <script type="text/javascript">
-        (function (c, l, a, r, i, t, y) {
-            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
-        })(window, document, "clarity", "script", "v95ngnbiuo");
+    <script>
+        window.addEventListener('load', () => {
+            // Saare fade-in elements ko select karo
+            const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in');
+
+            // Sab par 'visible' class add kar do turant
+            animatedElements.forEach((el) => {
+                el.classList.add('visible');
+            });
+        });
     </script>
 </head>
 
 <body class="bg-[#212121] my-6 mx-4 sm:my-8 sm:mx-6 md:my-12 md:mx-12 lg:my-8 lg:mx-48">
     <section class="flex flex-col lg:flex-row items-start p-0 gap-6 sm:gap-8 lg:gap-20">
-        <!-- sticky card -->
         <div
             class="fade-in bg-white border-4 p-6 flex flex-col items-center gap-4 sm:gap-6 lg:gap-8 w-full lg:w-[580px] rounded-2xl lg:sticky lg:top-10 lg:self-start">
             <img src="/img/pfp.webp" alt="profile_picture"
@@ -34,163 +37,238 @@
                 Crafting engaging
                 digital experiences with a perfect balance of creativity and functionality.</p>
             <div class="flex flex-row w-full justify-evenly px-2 sm:px-4 lg:px-8">
-                <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/instagram-svgrepo-com.svg" alt="instagram">
-                <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/mail-svgrepo-com.svg" alt="mail">
-                <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/phone-svgrepo-com.svg" alt="phone">
-                <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/behance-163-svgrepo-com.svg" alt="behance-163">
-                <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/artstation-svgrepo-com.svg" alt="artstation">
+                <a href="https://instagram.com/srijanux" target="_blank">
+                    <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/instagram-svgrepo-com.svg" alt="instagram">
+                </a>
+                <a href="mailto:guptasrijan85@gmail.com">
+                    <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/mail-svgrepo-com.svg" alt="mail">
+                </a>
+                <a href="https://www.behance.net/srijananandgupta" target="_blank">
+                    <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/behance-163-svgrepo-com.svg"
+                        alt="behance-163">
+                </a>
+                <a href="https://www.artstation.com/jellyfishjuggler" target="_blank">
+                    <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/artstation-svgrepo-com.svg"
+                        alt="artstation">
+                </a>
             </div>
         </div>
 
-        <!-- intro -->
         <div class="flex flex-col gap-10 sm:gap-12 lg:gap-6 w-full lg:min-h-[200vh]">
             <div class="flex flex-col gap-6 sm:gap-8 lg:gap-12">
                 <div class="flex flex-col gap-3 sm:gap-4">
-                    <h1 class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
+                    <h1
+                        class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
                         <span>UI/UX</span>
                         <span class="text-[#808080]">Designer</span>
                     </h1>
-                    <p class="fade-in text-[#808080] w-full lg:w-2/3 text-sm sm:text-base lg:text-xl leading-relaxed">Blending
+                    <p class="fade-in text-[#808080] w-full lg:w-2/3 text-sm sm:text-base lg:text-xl leading-relaxed">
+                        Blending
                         design and technology to craft seamless user
                         experiences and scalable solutions.</p>
                 </div>
                 <div class="flex flex-row w-full lg:w-fit gap-3 sm:gap-4 lg:gap-12 justify-between">
-                    <div class="fade-in uppercase text-white flex flex-col items-center flex-1 sm:flex-initial sm:w-[80px] lg:w-[100px]">
+                    <div
+                        class="fade-in uppercase text-white flex flex-col items-center flex-1 sm:flex-initial sm:w-[80px] lg:w-[100px]">
                         <h2 class="text-3xl sm:text-4xl lg:text-7xl font-satoshi-bold">+6</h2>
                         <h3
                             class="text-center font-satoshi-medium text-[#808080] text-[10px] sm:text-xs lg:text-base leading-tight">
                             Months of experience</h3>
                     </div>
-                    <div class="fade-in uppercase text-white flex flex-col items-center flex-1 sm:flex-initial sm:w-[80px] lg:w-[100px]">
+                    <div
+                        class="fade-in uppercase text-white flex flex-col items-center flex-1 sm:flex-initial sm:w-[80px] lg:w-[100px]">
                         <h2 class="text-3xl sm:text-4xl lg:text-7xl font-satoshi-bold">+6</h2>
                         <h3
                             class="text-center font-satoshi-medium text-[#808080] text-[10px] sm:text-xs lg:text-base leading-tight">
                             Projects Completed</h3>
                     </div>
-                    <div class="fade-in uppercase text-white flex flex-col items-center flex-1 sm:flex-initial sm:w-[80px] lg:w-[150px]">
+                    <div
+                        class="fade-in uppercase text-white flex flex-col items-center flex-1 sm:flex-initial sm:w-[80px] lg:w-[150px]">
                         <h2 class="text-3xl sm:text-4xl lg:text-7xl font-satoshi-bold">&infin;</h2>
                         <h3
                             class="text-center font-satoshi-medium text-[#808080] text-[10px] sm:text-xs lg:text-base leading-tight">
                             Endless Passion to learn</h3>
                     </div>
                 </div>
-                <button
-                    class="fade-in btn-hover font-satoshi-black text-sm sm:text-base lg:text-xl tracking-widest uppercase bg-[#f1f1f1f1] w-full lg:w-1/3 p-3 sm:p-4 rounded-sm">Contact
-                    Me</button>
+                <div class="fade-in w-full lg:w-1/3">
+                    <a href="mailto:guptasrijan85@gmail.com"
+                        onmouseover="this.style.backgroundColor='#f1f1f1'; this.style.color='#212121';"
+                        onmouseout="this.style.backgroundColor='transparent'; this.style.color='white';"
+                        style="background-color: transparent; color: white; border: 2px solid white; transition: all 0.3s ease-in-out;"
+                        class="font-satoshi-black text-sm sm:text-base lg:text-xl tracking-widest uppercase w-full p-3 sm:p-4 rounded-sm block text-center">
+                        Contact Me
+                    </a>
+                </div>
             </div>
 
-            <!-- recent work -->
             <div class="flex flex-col gap-4 sm:gap-6 mt-8 sm:mt-12 lg:mt-58">
                 <div class="flex flex-col gap-4 sm:gap-6 lg:gap-4">
-                    <h1 class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
+                    <h1
+                        class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
                         <span>recent</span>
                         <span class="text-[#808080]">projects</span>
                     </h1>
-                    <div class="flex flex-col w-full lg:w-fit gap-4 sm:gap-6 lg:gap-16">
-                        <div
-                            class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col lg:flex-row items-start lg:items-center gap-3 sm:gap-4 lg:gap-12 rounded-sm">
-                            <img src="/img/recent-work/image-1.webp" alt="recent-work-1"
-                                class="w-full lg:w-[180px] rounded-sm">
-                            <div class="flex flex-col w-fit gap-1 sm:gap-2">
-                                <h2 class="text-xl sm:text-2xl lg:text-3xl font-satoshi-bold uppercase">aquis</h2>
-                                <h3
-                                    class="font-satoshi-medium text-sm sm:text-base lg:text-xl text-[#808080] leading-relaxed">
-                                    A real-time groundwater
-                                    monitoring system</h3>
+
+                    <div class="flex flex-col w-full lg:w-[800px] gap-6 sm:gap-8 lg:gap-10">
+
+                        <a href="https://www.behance.net/gallery/239139313/AQUIS-Real-Time-Groundwater-Monitoring-Platform" target="_blank" class="block">
+                            <div
+                                class="fade-in card-hover bg-[#232323] p-4 sm:p-6 lg:p-8 text-white flex flex-col md:flex-row items-center gap-6 rounded-lg cursor-pointer transition-all hover:bg-[#2a2a2a]">
+                                <div class="w-full md:w-[450px] h-[180px] md:h-[250px] shrink-0 overflow-hidden rounded-md">
+                                    <img src="/img/recent-work/image-3.webp" alt="aquis"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <h2 class="text-xl sm:text-2xl lg:text-3xl font-satoshi-bold uppercase">aquis</h2>
+                                    <p
+                                        class="font-satoshi-medium text-sm sm:text-base lg:text-lg text-[#808080] leading-relaxed">
+                                        A real-time groundwater monitoring system designed for precision and scalability.
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div
-                            class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col lg:flex-row items-start lg:items-center gap-3 sm:gap-4 lg:gap-12 rounded-sm">
-                            <img src="/img/recent-work/image-1.webp" alt="recent-work-1"
-                                class="w-full lg:w-[180px] rounded-sm">
-                            <div class="flex flex-col w-fit gap-1 sm:gap-2">
-                                <h2 class="text-xl sm:text-2xl lg:text-3xl font-satoshi-bold uppercase">aquis</h2>
-                                <h3
-                                    class="font-satoshi-medium text-sm sm:text-base lg:text-xl text-[#808080] leading-relaxed">
-                                    A real-time groundwater
-                                    monitoring system</h3>
+                        </a>
+
+                        <a href="https://zehrasmakeovers.com/" target="_blank" class="block">
+                            <div
+                                class="fade-in card-hover bg-[#232323] p-4 sm:p-6 lg:p-8 text-white flex flex-col md:flex-row items-center gap-6 rounded-lg cursor-pointer transition-all hover:bg-[#2a2a2a]">
+                                <div class="w-full md:w-[280px] h-[180px] md:h-[200px] shrink-0 overflow-hidden rounded-md">
+                                    <img src="/img/recent-work/image-2.webp" alt="zehras-makeovers"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <h2 class="text-xl sm:text-2xl lg:text-3xl font-satoshi-bold uppercase">zehras makeovers
+                                    </h2>
+                                    <p
+                                        class="font-satoshi-medium text-sm sm:text-base lg:text-lg text-[#808080] leading-relaxed">
+                                        Responsive website for a Hyderabad-based makeover artist, optimized to convert
+                                        organic social traffic into bookings.
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div
-                            class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col lg:flex-row items-start lg:items-center gap-3 sm:gap-4 lg:gap-12 rounded-sm">
-                            <img src="/img/recent-work/image-1.webp" alt="recent-work-1"
-                                class="w-full lg:w-[180px] rounded-sm">
-                            <div class="flex flex-col w-fit gap-1 sm:gap-2">
-                                <h2 class="text-xl sm:text-2xl lg:text-3xl font-satoshi-bold uppercase">aquis</h2>
-                                <h3
-                                    class="font-satoshi-medium text-sm sm:text-base lg:text-xl text-[#808080] leading-relaxed">
-                                    A real-time groundwater
-                                    monitoring system</h3>
+                        </a>
+
+                        <a href="https://www.behance.net/gallery/237322081/ConfiSmile-Dental-Care-Landing-Page" target="_blank" class="block">
+                            <div
+                                class="fade-in card-hover bg-[#232323] p-4 sm:p-6 lg:p-8 text-white flex flex-col md:flex-row items-center gap-6 rounded-lg cursor-pointer transition-all hover:bg-[#2a2a2a]">
+                                <div class="w-full md:w-[280px] h-[180px] md:h-[200px] shrink-0 overflow-hidden rounded-md">
+                                    <img src="/img/recent-work/image-1.webp" alt="confi-smile"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <h2 class="text-xl sm:text-2xl lg:text-3xl font-satoshi-bold uppercase">confi-smile</h2>
+                                    <p
+                                        class="font-satoshi-medium text-sm sm:text-base lg:text-lg text-[#808080] leading-relaxed">
+                                        A specialized digital ecosystem designed to bridge the gap between dental care
+                                        professionals and personal oral hygiene management.
+                                    </p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
+
                     </div>
                 </div>
             </div>
 
-            <!-- my experience -->
             <div class="flex flex-col gap-4 sm:gap-6 mt-8 sm:mt-12 lg:mt-58">
                 <div class="flex flex-col gap-4 sm:gap-6 lg:gap-4">
-                    <h1 class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
+                    <h1
+                        class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
                         <span>my</span>
                         <span class="text-[#808080]">experience</span>
                     </h1>
                     <div class="flex flex-col w-full lg:w-[700px] gap-3 sm:gap-4">
-                        <div class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col items-start gap-2 sm:gap-3 lg:gap-4 rounded-sm">
+                        <div
+                            class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col items-start gap-2 sm:gap-3 lg:gap-4 rounded-sm">
                             <h2 class="text-lg sm:text-xl lg:text-2xl font-satoshi-bold uppercase leading-tight">
                                 Collective Networks</h2>
                             <h3
                                 class="font-satoshi-medium text-sm sm:text-base lg:text-xl text-[#808080] leading-relaxed">
-                                Crafted user-centric product designs at a fast-paced startup, collaborating with cross-functional teams to deliver intuitive digital experiences. Led the redesign of core product features, resulting in improved user engagement and streamlined workflows.</h3>
+                                Crafted user-centric product designs at a fast-paced startup, collaborating with
+                                cross-functional teams to deliver intuitive digital experiences. Led the redesign of
+                                core product features, resulting in improved user engagement and streamlined workflows.
+                            </h3>
                             <h4 class="font-satoshi-medium text-xs sm:text-sm text-[#808080]">Aug 2024 - Present</h4>
                         </div>
-                        <div class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col items-start gap-2 sm:gap-3 lg:gap-4 rounded-sm">
+                        <div
+                            class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col items-start gap-2 sm:gap-3 lg:gap-4 rounded-sm">
                             <h2 class="text-lg sm:text-xl lg:text-2xl font-satoshi-bold uppercase leading-tight">
-                                Scorpizo Technologies</h2>
+                                Scorpleo Technologies</h2>
                             <h3
                                 class="font-satoshi-medium text-sm sm:text-base lg:text-xl text-[#808080] leading-relaxed">
-                                Supported the design team in creating wireframes, prototypes, and high-fidelity mockups for web and mobile applications. Conducted user research and usability testing to inform design decisions, contributing to a 25% improvement in user satisfaction metrics.</h3>
+                                Supported the design team in creating wireframes, prototypes, and high-fidelity mockups
+                                for web and mobile applications. Conducted user research and usability testing to inform
+                                design decisions, contributing to a 25% improvement in user satisfaction metrics.</h3>
                             <h4 class="font-satoshi-medium text-xs sm:text-sm text-[#808080]">May 2024 - Jul 2024</h4>
                         </div>
-                        <div class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col items-start gap-2 sm:gap-3 lg:gap-4 rounded-sm">
+                        <div
+                            class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col items-start gap-2 sm:gap-3 lg:gap-4 rounded-sm">
                             <h2 class="text-lg sm:text-xl lg:text-2xl font-satoshi-bold uppercase leading-tight">
-                                Horizont - Advertising Agency</h2>
+                                Horizon9 - Advertising Agency</h2>
                             <h3
                                 class="font-satoshi-medium text-sm sm:text-base lg:text-xl text-[#808080] leading-relaxed">
-                                Delivered creative visual solutions for diverse client campaigns, including brand identity, marketing collateral, and digital assets. Managed multiple projects simultaneously while maintaining quality and meeting tight deadlines.</h3>
+                                Delivered creative visual solutions for diverse client campaigns, including brand
+                                identity, marketing collateral, and digital assets. Managed multiple projects
+                                simultaneously while maintaining quality and meeting tight deadlines.</h3>
                             <h4 class="font-satoshi-medium text-xs sm:text-sm text-[#808080]">Sep 2024 - Jan 2025</h4>
                         </div>
                     </div>
                 </div>
 
-                <!-- testimonials -->
                 <div class="flex flex-col gap-4 sm:gap-6 mt-8 sm:mt-12 lg:mt-58">
                     <div class="flex flex-col gap-4 sm:gap-6 lg:gap-4">
-                        <h1 class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
+                        <h1
+                            class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
                             <span>Voice</span>
                             <span class="text-[#808080]">of Trust</span>
                         </h1>
                         <div class="flex flex-col w-full lg:w-[700px] gap-3 sm:gap-4">
-                            <div class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col items-start gap-2 sm:gap-3 lg:gap-4 rounded-sm">
+
+                            <div
+                                class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col items-start gap-2 sm:gap-3 lg:gap-4 rounded-sm">
                                 <h3
                                     class="font-satoshi-medium text-sm sm:text-base lg:text-xl text-[#808080] leading-relaxed">
-                                    "Working with Srijan was a great experience. He responded to our project with care, quickly understood problems, and created a seamless and responsive site. Makes everything fit perfectly from development to design with fantastic skills and professionalism."</h3>
-                                <h4 class="font-satoshi-medium text-xs sm:text-sm text-white">- Joshua Byers</h4>
-                                <h4 class="font-satoshi-medium text-xs sm:text-sm text-[#808080]">Collective Networks</h4>
+                                    Srijan designed our web pages with great attention to detail and patience. He was
+                                    extremely cooperative throughout the process and handled every request calmly and
+                                    professionally. The final outcome reflected a clear understanding of our brand.
+                                </h3>
+                                <div class="flex flex-col">
+                                    <h4 class="font-satoshi-medium text-xs sm:text-sm text-white">Zehra's Makeovers</h4>
+                                    <h4 class="font-satoshi-medium text-xs sm:text-sm text-[#808080]">Dec 10, 2025</h4>
+                                </div>
                             </div>
-                            <div class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col items-start gap-2 sm:gap-3 lg:gap-4 rounded-sm">
+
+                            <div
+                                class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col items-start gap-2 sm:gap-3 lg:gap-4 rounded-sm">
                                 <h3
                                     class="font-satoshi-medium text-sm sm:text-base lg:text-xl text-[#808080] leading-relaxed">
-                                    "Srijan went above and beyond with creativity and processes. Outstanding support on the Horizont project. His dedication to understanding our needs and translating them into compelling designs was truly impressive. A reliable partner who delivers exceptional results on time."</h3>
-                                <h4 class="font-satoshi-medium text-xs sm:text-sm text-white">- Kavish Sharma</h4>
-                                <h4 class="font-satoshi-medium text-xs sm:text-sm text-[#808080]">Horizont - Advertising Agency</h4>
+                                    Working with Srijan was a great experience. He approached our project with care,
+                                    quickly implemented feedback, and created a seamless user experience that made
+                                    navigating the site effortless. The turnaround time exceeded expectations, and his
+                                    designs truly supported the impact we aimed to make.
+                                </h3>
+                                <div class="flex flex-col">
+                                    <h4 class="font-satoshi-medium text-xs sm:text-sm text-white">Collective Networks
+                                    </h4>
+                                    <h4 class="font-satoshi-medium text-xs sm:text-sm text-[#808080]">Aug 14, 2025</h4>
+                                </div>
                             </div>
-                            <div class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col items-start gap-2 sm:gap-3 lg:gap-4 rounded-sm">
+
+                            <div
+                                class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col items-start gap-2 sm:gap-3 lg:gap-4 rounded-sm">
                                 <h3
                                     class="font-satoshi-medium text-sm sm:text-base lg:text-xl text-[#808080] leading-relaxed">
-                                    "Working with Srijan is an affordable, top-performance, creative, and truly app developers. His technical expertise and design sensibility make him a valuable asset to any project."</h3>
-                                <h4 class="font-satoshi-medium text-xs sm:text-sm text-white">- Aman</h4>
-                                <h4 class="font-satoshi-medium text-xs sm:text-sm text-[#808080]">Founder - Marketing Agency</h4>
+                                    Srijan approaches design with creativity and precision, translating abstract ideas
+                                    into visually compelling solutions. Even as an intern, he delivered high-quality
+                                    work and demonstrated strong potential. With continued polish, he's on track to
+                                    consistently create impactful design outputs.
+                                </h3>
+                                <div class="flex flex-col">
+                                    <h4 class="font-satoshi-medium text-xs sm:text-sm text-white">Horizon9 - Advertising
+                                        Agency</h4>
+                                    <h4 class="font-satoshi-medium text-xs sm:text-sm text-[#808080]">Apr 22, 2025</h4>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
