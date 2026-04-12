@@ -4,12 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+        (function (c, l, a, r, i, t, y) {
+            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "walr28ksqs");
+    </script>
     <link rel="stylesheet" href="/src/satoshi.css">
     <link rel="stylesheet" href="/src/output.css">
     <link rel="stylesheet" href="/src/animations.css">
     <title>About — Srijan | Portfolio</title>
     <style>
-        /* ── Global Nav ── */
+        /* ── Global Nav — Desktop pill ── */
         .global-nav {
             position: fixed;
             top: 20px;
@@ -40,8 +47,15 @@
             white-space: nowrap;
         }
 
-        .nav-link:hover { color: #f1f1f1; background: rgba(255,255,255,0.06); }
-        .nav-link.active { color: #212121; background: #f1f1f1; }
+        .nav-link:hover {
+            color: #f1f1f1;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-link.active {
+            color: #212121;
+            background: #f1f1f1;
+        }
 
         .nav-resume {
             font-family: 'Satoshi-Bold', sans-serif;
@@ -56,7 +70,140 @@
             transition: all 0.2s ease;
         }
 
-        .nav-resume:hover { background: #ffffff; }
+        .nav-resume:hover {
+            background: #ffffff;
+        }
+
+        /* ── Mobile / Tablet Nav ── */
+        @media (max-width: 1023px) {
+
+            .global-nav {
+                top: auto;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                transform: none;
+                width: 100%;
+                border-radius: 0;
+                border: none;
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
+                padding: 0;
+                gap: 0;
+                justify-content: stretch;
+                background: rgba(22, 22, 22, 0.96);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+
+            .nav-link {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 4px;
+                padding: 10px 4px 10px;
+                border-radius: 0;
+                font-size: 0.6rem;
+                letter-spacing: 0.08em;
+                color: #606060;
+                background: transparent !important;
+            }
+
+            .nav-link::before {
+                content: '';
+                display: block;
+                width: 20px;
+                height: 20px;
+                background-color: #606060;
+                mask-repeat: no-repeat;
+                mask-position: center;
+                mask-size: contain;
+                -webkit-mask-repeat: no-repeat;
+                -webkit-mask-position: center;
+                -webkit-mask-size: contain;
+                transition: background-color 0.2s ease;
+            }
+
+            .nav-link[href="/"]::before {
+                -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z'/%3E%3Cpolyline points='9 22 9 12 15 12 15 22'/%3E%3C/svg%3E");
+                mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z'/%3E%3Cpolyline points='9 22 9 12 15 12 15 22'/%3E%3C/svg%3E");
+            }
+
+            .nav-link[href="/tabs/about.html"]::before {
+                -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 20c0-4 3.6-7 8-7s8 3 8 7'/%3E%3C/svg%3E");
+                mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 20c0-4 3.6-7 8-7s8 3 8 7'/%3E%3C/svg%3E");
+            }
+
+            .nav-link[href="/tabs/contact.html"]::before {
+                -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='4' width='20' height='16' rx='2'/%3E%3Cpath d='M2 7l10 7 10-7'/%3E%3C/svg%3E");
+                mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='4' width='20' height='16' rx='2'/%3E%3Cpath d='M2 7l10 7 10-7'/%3E%3C/svg%3E");
+            }
+
+            .nav-link.active {
+                color: #f1f1f1;
+                background: transparent !important;
+            }
+
+            .nav-link.active::before {
+                background-color: #f1f1f1;
+            }
+
+            .nav-link:hover {
+                color: #f1f1f1;
+                background: transparent !important;
+            }
+
+            .nav-link:hover::before {
+                background-color: #f1f1f1;
+            }
+
+            .nav-resume {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 4px;
+                padding: 10px 4px 10px;
+                border-radius: 0;
+                font-size: 0.6rem;
+                letter-spacing: 0.08em;
+                background: transparent;
+                color: #606060;
+            }
+
+            .nav-resume::before {
+                content: '';
+                display: block;
+                width: 20px;
+                height: 20px;
+                background-color: #606060;
+                -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z'/%3E%3Cpolyline points='14 2 14 8 20 8'/%3E%3Cline x1='16' y1='13' x2='8' y2='13'/%3E%3Cline x1='16' y1='17' x2='8' y2='17'/%3E%3Cpolyline points='10 9 9 9 8 9'/%3E%3C/svg%3E");
+                mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z'/%3E%3Cpolyline points='14 2 14 8 20 8'/%3E%3Cline x1='16' y1='13' x2='8' y2='13'/%3E%3Cline x1='16' y1='17' x2='8' y2='17'/%3E%3Cpolyline points='10 9 9 9 8 9'/%3E%3C/svg%3E");
+                mask-repeat: no-repeat;
+                mask-position: center;
+                mask-size: contain;
+                -webkit-mask-repeat: no-repeat;
+                -webkit-mask-position: center;
+                -webkit-mask-size: contain;
+                transition: background-color 0.2s ease;
+            }
+
+            .nav-resume:hover {
+                background: transparent;
+                color: #f1f1f1;
+            }
+
+            .nav-resume:hover::before {
+                background-color: #f1f1f1;
+            }
+
+            body {
+                padding-bottom: calc(72px + env(safe-area-inset-bottom)) !important;
+            }
+        }
 
         /* ── Skill tag ── */
         .skill-tag {
@@ -73,7 +220,6 @@
             white-space: nowrap;
         }
 
-        /* ── Section label ── */
         .section-label {
             font-family: 'Satoshi-Bold', sans-serif;
             font-size: 0.62rem;
@@ -83,7 +229,6 @@
             margin-bottom: 0.5rem;
         }
 
-        /* ── Cert pill ── */
         .cert-pill {
             background: #232323;
             border: 1px solid #2d2d2d;
@@ -119,21 +264,24 @@
     <!-- Global Navigation -->
     <nav class="global-nav">
         <a href="/" class="nav-link">Home</a>
-        <a href="/about.html" class="nav-link active">About</a>
-        <a href="mailto:guptasrijan85@gmail.com" class="nav-link">Contact</a>
+        <a href="/tabs/about.html" class="nav-link active">About</a>
+        <a href="/tabs/contact.html" class="nav-link">Contact</a>
         <a href="/resume.pdf" target="_blank" class="nav-resume">Résumé ↗</a>
     </nav>
 
     <section class="flex flex-col lg:flex-row items-start p-0 gap-6 sm:gap-8 lg:gap-20 pt-16 lg:pt-4">
 
-        <!-- Left white card — identical structure to index -->
-        <div class="fade-in bg-white border-4 p-6 flex flex-col items-center gap-4 sm:gap-6 lg:gap-8 w-full lg:w-[580px] rounded-2xl lg:sticky lg:top-10 lg:self-start">
+        <!-- Left white card -->
+        <div
+            class="fade-in bg-white border-4 p-6 flex flex-col items-center gap-4 sm:gap-6 lg:gap-8 w-full lg:w-[580px] rounded-2xl lg:sticky lg:top-10 lg:self-start">
             <img src="/img/pfp.png" alt="profile_picture" class="w-full h-[250px] sm:h-[290px] object-cover rounded-lg">
-            <h1 class="font-satoshi-black text-2xl sm:text-3xl lg:text-4xl items-center uppercase flex flex-col leading-tight w-full lg:w-auto text-center">
+            <h1
+                class="font-satoshi-black text-2xl sm:text-3xl lg:text-4xl items-center uppercase flex flex-col leading-tight w-full lg:w-auto text-center">
                 <span class="block">Srijan Anand</span>
                 <span class="block mt-1">Gupta</span>
             </h1>
-            <p class="w-full align-middle text-center font-satoshi-medium text-[#808080] text-sm sm:text-base lg:text-xl leading-relaxed">
+            <p
+                class="w-full align-middle text-center font-satoshi-medium text-[#808080] text-sm sm:text-base lg:text-xl leading-relaxed">
                 Computer Science Engineer specialising in Data Science and Product Design.
             </p>
             <div class="flex flex-row w-full justify-evenly px-2 sm:px-4 lg:px-8">
@@ -144,10 +292,12 @@
                     <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/mail-svgrepo-com.svg" alt="mail">
                 </a>
                 <a href="https://www.behance.net/srijananandgupta" target="_blank">
-                    <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/behance-163-svgrepo-com.svg" alt="behance-163">
+                    <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/behance-163-svgrepo-com.svg"
+                        alt="behance-163">
                 </a>
                 <a href="https://www.artstation.com/jellyfishjuggler" target="_blank">
-                    <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/artstation-svgrepo-com.svg" alt="artstation">
+                    <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/artstation-svgrepo-com.svg"
+                        alt="artstation">
                 </a>
             </div>
         </div>
@@ -158,19 +308,21 @@
             <!-- Summary -->
             <div class="flex flex-col gap-6 sm:gap-8 lg:gap-12">
                 <div class="flex flex-col gap-3 sm:gap-4">
-                    <h1 class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
+                    <h1
+                        class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
                         <span>About</span>
                         <span class="text-[#808080]">Me</span>
                     </h1>
                     <p class="fade-in text-[#808080] w-full lg:w-2/3 text-sm sm:text-base lg:text-xl leading-relaxed">
-                        I bring an engineering-led approach to UX, taking full ownership of end-to-end design systems — dedicated to building professional, high-impact digital products with a focus on technical scalability and user-centric architecture.
+                        I bring an engineering-led approach to UX, taking full ownership of end-to-end design systems —
+                        dedicated to building professional, high-impact digital products with a focus on technical
+                        scalability and user-centric architecture.
                     </p>
                 </div>
 
                 <!-- Contact quick links -->
                 <div class="fade-in flex flex-wrap gap-3">
-                    <a href="tel:+918510888675"
-                        style="background:transparent; color:#808080; border:1px solid #333;"
+                    <a href="tel:+918510888675" style="background:transparent; color:#808080; border:1px solid #333;"
                         onmouseover="this.style.color='#fff'; this.style.borderColor='#555';"
                         onmouseout="this.style.color='#808080'; this.style.borderColor='#333';"
                         class="font-satoshi-medium text-xs sm:text-sm tracking-wide px-4 py-2 rounded-full transition-all">
@@ -195,17 +347,18 @@
 
             <!-- Skills -->
             <div class="flex flex-col gap-4 sm:gap-6 mt-8 sm:mt-12 lg:mt-20">
-                <h1 class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
+                <h1
+                    class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
                     <span>Skills</span>
                     <span class="text-[#808080]">&amp; Tools</span>
                 </h1>
 
                 <div class="fade-in flex flex-col gap-6 w-full lg:w-[700px]">
 
-                    <!-- Product Design -->
-                    <div class="bg-[#232323] rounded-lg p-4 sm:p-6 flex flex-col gap-4">
+                    <div
+                        style="background:#232323; border-radius:8px; padding:1.25rem 1.5rem; display:flex; flex-direction:column; gap:1rem;">
                         <p class="section-label">Product Design</p>
-                        <div class="flex flex-wrap gap-2">
+                        <div style="display:flex; flex-wrap:wrap; gap:8px;">
                             <span class="skill-tag">User Research</span>
                             <span class="skill-tag">Information Architecture</span>
                             <span class="skill-tag">User Flows</span>
@@ -216,10 +369,10 @@
                         </div>
                     </div>
 
-                    <!-- Tools -->
-                    <div class="bg-[#232323] rounded-lg p-4 sm:p-6 flex flex-col gap-4">
+                    <div
+                        style="background:#232323; border-radius:8px; padding:1.25rem 1.5rem; display:flex; flex-direction:column; gap:1rem;">
                         <p class="section-label">Tools</p>
-                        <div class="flex flex-wrap gap-2">
+                        <div style="display:flex; flex-wrap:wrap; gap:8px;">
                             <span class="skill-tag">Figma</span>
                             <span class="skill-tag">FigJam</span>
                             <span class="skill-tag">Framer</span>
@@ -229,10 +382,10 @@
                         </div>
                     </div>
 
-                    <!-- Frontend -->
-                    <div class="bg-[#232323] rounded-lg p-4 sm:p-6 flex flex-col gap-4">
+                    <div
+                        style="background:#232323; border-radius:8px; padding:1.25rem 1.5rem; display:flex; flex-direction:column; gap:1rem;">
                         <p class="section-label">Frontend Familiarity</p>
-                        <div class="flex flex-wrap gap-2">
+                        <div style="display:flex; flex-wrap:wrap; gap:8px;">
                             <span class="skill-tag">HTML</span>
                             <span class="skill-tag">CSS</span>
                             <span class="skill-tag">JavaScript</span>
@@ -243,15 +396,18 @@
 
             <!-- Education & Certs -->
             <div class="flex flex-col gap-4 sm:gap-6 mt-8 sm:mt-12 lg:mt-20">
-                <h1 class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
+                <h1
+                    class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
                     <span>Education</span>
                     <span class="text-[#808080]">&amp; Certs</span>
                 </h1>
 
                 <div class="fade-in flex flex-col gap-3 w-full lg:w-[700px]">
 
-                    <div class="card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-10 text-white flex flex-col items-start gap-2 rounded-sm">
-                        <h2 class="text-lg sm:text-xl lg:text-2xl font-satoshi-bold uppercase leading-tight">B.Tech — Computer Science</h2>
+                    <div
+                        class="card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-10 text-white flex flex-col items-start gap-2 rounded-sm">
+                        <h2 class="text-lg sm:text-xl lg:text-2xl font-satoshi-bold uppercase leading-tight">B.Tech —
+                            Computer Science</h2>
                         <h3 class="font-satoshi-medium text-sm sm:text-base lg:text-xl text-[#808080] leading-relaxed">
                             Data Science Specialisation · Bhagwan Parshuram Institute of Technology
                         </h3>
@@ -273,7 +429,7 @@
 
             <!-- Contact CTA -->
             <div class="fade-in mt-8 sm:mt-12 lg:mt-20 w-full lg:w-1/3">
-                <a href="mailto:guptasrijan85@gmail.com"
+                <a href="/tabs/contact.html"
                     onmouseover="this.style.backgroundColor='#f1f1f1'; this.style.color='#212121';"
                     onmouseout="this.style.backgroundColor='transparent'; this.style.color='white';"
                     style="background-color: transparent; color: white; border: 2px solid white; transition: all 0.3s ease-in-out;"
