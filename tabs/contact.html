@@ -205,6 +205,28 @@
         }
 
         /* ── Contact link rows ── */
+        /* ── Custom cursor — desktop only ── */
+        @media (min-width: 1024px) {
+            * { cursor: none !important; }
+            #custom-cursor {
+                position: fixed;
+                width: 18px;
+                height: 18px;
+                background: #f1f1f1;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 99999;
+                transform: translate(-50%, -50%);
+                transition: width 0.22s ease, height 0.22s ease, opacity 0.3s ease;
+                will-change: left, top;
+                mix-blend-mode: difference;
+            }
+            #custom-cursor.hovering {
+                width: 46px;
+                height: 46px;
+            }
+        }
+
         .contact-row {
             display: flex;
             align-items: center;
@@ -259,21 +281,21 @@
     </script>
 </head>
 
-<body class="bg-[#212121] my-6 mx-4 sm:my-8 sm:mx-6 md:my-12 md:mx-12 lg:my-8 lg:mx-48">
+<body class="bg-[#212121] my-6 py-8 mx-4 sm:my-8 sm:mx-6 md:my-12 md:mx-12 lg:my-8 lg:mx-48">
 
     <!-- Global Navigation -->
     <nav class="global-nav">
         <a href="/" class="nav-link">Home</a>
         <a href="/tabs/about.html" class="nav-link">About</a>
         <a href="/tabs/contact.html" class="nav-link active">Contact</a>
-        <a href="/resume.pdf" target="_blank" class="nav-resume">Résumé ↗</a>
+        <a href="https://drive.google.com/file/d/1e7O-35jjluVZhToTnGrjFI1ogg5BSLTm/view?usp=sharing" target="_blank" class="nav-resume">Résumé ↗</a>
     </nav>
 
     <section class="flex flex-col lg:flex-row items-start p-0 gap-6 sm:gap-8 lg:gap-20 pt-16 lg:pt-4">
 
-        <!-- Left white card -->
+        <!-- Left white card — consistent with index.html (lg:gap-4) -->
         <div
-            class="fade-in bg-white border-4 p-6 flex flex-col items-center gap-4 sm:gap-6 lg:gap-8 w-full lg:w-[580px] rounded-2xl lg:sticky lg:top-10 lg:self-start">
+            class="fade-in bg-white border-4 p-6 flex flex-col items-center gap-4 sm:gap-6 lg:gap-4 w-full lg:w-[580px] rounded-2xl lg:sticky lg:top-10 lg:self-start">
             <img src="/img/pfp.png" alt="profile_picture" class="w-full h-[250px] sm:h-[290px] object-cover rounded-lg">
             <h1
                 class="font-satoshi-black text-2xl sm:text-3xl lg:text-4xl items-center uppercase flex flex-col leading-tight w-full lg:w-auto text-center">
@@ -282,13 +304,13 @@
             </h1>
             <p
                 class="w-full align-middle text-center font-satoshi-medium text-[#808080] text-sm sm:text-base lg:text-xl leading-relaxed">
-                Crafting engaging digital experiences with a perfect balance of creativity and functionality.
+                Computer Science Engineer specialising in Data Science and Product Design.
             </p>
             <div class="flex flex-row w-full justify-evenly px-2 sm:px-4 lg:px-8">
                 <a href="https://instagram.com/srijanux" target="_blank">
                     <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/instagram-svgrepo-com.svg" alt="instagram">
                 </a>
-                <a href="/cdn-cgi/l/email-protection#caadbfbabeabb9b8a3a0aba4f2ff8aada7aba3a6e4a9a5a7">
+                <a href="/cdn-cgi/l/email-protection#36514346425745445f5c57580e0376515b575f5a1855595b">
                     <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/mail-svgrepo-com.svg" alt="mail">
                 </a>
                 <a href="https://www.behance.net/srijananandgupta" target="_blank">
@@ -318,47 +340,52 @@
                 </p>
             </div>
 
-            <!-- Contact links -->
+            <!-- Contact links — ordered high to low priority via tonal hierarchy -->
             <div class="fade-in flex flex-col gap-3 w-full lg:w-[700px]">
 
-                <a href="/cdn-cgi/l/email-protection#fa9d8f8a8e9b898893909b94c2cfba9d979b9396d4999597" class="contact-row">
+                <!-- Priority 1: Email — highest visibility -->
+                <a href="/cdn-cgi/l/email-protection#a5c2d0d5d1c4d6d7cccfc4cb9d90e5c2c8c4ccc98bc6cac8" class="contact-row">
                     <div class="flex flex-col gap-0.5">
-                        <span class="contact-row-label">Email</span>
-                        <span class="contact-row-value"><span class="__cf_email__" data-cfemail="c5a2b0b5b1a4b6b7acafa4abfdf085a2a8a4aca9eba6aaa8">[email&#160;protected]</span></span>
+                        <span class="contact-row-label" style="color:#888; letter-spacing:0.18em;">Email</span>
+                        <span class="contact-row-value" style="color:#f1f1f1; font-size:1rem;"><span class="__cf_email__" data-cfemail="dbbcaeabafbaa8a9b2b1bab5e3ee9bbcb6bab2b7f5b8b4b6">[email&#160;protected]</span></span>
                     </div>
-                    <span class="contact-arrow">↗</span>
+                    <span class="contact-arrow" style="color:#666;">↗</span>
                 </a>
 
+                <!-- Priority 2: Phone — high visibility -->
                 <a href="tel:+918510888675" class="contact-row">
                     <div class="flex flex-col gap-0.5">
-                        <span class="contact-row-label">Phone</span>
-                        <span class="contact-row-value">+91 85108 88675</span>
+                        <span class="contact-row-label" style="color:#666;">Phone</span>
+                        <span class="contact-row-value" style="color:#c8c8c8;">+91 8510888675</span>
                     </div>
-                    <span class="contact-arrow">↗</span>
+                    <span class="contact-arrow" style="color:#444;">↗</span>
                 </a>
 
+                <!-- Priority 3: Behance — medium visibility -->
                 <a href="https://www.behance.net/srijananandgupta" target="_blank" class="contact-row">
                     <div class="flex flex-col gap-0.5">
-                        <span class="contact-row-label">Behance</span>
-                        <span class="contact-row-value">behance.net/srijananandgupta</span>
+                        <span class="contact-row-label" style="color:#505050;">Behance</span>
+                        <span class="contact-row-value" style="color:#808080;">behance.net/srijananandgupta</span>
                     </div>
-                    <span class="contact-arrow">↗</span>
+                    <span class="contact-arrow" style="color:#383838;">↗</span>
                 </a>
 
+                <!-- Priority 4: Instagram — lower visibility -->
                 <a href="https://instagram.com/srijanux" target="_blank" class="contact-row">
                     <div class="flex flex-col gap-0.5">
-                        <span class="contact-row-label">Instagram</span>
-                        <span class="contact-row-value">@srijanux</span>
+                        <span class="contact-row-label" style="color:#404040;">Instagram</span>
+                        <span class="contact-row-value" style="color:#606060;">@srijanux</span>
                     </div>
-                    <span class="contact-arrow">↗</span>
+                    <span class="contact-arrow" style="color:#303030;">↗</span>
                 </a>
 
+                <!-- Priority 5: ArtStation — lowest visibility -->
                 <a href="https://www.artstation.com/jellyfishjuggler" target="_blank" class="contact-row">
                     <div class="flex flex-col gap-0.5">
-                        <span class="contact-row-label">ArtStation</span>
-                        <span class="contact-row-value">artstation.com/jellyfishjuggler</span>
+                        <span class="contact-row-label" style="color:#363636;">ArtStation</span>
+                        <span class="contact-row-value" style="color:#505050;">artstation.com/jellyfishjuggler</span>
                     </div>
-                    <span class="contact-arrow">↗</span>
+                    <span class="contact-arrow" style="color:#2a2a2a;">↗</span>
                 </a>
 
             </div>
@@ -377,7 +404,7 @@
 
             <!-- Resume CTA -->
             <div class="fade-in w-full lg:w-1/3">
-                <a href="/resume.pdf" target="_blank"
+                <a href="https://drive.google.com/file/d/1e7O-35jjluVZhToTnGrjFI1ogg5BSLTm/view?usp=sharing" target="_blank"
                     onmouseover="this.style.backgroundColor='#f1f1f1'; this.style.color='#212121';"
                     onmouseout="this.style.backgroundColor='transparent'; this.style.color='white';"
                     style="background-color: transparent; color: white; border: 2px solid white; transition: all 0.3s ease-in-out;"
@@ -386,6 +413,23 @@
             </div>
         </div>
     </section>
+    <div id="custom-cursor"></div>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        (function(){
+            var cursor = document.getElementById('custom-cursor');
+            if(!cursor || window.innerWidth < 1024) { if(cursor) cursor.style.display='none'; return; }
+            document.addEventListener('mousemove', function(e){
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top  = e.clientY + 'px';
+            });
+            document.addEventListener('mouseleave', function(){ cursor.style.opacity='0'; });
+            document.addEventListener('mouseenter', function(){ cursor.style.opacity='1'; });
+            document.querySelectorAll('a, button, [role="button"]').forEach(function(el){
+                el.addEventListener('mouseenter', function(){ cursor.classList.add('hovering'); });
+                el.addEventListener('mouseleave', function(){ cursor.classList.remove('hovering'); });
+            });
+        })();
+    </script>
     <script src="/src/animation.js"></script>
 </body>
 </html>

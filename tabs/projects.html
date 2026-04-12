@@ -209,8 +209,8 @@
         }
 
         .stat-bento-icon {
-            width: 28px;
-            height: 28px;
+            width: 18px;
+            height: 18px;
             border-radius: 7px;
             background: rgba(255, 255, 255, 0.04);
             display: flex;
@@ -741,6 +741,27 @@
                 padding-bottom: 106px !important;
             }
         }
+        /* ── Custom cursor — desktop only ── */
+        @media (min-width: 1024px) {
+            * { cursor: none !important; }
+            #custom-cursor {
+                position: fixed;
+                width: 18px;
+                height: 18px;
+                background: #f1f1f1;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 99999;
+                transform: translate(-50%, -50%);
+                transition: width 0.22s ease, height 0.22s ease, opacity 0.3s ease;
+                will-change: left, top;
+                mix-blend-mode: difference;
+            }
+            #custom-cursor.hovering {
+                width: 46px;
+                height: 46px;
+            }
+        }
     </style>
 </head>
 
@@ -751,7 +772,7 @@
         <a href="/" class="nav-link">Home</a>
         <a href="/tabs/about.html" class="nav-link">About</a>
         <a href="/cdn-cgi/l/email-protection#ee899b9e9a8f9d9c87848f80d6dbae89838f8782c08d8183" class="nav-link">Contact</a>
-        <a href="/resume.pdf" target="_blank" class="nav-resume">Résumé ↗</a>
+        <a href="https://drive.google.com/file/d/1e7O-35jjluVZhToTnGrjFI1ogg5BSLTm/view?usp=sharing" target="_blank" class="nav-resume">Résumé ↗</a>
     </nav>
 
     <!-- Back nav -->
@@ -1383,6 +1404,23 @@
             }, { threshold: 0.1 });
             document.querySelectorAll('.skill-bar').forEach(bar => observer.observe(bar));
         });
+    </script>
+    <div id="custom-cursor"></div>
+    <script>
+        (function(){
+            var cursor = document.getElementById('custom-cursor');
+            if(!cursor || window.innerWidth < 1024) { if(cursor) cursor.style.display='none'; return; }
+            document.addEventListener('mousemove', function(e){
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top  = e.clientY + 'px';
+            });
+            document.addEventListener('mouseleave', function(){ cursor.style.opacity='0'; });
+            document.addEventListener('mouseenter', function(){ cursor.style.opacity='1'; });
+            document.querySelectorAll('a, button, [role="button"]').forEach(function(el){
+                el.addEventListener('mouseenter', function(){ cursor.classList.add('hovering'); });
+                el.addEventListener('mouseleave', function(){ cursor.classList.remove('hovering'); });
+            });
+        })();
     </script>
 </body>
 </html>

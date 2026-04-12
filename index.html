@@ -74,6 +74,41 @@
             background: #ffffff;
         }
 
+        /* ── Custom cursor — desktop only ── */
+        @media (min-width: 1024px) {
+            * {
+                cursor: none !important;
+            }
+
+            #custom-cursor {
+                position: fixed;
+                width: 18px;
+                height: 18px;
+                background: #f1f1f1;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 99999;
+                transform: translate(-50%, -50%);
+                transition: width 0.22s ease, height 0.22s ease, opacity 0.3s ease;
+                will-change: left, top;
+                mix-blend-mode: difference;
+            }
+
+            #custom-cursor.hovering {
+                width: 46px;
+                height: 46px;
+            }
+        }
+
+        /* ── Typography hierarchy — section labels elevated ── */
+        .section-eyebrow {
+            font-family: 'Satoshi-Medium', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #505050;
+        }
+
         /* ── Sticky profile card — desktop only ── */
         @media (min-width: 1024px) {
             .profile-card {
@@ -90,7 +125,7 @@
                 top: auto;
                 bottom: 0;
                 left: 50%;
-                
+
                 transform: translateX(-50%);
                 width: 100vw;
                 border-radius: 0;
@@ -232,14 +267,14 @@
     <nav class="global-nav">
         <a href="/" class="nav-link active">Home</a>
         <a href="/tabs/about.html" class="nav-link">About</a>
-        <a href="/tabs/contact.html"
-            class="nav-link">Contact</a>
-        <a href="/resume.pdf" target="_blank" class="nav-resume">Résumé ↗</a>
+        <a href="/tabs/contact.html" class="nav-link">Contact</a>
+        <a href="https://drive.google.com/file/d/1e7O-35jjluVZhToTnGrjFI1ogg5BSLTm/view?usp=sharing" target="_blank"
+            class="nav-resume">Résumé ↗</a>
     </nav>
 
     <section class="flex flex-col lg:flex-row items-start p-0 gap-6 sm:gap-8 lg:gap-20 pt-16 lg:pt-4">
 
-        <!-- Left card -->
+        <!-- Left white card — consistent with index.html (lg:gap-4) -->
         <div
             class="fade-in bg-white border-4 p-6 flex flex-col items-center gap-4 sm:gap-6 lg:gap-4 w-full lg:w-[580px] rounded-2xl lg:sticky lg:top-10 lg:self-start">
             <img src="/img/pfp.png" alt="profile_picture" class="w-full h-[250px] sm:h-[290px] object-cover rounded-lg">
@@ -250,13 +285,13 @@
             </h1>
             <p
                 class="w-full align-middle text-center font-satoshi-medium text-[#808080] text-sm sm:text-base lg:text-xl leading-relaxed">
-                Crafting engaging digital experiences with a perfect balance of creativity and functionality.
+                Computer Science Engineer specialising in Data Science and Product Design.
             </p>
             <div class="flex flex-row w-full justify-evenly px-2 sm:px-4 lg:px-8">
                 <a href="https://instagram.com/srijanux" target="_blank">
                     <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/instagram-svgrepo-com.svg" alt="instagram">
                 </a>
-                <a href="/cdn-cgi/l/email-protection#6f081a1f1b0e1c1d06050e01575a2f08020e0603410c0002">
+                <a href="/cdn-cgi/l/email-protection#36514346425745445f5c57580e0376515b575f5a1855595b">
                     <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/mail-svgrepo-com.svg" alt="mail">
                 </a>
                 <a href="https://www.behance.net/srijananandgupta" target="_blank">
@@ -567,6 +602,23 @@
         </div>
     </section>
 
+    <div id="custom-cursor"></div>
+    <script>
+        (function () {
+            var cursor = document.getElementById('custom-cursor');
+            if (!cursor || window.innerWidth < 1024) { if (cursor) cursor.style.display = 'none'; return; }
+            document.addEventListener('mousemove', function (e) {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+            document.addEventListener('mouseleave', function () { cursor.style.opacity = '0'; });
+            document.addEventListener('mouseenter', function () { cursor.style.opacity = '1'; });
+            document.querySelectorAll('a, button, [role="button"]').forEach(function (el) {
+                el.addEventListener('mouseenter', function () { cursor.classList.add('hovering'); });
+                el.addEventListener('mouseleave', function () { cursor.classList.remove('hovering'); });
+            });
+        })();
+    </script>
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 </body>
 

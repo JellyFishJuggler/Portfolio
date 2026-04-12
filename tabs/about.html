@@ -204,18 +204,40 @@
             }
         }
 
-        /* ── Skill tag ── */
+        /* ── Custom cursor — desktop only ── */
+        @media (min-width: 1024px) {
+            * { cursor: none !important; }
+            #custom-cursor {
+                position: fixed;
+                width: 18px;
+                height: 18px;
+                background: #f1f1f1;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 99999;
+                transform: translate(-50%, -50%);
+                transition: width 0.22s ease, height 0.22s ease, opacity 0.3s ease;
+                will-change: left, top;
+                mix-blend-mode: difference;
+            }
+            #custom-cursor.hovering {
+                width: 46px;
+                height: 46px;
+            }
+        }
+
+        /* ── Skill tag — transparent pill with border (matches reference) ── */
         .skill-tag {
             display: inline-flex;
             align-items: center;
             font-family: 'Satoshi-Medium', sans-serif;
-            font-size: 0.68rem;
-            letter-spacing: 0.08em;
-            color: #808080;
-            background: #2a2a2a;
-            border: 1px solid #333;
+            font-size: 0.75rem;
+            letter-spacing: 0.04em;
+            color: #c8c8c8;
+            background: transparent;
+            border: 1px solid #4a4a4a;
             border-radius: 999px;
-            padding: 4px 12px;
+            padding: 6px 14px;
             white-space: nowrap;
         }
 
@@ -258,21 +280,21 @@
     </script>
 </head>
 
-<body class="bg-[#212121] my-6 mx-4 sm:my-8 sm:mx-6 md:my-12 md:mx-12 lg:my-8 lg:mx-48">
+<body class="bg-[#212121] my-6 py-8 mx-4 sm:my-8 sm:mx-6 md:my-12 md:mx-12 lg:my-8 lg:mx-48">
 
     <!-- Global Navigation -->
     <nav class="global-nav">
         <a href="/" class="nav-link">Home</a>
         <a href="/tabs/about.html" class="nav-link active">About</a>
         <a href="/tabs/contact.html" class="nav-link">Contact</a>
-        <a href="/resume.pdf" target="_blank" class="nav-resume">Résumé ↗</a>
+        <a href="https://drive.google.com/file/d/1e7O-35jjluVZhToTnGrjFI1ogg5BSLTm/view?usp=sharing" target="_blank" class="nav-resume">Résumé ↗</a>
     </nav>
 
     <section class="flex flex-col lg:flex-row items-start p-0 gap-6 sm:gap-8 lg:gap-20 pt-16 lg:pt-4">
 
-        <!-- Left white card -->
+        <!-- Left white card — consistent with index.html (lg:gap-4) -->
         <div
-            class="fade-in bg-white border-4 p-6 flex flex-col items-center gap-4 sm:gap-6 lg:gap-8 w-full lg:w-[580px] rounded-2xl lg:sticky lg:top-10 lg:self-start">
+            class="fade-in bg-white border-4 p-6 flex flex-col items-center gap-4 sm:gap-6 lg:gap-4 w-full lg:w-[580px] rounded-2xl lg:sticky lg:top-10 lg:self-start">
             <img src="/img/pfp.png" alt="profile_picture" class="w-full h-[250px] sm:h-[290px] object-cover rounded-lg">
             <h1
                 class="font-satoshi-black text-2xl sm:text-3xl lg:text-4xl items-center uppercase flex flex-col leading-tight w-full lg:w-auto text-center">
@@ -321,20 +343,22 @@
 
                 <!-- Contact quick links -->
                 <div class="fade-in flex flex-wrap gap-3">
-                    <a href="tel:+918510888675" style="background:transparent; color:#808080; border:1px solid #333;"
-                        onmouseover="this.style.color='#fff'; this.style.borderColor='#555';"
-                        onmouseout="this.style.color='#808080'; this.style.borderColor='#333';"
-                        class="font-satoshi-medium text-xs sm:text-sm tracking-wide px-4 py-2 rounded-full transition-all">
-                        +91 85108 88675
+                    <a href="tel:+918510888675"
+                        style="background:transparent; color:#c8c8c8; border:1px solid #505050; border-radius:999px; font-family:'Satoshi-Medium',sans-serif; font-size:0.78rem; letter-spacing:0.03em; padding:7px 16px; text-decoration:none; display:inline-flex; align-items:center; transition:all 0.2s ease;"
+                        onmouseover="this.style.color='#fff'; this.style.borderColor='#888';"
+                        onmouseout="this.style.color='#c8c8c8'; this.style.borderColor='#505050';">
+                        +91 8510888675
                     </a>
-                    <a href="/cdn-cgi/l/email-protection#e5829095918496978c8f848bddd0a58288848c89cb868a88" style="background:transparent; color:#808080; border:1px solid #333;" onmouseover="this.style.color='#fff'; this.style.borderColor='#555';" onmouseout="this.style.color='#808080'; this.style.borderColor='#333';" class="font-satoshi-medium text-xs sm:text-sm tracking-wide px-4 py-2 rounded-full transition-all">
-                        <span class="__cf_email__" data-cfemail="35524045415446475c5f545b0d00755258545c591b565a58">[email&#160;protected]</span>
+                    <a href="mailto:guptasrijan85@gmail.com"
+                        style="background:transparent; color:#c8c8c8; border:1px solid #505050; border-radius:999px; font-family:'Satoshi-Medium',sans-serif; font-size:0.78rem; letter-spacing:0.03em; padding:7px 16px; text-decoration:none; display:inline-flex; align-items:center; transition:all 0.2s ease;"
+                        onmouseover="this.style.color='#fff'; this.style.borderColor='#888';"
+                        onmouseout="this.style.color='#c8c8c8'; this.style.borderColor='#505050';">
+                        guptasrijan85@gmail.com
                     </a>
-                    <a href="https://linkedin.com" target="_blank"
-                        style="background:transparent; color:#808080; border:1px solid #333;"
-                        onmouseover="this.style.color='#fff'; this.style.borderColor='#555';"
-                        onmouseout="this.style.color='#808080'; this.style.borderColor='#333';"
-                        class="font-satoshi-medium text-xs sm:text-sm tracking-wide px-4 py-2 rounded-full transition-all">
+                    <a href="https://linkedin.com/in/srijananandgupta" target="_blank"
+                        style="background:transparent; color:#c8c8c8; border:1px solid #505050; border-radius:999px; font-family:'Satoshi-Medium',sans-serif; font-size:0.78rem; letter-spacing:0.03em; padding:7px 16px; text-decoration:none; display:inline-flex; align-items:center; transition:all 0.2s ease;"
+                        onmouseover="this.style.color='#fff'; this.style.borderColor='#888';"
+                        onmouseout="this.style.color='#c8c8c8'; this.style.borderColor='#505050';">
                         LinkedIn ↗
                     </a>
                 </div>
@@ -352,7 +376,7 @@
 
                     <div
                         style="background:#232323; border-radius:8px; padding:1.25rem 1.5rem; display:flex; flex-direction:column; gap:1rem;">
-                        <p class="section-label">Product Design</p>
+                        <p class="section-label" style="color:#888;">Product Design</p>
                         <div style="display:flex; flex-wrap:wrap; gap:8px;">
                             <span class="skill-tag">User Research</span>
                             <span class="skill-tag">Information Architecture</span>
@@ -366,24 +390,24 @@
 
                     <div
                         style="background:#232323; border-radius:8px; padding:1.25rem 1.5rem; display:flex; flex-direction:column; gap:1rem;">
-                        <p class="section-label">Tools</p>
+                        <p class="section-label" style="color:#666;">Tools</p>
                         <div style="display:flex; flex-wrap:wrap; gap:8px;">
-                            <span class="skill-tag">Figma</span>
-                            <span class="skill-tag">FigJam</span>
-                            <span class="skill-tag">Framer</span>
-                            <span class="skill-tag">Adobe XD</span>
-                            <span class="skill-tag">Photoshop</span>
-                            <span class="skill-tag">Blender</span>
+                            <span class="skill-tag" style="color:#a0a0a0; border-color:#3a3a3a;">Figma</span>
+                            <span class="skill-tag" style="color:#a0a0a0; border-color:#3a3a3a;">FigJam</span>
+                            <span class="skill-tag" style="color:#a0a0a0; border-color:#3a3a3a;">Framer</span>
+                            <span class="skill-tag" style="color:#a0a0a0; border-color:#3a3a3a;">Adobe XD</span>
+                            <span class="skill-tag" style="color:#a0a0a0; border-color:#3a3a3a;">Photoshop</span>
+                            <span class="skill-tag" style="color:#a0a0a0; border-color:#3a3a3a;">Blender</span>
                         </div>
                     </div>
 
                     <div
                         style="background:#232323; border-radius:8px; padding:1.25rem 1.5rem; display:flex; flex-direction:column; gap:1rem;">
-                        <p class="section-label">Frontend Familiarity</p>
+                        <p class="section-label" style="color:#444;">Frontend Familiarity</p>
                         <div style="display:flex; flex-wrap:wrap; gap:8px;">
-                            <span class="skill-tag">HTML</span>
-                            <span class="skill-tag">CSS</span>
-                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag" style="color:#606060; border-color:#2d2d2d;">HTML</span>
+                            <span class="skill-tag" style="color:#606060; border-color:#2d2d2d;">CSS</span>
+                            <span class="skill-tag" style="color:#606060; border-color:#2d2d2d;">JavaScript</span>
                         </div>
                     </div>
                 </div>
@@ -436,6 +460,23 @@
         </div>
         </div>
     </section>
+    <div id="custom-cursor"></div>
+    <script>
+        (function(){
+            var cursor = document.getElementById('custom-cursor');
+            if(!cursor || window.innerWidth < 1024) { if(cursor) cursor.style.display='none'; return; }
+            document.addEventListener('mousemove', function(e){
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top  = e.clientY + 'px';
+            });
+            document.addEventListener('mouseleave', function(){ cursor.style.opacity='0'; });
+            document.addEventListener('mouseenter', function(){ cursor.style.opacity='1'; });
+            document.querySelectorAll('a, button, [role="button"]').forEach(function(el){
+                el.addEventListener('mouseenter', function(){ cursor.classList.add('hovering'); });
+                el.addEventListener('mouseleave', function(){ cursor.classList.remove('hovering'); });
+            });
+        })();
+    </script>
     <script src="/src/animation.js"></script>
 </body>
 </html>
