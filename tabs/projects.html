@@ -614,10 +614,9 @@
             .global-nav {
                 top: auto;
                 bottom: 0;
-                left: 0;
-                right: 0;
-                transform: none;
-                width: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100vw;
                 border-radius: 0;
                 border: none;
                 border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -751,7 +750,7 @@
     <nav class="global-nav">
         <a href="/" class="nav-link">Home</a>
         <a href="/tabs/about.html" class="nav-link">About</a>
-        <a href="mailto:guptasrijan85@gmail.com" class="nav-link">Contact</a>
+        <a href="/cdn-cgi/l/email-protection#ee899b9e9a8f9d9c87848f80d6dbae89838f8782c08d8183" class="nav-link">Contact</a>
         <a href="/resume.pdf" target="_blank" class="nav-resume">Résumé ↗</a>
     </nav>
 
@@ -1364,7 +1363,7 @@
         </div>
     </section>
 
-    <script src="/src/animation.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/src/animation.js"></script>
     <script>
         // ── Progress bar slide-in on first scroll into view ──────────────────
         (function () {
@@ -1379,13 +1378,12 @@
                         setTimeout(() => bar.classList.add('animated'), 120);
                         observer.unobserve(bar);
                     }
-                });
-            }, { threshold: 0.3 });
+                             });
+            }, { threshold: 0.1 });
 
-            bars.forEach(bar => observer.observe(bar));
-        })();
+            document.querySelectorAll('.skill-bar').forEach(bar => observer.observe(bar));
+        });
     </script>
-
 </body>
 
 </html>
