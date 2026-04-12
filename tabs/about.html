@@ -204,9 +204,27 @@
             }
         }
 
+        /* ── Sticky profile card — desktop only ── */
+        @media (min-width: 1024px) {
+            .profile-card {
+                max-height: calc(100vh - 7rem);
+                overflow-y: auto;
+            }
+        }
+
+        /* ── Mobile overflow fix — clip on section only, never on html/body (breaks sticky) ── */
+        @media (max-width: 1023px) {
+            section {
+                overflow-x: clip;
+            }
+        }
+
         /* ── Custom cursor — desktop only ── */
         @media (min-width: 1024px) {
-            * { cursor: none !important; }
+            * {
+                cursor: none !important;
+            }
+
             #custom-cursor {
                 position: fixed;
                 width: 18px;
@@ -220,6 +238,7 @@
                 will-change: left, top;
                 mix-blend-mode: difference;
             }
+
             #custom-cursor.hovering {
                 width: 46px;
                 height: 46px;
@@ -238,7 +257,8 @@
             border: 1px solid #4a4a4a;
             border-radius: 999px;
             padding: 6px 14px;
-            white-space: nowrap;
+            white-space: normal;
+            word-break: break-word;
         }
 
         .section-label {
@@ -282,12 +302,14 @@
 
 <body class="bg-[#212121] my-6 py-8 mx-4 sm:my-8 sm:mx-6 md:my-12 md:mx-12 lg:my-8 lg:mx-48">
 
+
     <!-- Global Navigation -->
     <nav class="global-nav">
         <a href="/" class="nav-link">Home</a>
         <a href="/tabs/about.html" class="nav-link active">About</a>
         <a href="/tabs/contact.html" class="nav-link">Contact</a>
-        <a href="https://drive.google.com/file/d/1e7O-35jjluVZhToTnGrjFI1ogg5BSLTm/view?usp=sharing" target="_blank" class="nav-resume">Résumé ↗</a>
+        <a href="https://drive.google.com/file/d/1e7O-35jjluVZhToTnGrjFI1ogg5BSLTm/view?usp=sharing" target="_blank"
+            class="nav-resume">Résumé ↗</a>
     </nav>
 
     <section class="flex flex-col lg:flex-row items-start p-0 gap-6 sm:gap-8 lg:gap-20 pt-16 lg:pt-4">
@@ -324,7 +346,7 @@
         </div>
 
         <!-- Right content -->
-        <div class="flex flex-col gap-10 sm:gap-12 lg:gap-6 w-full lg:min-h-[200vh]">
+        <div class="flex flex-col gap-10 sm:gap-12 lg:gap-6 w-full text-white">
 
             <!-- Summary -->
             <div class="flex flex-col gap-6 sm:gap-8 lg:gap-12">
@@ -342,21 +364,21 @@
                 </div>
 
                 <!-- Contact quick links -->
-                <div class="fade-in flex flex-wrap gap-3">
+                <div class="fade-in flex flex-wrap gap-2 sm:gap-3">
                     <a href="tel:+918510888675"
-                        style="background:transparent; color:#c8c8c8; border:1px solid #505050; border-radius:999px; font-family:'Satoshi-Medium',sans-serif; font-size:0.78rem; letter-spacing:0.03em; padding:7px 16px; text-decoration:none; display:inline-flex; align-items:center; transition:all 0.2s ease;"
+                        style="background:transparent; color:#c8c8c8; border:1px solid #505050; border-radius:999px; font-family:'Satoshi-Medium',sans-serif; font-size:0.72rem; letter-spacing:0.03em; padding:6px 14px; text-decoration:none; display:inline-flex; align-items:center; transition:all 0.2s ease; white-space:nowrap;"
                         onmouseover="this.style.color='#fff'; this.style.borderColor='#888';"
                         onmouseout="this.style.color='#c8c8c8'; this.style.borderColor='#505050';">
                         +91 8510888675
                     </a>
                     <a href="mailto:guptasrijan85@gmail.com"
-                        style="background:transparent; color:#c8c8c8; border:1px solid #505050; border-radius:999px; font-family:'Satoshi-Medium',sans-serif; font-size:0.78rem; letter-spacing:0.03em; padding:7px 16px; text-decoration:none; display:inline-flex; align-items:center; transition:all 0.2s ease;"
+                        style="background:transparent; color:#c8c8c8; border:1px solid #505050; border-radius:999px; font-family:'Satoshi-Medium',sans-serif; font-size:0.72rem; letter-spacing:0.03em; padding:6px 14px; text-decoration:none; display:inline-flex; align-items:center; transition:all 0.2s ease; white-space:nowrap;"
                         onmouseover="this.style.color='#fff'; this.style.borderColor='#888';"
                         onmouseout="this.style.color='#c8c8c8'; this.style.borderColor='#505050';">
                         guptasrijan85@gmail.com
                     </a>
                     <a href="https://linkedin.com/in/srijananandgupta" target="_blank"
-                        style="background:transparent; color:#c8c8c8; border:1px solid #505050; border-radius:999px; font-family:'Satoshi-Medium',sans-serif; font-size:0.78rem; letter-spacing:0.03em; padding:7px 16px; text-decoration:none; display:inline-flex; align-items:center; transition:all 0.2s ease;"
+                        style="background:transparent; color:#c8c8c8; border:1px solid #505050; border-radius:999px; font-family:'Satoshi-Medium',sans-serif; font-size:0.72rem; letter-spacing:0.03em; padding:6px 14px; text-decoration:none; display:inline-flex; align-items:center; transition:all 0.2s ease; white-space:nowrap;"
                         onmouseover="this.style.color='#fff'; this.style.borderColor='#888';"
                         onmouseout="this.style.color='#c8c8c8'; this.style.borderColor='#505050';">
                         LinkedIn ↗
@@ -461,22 +483,24 @@
         </div>
     </section>
     <div id="custom-cursor"></div>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script>
-        (function(){
+        (function () {
             var cursor = document.getElementById('custom-cursor');
-            if(!cursor || window.innerWidth < 1024) { if(cursor) cursor.style.display='none'; return; }
-            document.addEventListener('mousemove', function(e){
+            if (!cursor || window.innerWidth < 1024) { if (cursor) cursor.style.display = 'none'; return; }
+            document.addEventListener('mousemove', function (e) {
                 cursor.style.left = e.clientX + 'px';
-                cursor.style.top  = e.clientY + 'px';
+                cursor.style.top = e.clientY + 'px';
             });
-            document.addEventListener('mouseleave', function(){ cursor.style.opacity='0'; });
-            document.addEventListener('mouseenter', function(){ cursor.style.opacity='1'; });
-            document.querySelectorAll('a, button, [role="button"]').forEach(function(el){
-                el.addEventListener('mouseenter', function(){ cursor.classList.add('hovering'); });
-                el.addEventListener('mouseleave', function(){ cursor.classList.remove('hovering'); });
+            document.addEventListener('mouseleave', function () { cursor.style.opacity = '0'; });
+            document.addEventListener('mouseenter', function () { cursor.style.opacity = '1'; });
+            document.querySelectorAll('a, button, [role="button"]').forEach(function (el) {
+                el.addEventListener('mouseenter', function () { cursor.classList.add('hovering'); });
+                el.addEventListener('mouseleave', function () { cursor.classList.remove('hovering'); });
             });
         })();
     </script>
     <script src="/src/animation.js"></script>
 </body>
+
 </html>

@@ -1386,7 +1386,7 @@
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/src/animation.js"></script>
     <script>
-        // ── Progress bar slide-in on first scroll into view ──────────────────
+        // ── Progress bar slide-in on scroll into view ──────────────────
         (function () {
             const bars = document.querySelectorAll('.progress-fill');
             if (!bars.length) return;
@@ -1395,15 +1395,14 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const bar = entry.target;
-                        // Small delay so the card fade-in finishes first
                         setTimeout(() => bar.classList.add('animated'), 120);
                         observer.unobserve(bar);
                     }
-             
                 });
             }, { threshold: 0.1 });
-            document.querySelectorAll('.skill-bar').forEach(bar => observer.observe(bar));
-        });
+
+            bars.forEach(bar => observer.observe(bar));
+        })();
     </script>
     <div id="custom-cursor"></div>
     <script>
