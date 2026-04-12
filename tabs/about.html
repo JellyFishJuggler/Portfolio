@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/satoshi.css">
+    <link rel="stylesheet" href="/src/output.css">
+    <link rel="stylesheet" href="/src/animations.css">
+    <title>About — Srijan | Portfolio</title>
+    <style>
+        /* ── Global Nav ── */
+        .global-nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            background: rgba(33, 33, 33, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            padding: 6px 8px;
+        }
+
+        .nav-link {
+            font-family: 'Satoshi-Medium', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #808080;
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 999px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover { color: #f1f1f1; background: rgba(255,255,255,0.06); }
+        .nav-link.active { color: #212121; background: #f1f1f1; }
+
+        .nav-resume {
+            font-family: 'Satoshi-Bold', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #212121;
+            background: #f1f1f1;
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 999px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-resume:hover { background: #ffffff; }
+
+        /* ── Skill tag ── */
+        .skill-tag {
+            display: inline-flex;
+            align-items: center;
+            font-family: 'Satoshi-Medium', sans-serif;
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+            color: #808080;
+            background: #2a2a2a;
+            border: 1px solid #333;
+            border-radius: 999px;
+            padding: 4px 12px;
+            white-space: nowrap;
+        }
+
+        /* ── Section label ── */
+        .section-label {
+            font-family: 'Satoshi-Bold', sans-serif;
+            font-size: 0.62rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #505050;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ── Cert pill ── */
+        .cert-pill {
+            background: #232323;
+            border: 1px solid #2d2d2d;
+            border-radius: 10px;
+            padding: 0.85rem 1.1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .cert-name {
+            font-family: 'Satoshi-Bold', sans-serif;
+            font-size: 0.82rem;
+            color: #c8c8c8;
+        }
+
+        .cert-sub {
+            font-family: 'Satoshi-Medium', sans-serif;
+            font-size: 0.7rem;
+            color: #585858;
+        }
+    </style>
+    <script>
+        window.addEventListener('load', () => {
+            const els = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in');
+            els.forEach(el => el.classList.add('visible'));
+        });
+    </script>
+</head>
+
+<body class="bg-[#212121] my-6 mx-4 sm:my-8 sm:mx-6 md:my-12 md:mx-12 lg:my-8 lg:mx-48">
+
+    <!-- Global Navigation -->
+    <nav class="global-nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/about.html" class="nav-link active">About</a>
+        <a href="mailto:guptasrijan85@gmail.com" class="nav-link">Contact</a>
+        <a href="/resume.pdf" target="_blank" class="nav-resume">Résumé ↗</a>
+    </nav>
+
+    <section class="flex flex-col lg:flex-row items-start p-0 gap-6 sm:gap-8 lg:gap-20 pt-16 lg:pt-4">
+
+        <!-- Left white card — identical structure to index -->
+        <div class="fade-in bg-white border-4 p-6 flex flex-col items-center gap-4 sm:gap-6 lg:gap-8 w-full lg:w-[580px] rounded-2xl lg:sticky lg:top-10 lg:self-start">
+            <img src="/img/pfp.png" alt="profile_picture" class="w-full h-[250px] sm:h-[290px] object-cover rounded-lg">
+            <h1 class="font-satoshi-black text-2xl sm:text-3xl lg:text-4xl items-center uppercase flex flex-col leading-tight w-full lg:w-auto text-center">
+                <span class="block">Srijan Anand</span>
+                <span class="block mt-1">Gupta</span>
+            </h1>
+            <p class="w-full align-middle text-center font-satoshi-medium text-[#808080] text-sm sm:text-base lg:text-xl leading-relaxed">
+                Computer Science Engineer specialising in Data Science and Product Design.
+            </p>
+            <div class="flex flex-row w-full justify-evenly px-2 sm:px-4 lg:px-8">
+                <a href="https://instagram.com/srijanux" target="_blank">
+                    <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/instagram-svgrepo-com.svg" alt="instagram">
+                </a>
+                <a href="mailto:guptasrijan85@gmail.com">
+                    <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/mail-svgrepo-com.svg" alt="mail">
+                </a>
+                <a href="https://www.behance.net/srijananandgupta" target="_blank">
+                    <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/behance-163-svgrepo-com.svg" alt="behance-163">
+                </a>
+                <a href="https://www.artstation.com/jellyfishjuggler" target="_blank">
+                    <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/artstation-svgrepo-com.svg" alt="artstation">
+                </a>
+            </div>
+        </div>
+
+        <!-- Right content -->
+        <div class="flex flex-col gap-10 sm:gap-12 lg:gap-6 w-full lg:min-h-[200vh]">
+
+            <!-- Summary -->
+            <div class="flex flex-col gap-6 sm:gap-8 lg:gap-12">
+                <div class="flex flex-col gap-3 sm:gap-4">
+                    <h1 class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
+                        <span>About</span>
+                        <span class="text-[#808080]">Me</span>
+                    </h1>
+                    <p class="fade-in text-[#808080] w-full lg:w-2/3 text-sm sm:text-base lg:text-xl leading-relaxed">
+                        I bring an engineering-led approach to UX, taking full ownership of end-to-end design systems — dedicated to building professional, high-impact digital products with a focus on technical scalability and user-centric architecture.
+                    </p>
+                </div>
+
+                <!-- Contact quick links -->
+                <div class="fade-in flex flex-wrap gap-3">
+                    <a href="tel:+918510888675"
+                        style="background:transparent; color:#808080; border:1px solid #333;"
+                        onmouseover="this.style.color='#fff'; this.style.borderColor='#555';"
+                        onmouseout="this.style.color='#808080'; this.style.borderColor='#333';"
+                        class="font-satoshi-medium text-xs sm:text-sm tracking-wide px-4 py-2 rounded-full transition-all">
+                        +91 85108 88675
+                    </a>
+                    <a href="mailto:guptasrijan85@gmail.com"
+                        style="background:transparent; color:#808080; border:1px solid #333;"
+                        onmouseover="this.style.color='#fff'; this.style.borderColor='#555';"
+                        onmouseout="this.style.color='#808080'; this.style.borderColor='#333';"
+                        class="font-satoshi-medium text-xs sm:text-sm tracking-wide px-4 py-2 rounded-full transition-all">
+                        guptasrijan85@gmail.com
+                    </a>
+                    <a href="https://linkedin.com" target="_blank"
+                        style="background:transparent; color:#808080; border:1px solid #333;"
+                        onmouseover="this.style.color='#fff'; this.style.borderColor='#555';"
+                        onmouseout="this.style.color='#808080'; this.style.borderColor='#333';"
+                        class="font-satoshi-medium text-xs sm:text-sm tracking-wide px-4 py-2 rounded-full transition-all">
+                        LinkedIn ↗
+                    </a>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="flex flex-col gap-4 sm:gap-6 mt-8 sm:mt-12 lg:mt-20">
+                <h1 class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
+                    <span>Skills</span>
+                    <span class="text-[#808080]">&amp; Tools</span>
+                </h1>
+
+                <div class="fade-in flex flex-col gap-6 w-full lg:w-[700px]">
+
+                    <!-- Product Design -->
+                    <div class="bg-[#232323] rounded-lg p-4 sm:p-6 flex flex-col gap-4">
+                        <p class="section-label">Product Design</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">User Research</span>
+                            <span class="skill-tag">Information Architecture</span>
+                            <span class="skill-tag">User Flows</span>
+                            <span class="skill-tag">Wireframing</span>
+                            <span class="skill-tag">Interaction Design</span>
+                            <span class="skill-tag">Usability Heuristics</span>
+                            <span class="skill-tag">Design Systems</span>
+                        </div>
+                    </div>
+
+                    <!-- Tools -->
+                    <div class="bg-[#232323] rounded-lg p-4 sm:p-6 flex flex-col gap-4">
+                        <p class="section-label">Tools</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">Figma</span>
+                            <span class="skill-tag">FigJam</span>
+                            <span class="skill-tag">Framer</span>
+                            <span class="skill-tag">Adobe XD</span>
+                            <span class="skill-tag">Photoshop</span>
+                            <span class="skill-tag">Blender</span>
+                        </div>
+                    </div>
+
+                    <!-- Frontend -->
+                    <div class="bg-[#232323] rounded-lg p-4 sm:p-6 flex flex-col gap-4">
+                        <p class="section-label">Frontend Familiarity</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">HTML</span>
+                            <span class="skill-tag">CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education & Certs -->
+            <div class="flex flex-col gap-4 sm:gap-6 mt-8 sm:mt-12 lg:mt-20">
+                <h1 class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
+                    <span>Education</span>
+                    <span class="text-[#808080]">&amp; Certs</span>
+                </h1>
+
+                <div class="fade-in flex flex-col gap-3 w-full lg:w-[700px]">
+
+                    <div class="card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-10 text-white flex flex-col items-start gap-2 rounded-sm">
+                        <h2 class="text-lg sm:text-xl lg:text-2xl font-satoshi-bold uppercase leading-tight">B.Tech — Computer Science</h2>
+                        <h3 class="font-satoshi-medium text-sm sm:text-base lg:text-xl text-[#808080] leading-relaxed">
+                            Data Science Specialisation · Bhagwan Parshuram Institute of Technology
+                        </h3>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <div class="cert-pill flex-1">
+                            <span class="cert-name">Blender 3D — Product Animation</span>
+                            <span class="cert-sub">Udemy · Consumer goods &amp; large-scale models</span>
+                        </div>
+                        <div class="cert-pill flex-1">
+                            <span class="cert-name">Human Computer Interaction</span>
+                            <span class="cert-sub">NPTEL · In Progress</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Contact CTA -->
+            <div class="fade-in mt-8 sm:mt-12 lg:mt-20 w-full lg:w-1/3">
+                <a href="mailto:guptasrijan85@gmail.com"
+                    onmouseover="this.style.backgroundColor='#f1f1f1'; this.style.color='#212121';"
+                    onmouseout="this.style.backgroundColor='transparent'; this.style.color='white';"
+                    style="background-color: transparent; color: white; border: 2px solid white; transition: all 0.3s ease-in-out;"
+                    class="font-satoshi-black text-sm sm:text-base lg:text-xl tracking-widest uppercase w-full p-3 sm:p-4 rounded-sm block text-center">
+                    Get in Touch
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="/src/animation.js"></script>
+</body>
+
+</html>

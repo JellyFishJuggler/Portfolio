@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/satoshi.css">
+    <link rel="stylesheet" href="/src/output.css">
+    <link rel="stylesheet" href="/src/animations.css">
+    <title>Bloom — Case Study | Srijan</title>
+    <script>
+        window.addEventListener('load', () => {
+            const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in');
+            animatedElements.forEach((el) => el.classList.add('visible'));
+        });
+    </script>
+    <style>
+        /* ── Bloom accent palette ── */
+        :root {
+            --bloom-blush: #F2C4CE;
+            --bloom-sage: #C8D8C0;
+            --bloom-lavender: #D6CCE8;
+            --bloom-peach: #F5D9C8;
+            --bloom-sand: #EDE3D8;
+        }
+
+        /* ── Animated soft gradient on sidebar ── */
+        @keyframes gradientShift {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .sidebar-card {
+            background: linear-gradient(135deg,
+                #ffffff 0%, #fdf0f3 20%, #f5f0fb 40%,
+                #f0f5fb 60%, #f5faf2 80%, #fdf6f0 100%);
+            background-size: 300% 300%;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        /* ── Bloom hero banner ── */
+        .bloom-wordmark-wrap {
+            width: 100%;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(160deg, #f0e6ea 0%, #e8e2f2 50%, #e2edf5 100%);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 640px) {
+            .bloom-wordmark-wrap { height: 280px; }
+        }
+
+        .bloom-wordmark {
+            font-family: 'Satoshi-Black', sans-serif;
+            font-size: clamp(3.5rem, 10vw, 5.8rem);
+            line-height: 0.88;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #c08090 0%, #8878b8 45%, #a09070 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .bloom-wordmark-sub {
+            font-family: 'Satoshi-Medium', sans-serif;
+            font-size: 0.62rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: #b0a8b8;
+        }
+
+        /* ── WIP banner ── */
+        .wip-banner {
+            background: rgba(192, 128, 144, 0.08);
+            border: 1px solid rgba(192, 128, 144, 0.18);
+            border-radius: 10px;
+            padding: 0.8rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .wip-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #c08090;
+            animation: pulse-dot 2s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: 0.3; transform: scale(0.55); }
+        }
+
+        /* ── Stat pills ── */
+        .sidebar-stat {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            padding: 0.75rem 0.5rem;
+            background: rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 10px;
+        }
+
+        .sidebar-stat-num {
+            font-family: 'Satoshi-Black', sans-serif;
+            font-size: 1.35rem;
+            line-height: 1;
+        }
+
+        .sidebar-stat-lbl {
+            font-family: 'Satoshi-Medium', sans-serif;
+            font-size: 0.59rem;
+            color: #a0a0a0;
+            text-align: center;
+            line-height: 1.3;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* ── Section chip with SVG ── */
+        .section-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-family: 'Satoshi-Medium', sans-serif;
+            font-size: 0.68rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border: 1px solid #333;
+            color: #808080;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-chip svg { flex-shrink: 0; }
+
+        /* ── Stat bento chips (problem section) ── */
+        .stat-bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        @media (min-width: 640px) {
+            .stat-bento-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        .stat-bento {
+            background: #232323;
+            border: 1px solid #2d2d2d;
+            border-radius: 12px;
+            padding: 1rem 1.1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .stat-bento:hover {
+            background: #2a2a2a;
+            transform: translateY(-3px);
+        }
+
+        .stat-bento-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 7px;
+            background: rgba(255,255,255,0.04);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-bento-num {
+            font-family: 'Satoshi-Black', sans-serif;
+            font-size: 1.4rem;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--bloom-blush), var(--bloom-lavender));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-bento-lbl {
+            font-family: 'Satoshi-Medium', sans-serif;
+            font-size: 0.68rem;
+            color: #606060;
+            line-height: 1.35;
+        }
+
+        /* ── Gap bento grid ── */
+        .gap-bento-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        @media (max-width: 500px) {
+            .gap-bento-grid { grid-template-columns: 1fr; }
+        }
+
+        .gap-bento {
+            background: #232323;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 1.2rem 1.3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            transition: background 0.2s, transform 0.22s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gap-bento::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .gap-bento:hover {
+            background: #2a2a2a;
+            transform: translateY(-4px);
+        }
+
+        .gap-bento.span-2 { grid-column: span 2; }
+
+        @media (max-width: 500px) {
+            .gap-bento.span-2 { grid-column: span 1; }
+        }
+
+        .gap-bento-accent {
+            font-family: 'Satoshi-Bold', sans-serif;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            margin-bottom: 2px;
+        }
+
+        .gap-bento-title {
+            font-family: 'Satoshi-Bold', sans-serif;
+            font-size: 0.88rem;
+            color: #c8c8c8;
+            line-height: 1.3;
+        }
+
+        .gap-bento-body {
+            font-family: 'Satoshi-Medium', sans-serif;
+            font-size: 0.76rem;
+            color: #585858;
+            line-height: 1.5;
+        }
+
+        /* ── Data cards ── */
+        .data-card {
+            background: #232323;
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .data-card-title {
+            font-family: 'Satoshi-Bold', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #585858;
+        }
+
+        /* ── Progress bar ── */
+        .progress-row {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Satoshi-Medium', sans-serif;
+            font-size: 0.78rem;
+            color: #808080;
+        }
+
+        .progress-track {
+            background: #2d2d2d;
+            border-radius: 4px;
+            height: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--bloom-blush), var(--bloom-lavender));
+            width: 0;
+            transition: width 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .progress-fill.animated {
+            width: var(--target-width) !important;
+        }
+
+        .progress-fill.muted {
+            background: linear-gradient(90deg, #3a3a3a, #333);
+        }
+
+        /* ── Quote block ── */
+        .survey-quote {
+            border-left: 2px solid var(--bloom-lavender);
+            padding: 0.7rem 1rem;
+            font-family: 'Satoshi-Italic', sans-serif;
+            font-size: 0.88rem;
+            color: #808080;
+            background: #232323;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* ── Competitor table ── */
+        .comp-row {
+            background: #232323;
+            border-radius: 8px;
+            padding: 0.85rem 1.1rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .comp-row:hover {
+            background: #2a2a2a;
+        }
+
+        .comp-row.header {
+            background: transparent;
+            border-bottom: 1px solid #2a2a2a;
+            border-radius: 0;
+            padding-bottom: 0.4rem;
+        }
+
+        .comp-row.header span {
+            font-family: 'Satoshi-Bold', sans-serif;
+            font-size: 0.66rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #404040;
+        }
+
+        .comp-name {
+            font-family: 'Satoshi-Bold', sans-serif;
+            font-size: 0.87rem;
+            color: #c8c8c8;
+        }
+
+        .comp-strength {
+            font-family: 'Satoshi-Medium', sans-serif;
+            font-size: 0.76rem;
+            color: #808080;
+        }
+
+        .comp-weakness {
+            font-family: 'Satoshi-Medium', sans-serif;
+            font-size: 0.76rem;
+            color: #505050;
+        }
+
+        /* ── Bento grid ── */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .bento-cell {
+            background: #232323;
+            border-radius: 10px;
+            padding: 1.1rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: transform 0.2s ease, background 0.2s;
+        }
+
+        .bento-cell:hover {
+            background: #2a2a2a;
+            transform: translateY(-3px);
+        }
+
+        .bento-cell.wide {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 480px) {
+            .bento-cell.wide {
+                grid-column: span 1;
+            }
+        }
+
+        .bento-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .bento-label {
+            font-family: 'Satoshi-Bold', sans-serif;
+            font-size: 0.83rem;
+            color: #c0c0c0;
+        }
+
+        .bento-desc {
+            font-family: 'Satoshi-Medium', sans-serif;
+            font-size: 0.72rem;
+            color: #606060;
+            line-height: 1.45;
+        }
+
+        /* ── POP spotlight ── */
+        .pop-card {
+            background: linear-gradient(135deg, #231a1c 0%, #1e1a23 100%);
+            border: 1px solid #3a2a2e;
+            border-radius: 12px;
+            padding: 1.4rem;
+        }
+
+        /* ── Section divider ── */
+        .section-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #2a2a2a 30%, #2a2a2a 70%, transparent);
+            margin: 0.25rem 0;
+        }
+
+        /* ── Sticky sidebar ── */
+        @media (min-width: 1024px) {
+            .sidebar-sticky {
+                position: sticky;
+                top: calc(20px + 48px + 1.5rem);
+                align-self: flex-start;
+                max-height: calc(100vh - 20px - 48px - 3rem);
+                overflow-y: auto;
+                scrollbar-width: none;
+            }
+            .sidebar-sticky::-webkit-scrollbar { display: none; }
+        }
+
+        /* ── Back link ── */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Satoshi-Medium', sans-serif;
+            font-size: 0.8rem;
+            color: #555;
+            text-decoration: none;
+            transition: color 0.2s;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .back-link:hover {
+            color: #f1f1f1;
+        }
+
+        .back-link:hover svg {
+            transform: translateX(-4px);
+        }
+
+        .back-link svg {
+            transition: transform 0.2s;
+        }
+
+        /* ── Global Nav ── */
+        .global-nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            background: rgba(33, 33, 33, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            padding: 6px 8px;
+        }
+
+        .nav-link {
+            font-family: 'Satoshi-Medium', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #808080;
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 999px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover { color: #f1f1f1; background: rgba(255,255,255,0.06); }
+        .nav-link.active { color: #212121; background: #f1f1f1; }
+
+        .nav-resume {
+            font-family: 'Satoshi-Bold', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #212121;
+            background: #f1f1f1;
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 999px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-resume:hover { background: #ffffff; }
+    </style>
+</head>
+
+<body class="bg-[#212121] my-6 mx-4 sm:my-8 sm:mx-6 md:my-12 md:mx-12 lg:my-8 lg:mx-48">
+
+    <!-- Global Navigation -->
+    <nav class="global-nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/tabs/about.html" class="nav-link">About</a>
+        <a href="mailto:guptasrijan85@gmail.com" class="nav-link">Contact</a>
+        <a href="/resume.pdf" target="_blank" class="nav-resume">Résumé ↗</a>
+    </nav>
+
+    <!-- Back nav -->
+    <div class="mb-8 fade-in pt-16 lg:pt-4">
+        <a href="/" class="back-link">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 2L4 7l5 5" />
+            </svg>
+            Back to Portfolio
+        </a>
+    </div>
+
+    <section class="flex flex-col lg:flex-row items-start gap-8 lg:gap-12 xl:gap-16 lg:min-h-screen">
+
+        <!-- LEFT SIDEBAR -->
+        <div class="fade-in sidebar-card border-4 border-white p-6 flex flex-col items-center gap-8
+                    w-full lg:w-[580px]
+                    rounded-2xl sidebar-sticky">
+
+            <!-- Bloom hero wordmark -->
+            <div class="bloom-wordmark-wrap">
+                <span class="bloom-wordmark">Bloom</span>
+                <span class="bloom-wordmark-sub">Fintech · UI/UX Case Study</span>
+            </div>
+
+            <!-- WIP status -->
+            <div class="wip-banner">
+                <div class="wip-dot"></div>
+                <div>
+                    <p style="font-family:'Satoshi-Bold',sans-serif;font-size:0.76rem;color:#555;">Case Study in Progress</p>
+                    <p style="font-family:'Satoshi-Medium',sans-serif;font-size:0.66rem;color:#aaa;margin-top:1px;">Research complete · Wireframes upcoming</p>
+                </div>
+            </div>
+
+            <!-- Project meta rows -->
+            <div class="w-full flex flex-col" style="border-top:1px solid rgba(0,0,0,0.07);">
+                <div class="flex justify-between items-center py-2.5" style="border-bottom:1px solid rgba(0,0,0,0.07)">
+                    <span style="font-family:'Satoshi-Medium',sans-serif;font-size:0.65rem;color:#b0b0b0;text-transform:uppercase;letter-spacing:0.12em;">Type</span>
+                    <span style="font-family:'Satoshi-Bold',sans-serif;font-size:0.73rem;color:#555;">UX/UI Design</span>
+                </div>
+                <div class="flex justify-between items-center py-2.5" style="border-bottom:1px solid rgba(0,0,0,0.07)">
+                    <span style="font-family:'Satoshi-Medium',sans-serif;font-size:0.65rem;color:#b0b0b0;text-transform:uppercase;letter-spacing:0.12em;">Domain</span>
+                    <span style="font-family:'Satoshi-Bold',sans-serif;font-size:0.73rem;color:#555;">Fintech · Gen Z</span>
+                </div>
+                <div class="flex justify-between items-center py-2.5" style="border-bottom:1px solid rgba(0,0,0,0.07)">
+                    <span style="font-family:'Satoshi-Medium',sans-serif;font-size:0.65rem;color:#b0b0b0;text-transform:uppercase;letter-spacing:0.12em;">Timeline</span>
+                    <span style="font-family:'Satoshi-Bold',sans-serif;font-size:0.73rem;color:#555;">April 2026 →</span>
+                </div>
+                <div class="flex justify-between items-center py-2.5" style="border-bottom:1px solid rgba(0,0,0,0.07)">
+                    <span style="font-family:'Satoshi-Medium',sans-serif;font-size:0.65rem;color:#b0b0b0;text-transform:uppercase;letter-spacing:0.12em;">Research</span>
+                    <span style="font-family:'Satoshi-Bold',sans-serif;font-size:0.73rem;color:#555;">28 respondents</span>
+                </div>
+                <div class="flex justify-between items-center py-2.5">
+                    <span style="font-family:'Satoshi-Medium',sans-serif;font-size:0.65rem;color:#b0b0b0;text-transform:uppercase;letter-spacing:0.12em;">Audited</span>
+                    <span style="font-family:'Satoshi-Bold',sans-serif;font-size:0.73rem;color:#555;">7 competitors</span>
+                </div>
+            </div>
+
+            <!-- Stats row -->
+            <div class="flex flex-row w-full gap-3">
+                <div class="sidebar-stat">
+                    <span class="sidebar-stat-num" style="color:#c08090;">94%</span>
+                    <span class="sidebar-stat-lbl">aged 18–21</span>
+                </div>
+                <div class="sidebar-stat">
+                    <span class="sidebar-stat-num" style="color:#8878b8;">4.2<span style="font-size:0.8rem;">/5</span></span>
+                    <span class="sidebar-stat-lbl">design score</span>
+                </div>
+                <div class="sidebar-stat">
+                    <span class="sidebar-stat-num" style="color:#7a9e7e;">82%</span>
+                    <span class="sidebar-stat-lbl">lifestyle vibe</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT CONTENT -->
+        <div class="flex flex-col gap-10 sm:gap-12 lg:gap-16 w-full max-w-2xl">
+
+            <!-- The Problem -->
+            <div class="flex flex-col gap-4">
+                <h1
+                    class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
+                    <span>The</span>
+                    <span class="text-[#808080]">Problem</span>
+                </h1>
+                <p class="fade-in text-[#808080] text-sm sm:text-base lg:text-xl leading-relaxed">
+                    Gen Z pays via UPI every day — but nobody has built an app that combines payments, splits,
+                    categorization, saving goals, and rewards in one place. Every existing app solves one piece. Bloom
+                    solves all of it.
+                </p>
+                <div class="fade-in stat-bento-grid mt-1">
+                    <div class="stat-bento">
+                        <div class="stat-bento-icon">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--bloom-blush)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        </div>
+                        <span class="stat-bento-num">64.7%</span>
+                        <span class="stat-bento-lbl">check spending once/week or less</span>
+                    </div>
+                    <div class="stat-bento">
+                        <div class="stat-bento-icon">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--bloom-lavender)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        </div>
+                        <span class="stat-bento-num">41.2%</span>
+                        <span class="stat-bento-lbl">surprised by monthly spending</span>
+                    </div>
+                    <div class="stat-bento">
+                        <div class="stat-bento-icon">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--bloom-peach)" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                        </div>
+                        <span class="stat-bento-num">0%</span>
+                        <span class="stat-bento-lbl">use Splitwise for UPI</span>
+                    </div>
+                    <div class="stat-bento">
+                        <div class="stat-bento-icon">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--bloom-sage)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                        </div>
+                        <span class="stat-bento-num">70%</span>
+                        <span class="stat-bento-lbl">use one-pays method</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Survey Analysis -->
+            <div class="flex flex-col gap-6">
+                <div class="fade-in">
+                    <div class="section-chip">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <polyline points="14 2 14 8 20 8" />
+                            <line x1="16" y1="13" x2="8" y2="13" />
+                            <line x1="16" y1="17" x2="8" y2="17" />
+                        </svg>
+                        Primary Research
+                    </div>
+                    <h2
+                        class="font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase text-white leading-tight tracking-wider">
+                        <span>Survey</span><br><span class="text-[#808080]">Analysis</span>
+                    </h2>
+                </div>
+
+                <div class="fade-in data-card">
+                    <p class="data-card-title">How people track spending</p>
+                    <div class="flex flex-col gap-4">
+                        <div class="progress-row">
+                            <div class="progress-label"><span>Bank app history</span><span>58.8%</span></div>
+                            <div class="progress-track">
+                                <div class="progress-fill" style="--target-width:58.8%" data-width="58.8%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-row">
+                            <div class="progress-label"><span>Mental note</span><span>52.9%</span></div>
+                            <div class="progress-track">
+                                <div class="progress-fill" style="--target-width:52.9%" data-width="52.9%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-row">
+                            <div class="progress-label"><span>Don't track at all</span><span>23.5%</span></div>
+                            <div class="progress-track">
+                                <div class="progress-fill muted" style="--target-width:23.5%" data-width="23.5%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-row">
+                            <div class="progress-label"><span>Notes / spreadsheet</span><span>23.5%</span></div>
+                            <div class="progress-track">
+                                <div class="progress-fill muted" style="--target-width:23.5%" data-width="23.5%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="font-family:'Satoshi-Medium',sans-serif;font-size:0.72rem;color:#505050;line-height:1.5;">
+                        Nobody has a real system — Bloom's auto-categorization directly addresses this gap.</p>
+                </div>
+
+                <div class="fade-in data-card">
+                    <p class="data-card-title">Top spending categories</p>
+                    <div class="flex flex-col gap-4">
+                        <div class="progress-row">
+                            <div class="progress-label"><span>Food & drinks</span><span
+                                    style="color:var(--bloom-blush)">94.1%</span></div>
+                            <div class="progress-track">
+                                <div class="progress-fill" style="--target-width:94.1%" data-width="94.1%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-row">
+                            <div class="progress-label"><span>Transport</span><span>41.2%</span></div>
+                            <div class="progress-track">
+                                <div class="progress-fill" style="--target-width:41.2%" data-width="41.2%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-row">
+                            <div class="progress-label"><span>Going out</span><span>35.3%</span></div>
+                            <div class="progress-track">
+                                <div class="progress-fill" style="--target-width:35.3%" data-width="35.3%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-row">
+                            <div class="progress-label"><span>Online shopping</span><span>35.3%</span></div>
+                            <div class="progress-track">
+                                <div class="progress-fill" style="--target-width:35.3%" data-width="35.3%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-row">
+                            <div class="progress-label"><span>Self care</span><span>35.3%</span></div>
+                            <div class="progress-track">
+                                <div class="progress-fill" style="--target-width:35.3%" data-width="35.3%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fade-in data-card">
+                    <p class="data-card-title">Features that would drive switching</p>
+                    <div class="flex flex-col gap-4">
+                        <div class="progress-row">
+                            <div class="progress-label"><span>Saving goals & progress</span><span
+                                    style="color:var(--bloom-blush)">64.7%</span></div>
+                            <div class="progress-track">
+                                <div class="progress-fill" style="--target-width:64.7%" data-width="64.7%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-row">
+                            <div class="progress-label"><span>Rewards / coins per transaction</span><span>58.8%</span>
+                            </div>
+                            <div class="progress-track">
+                                <div class="progress-fill" style="--target-width:58.8%" data-width="58.8%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-row">
+                            <div class="progress-label"><span>Auto-categorization</span><span>52.9%</span></div>
+                            <div class="progress-track">
+                                <div class="progress-fill" style="--target-width:52.9%" data-width="52.9%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-row">
+                            <div class="progress-label"><span>Smart bill splits</span><span>52.9%</span></div>
+                            <div class="progress-track">
+                                <div class="progress-fill" style="--target-width:52.9%" data-width="52.9%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-row">
+                            <div class="progress-label"><span>Beautiful design</span><span>52.9%</span></div>
+                            <div class="progress-track">
+                                <div class="progress-fill" style="--target-width:52.9%" data-width="52.9%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-row">
+                            <div class="progress-label"><span>Spending insights</span><span>41.2%</span></div>
+                            <div class="progress-track">
+                                <div class="progress-fill" style="--target-width:41.2%" data-width="41.2%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="font-family:'Satoshi-Medium',sans-serif;font-size:0.72rem;color:#505050;line-height:1.5;">
+                        Top 5 features all scored 52%+ — validating Bloom's core feature set.</p>
+                </div>
+
+                <div class="fade-in flex flex-col gap-3">
+                    <p
+                        style="font-family:'Satoshi-Bold',sans-serif;font-size:0.66rem;color:#454545;text-transform:uppercase;letter-spacing:0.1em;">
+                        What users wish their money app did better</p>
+                    <div class="survey-quote">"Better expense tracking with smart insights and personalized
+                        suggestions."</div>
+                    <div class="survey-quote">"Having a personality"</div>
+                    <div class="survey-quote">"Tracking my expenses category wise"</div>
+                    <div class="survey-quote">"Better saving option"</div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Competitive Audit -->
+            <div class="flex flex-col gap-6">
+                <div class="fade-in">
+                    <div class="section-chip">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="11" cy="11" r="8" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        </svg>
+                        Secondary Research
+                    </div>
+                    <h2
+                        class="font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase text-white leading-tight tracking-wider">
+                        <span>Competitive</span><br><span class="text-[#808080]">Audit</span>
+                    </h2>
+                    <p class="text-[#808080] text-sm lg:text-base leading-relaxed mt-3">7 apps audited across 9
+                        dimensions — PhonePe, GPay, CRED, Paytm, Splitwise, POP, and Navi.</p>
+                </div>
+
+                <div class="fade-in flex flex-col gap-2">
+                    <div class="comp-row header"><span>App</span><span>Strength</span><span>Weakness</span></div>
+                    <div class="comp-row"><span class="comp-name">PhonePe</span><span class="comp-strength">47% market
+                            share</span><span class="comp-weakness">Cluttered UI, no tracking</span></div>
+                    <div class="comp-row"><span class="comp-name">GPay</span><span class="comp-strength">Cleanest UPI
+                            design</span><span class="comp-weakness">No tracking, no splitting</span></div>
+                    <div class="comp-row"><span class="comp-name">CRED</span><span class="comp-strength">Premium design
+                            + rewards</span><span class="comp-weakness">CIBIL 750+ gated</span></div>
+                    <div class="comp-row"><span class="comp-name">Paytm</span><span class="comp-strength">Widest feature
+                            set</span><span class="comp-weakness">Ad-heavy, 1.7★ rating</span></div>
+                    <div class="comp-row"><span class="comp-name">Splitwise</span><span class="comp-strength">Best
+                            splitting logic</span><span class="comp-weakness">No UPI, paywall</span></div>
+                    <div class="comp-row" style="border-left:2px solid var(--bloom-blush)"><span class="comp-name"
+                            style="color:var(--bloom-blush)">POP ★</span><span class="comp-strength">Coins on every UPI
+                            txn</span><span class="comp-weakness">No tracking, reliability issues</span></div>
+                    <div class="comp-row"><span class="comp-name">Navi</span><span class="comp-strength">Biometric pay +
+                            super-app</span><span class="comp-weakness">Loan complaints, loan-heavy</span></div>
+                </div>
+
+                <div class="fade-in pop-card">
+                    <p
+                        style="font-family:'Satoshi-Bold',sans-serif;font-size:0.66rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--bloom-blush);margin-bottom:8px;">
+                        POP — Closest Direct Competitor</p>
+                    <p style="font-family:'Satoshi-Medium',sans-serif;font-size:0.82rem;color:#606060;line-height:1.6;">
+                        Founded 2023, Bengaluru. 1Cr+ users backed by IndiaQuotient. Endorsed by Samay Raina. POPcoins
+                        earned on every UPI transaction, but no spending tracking or bill splitting.</p>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Gaps Bloom Can Fill -->
+            <div class="flex flex-col gap-6">
+                <div class="fade-in">
+                    <div class="section-chip">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                        </svg>
+                        Opportunity
+                    </div>
+                    <h2
+                        class="font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase text-white leading-tight tracking-wider">
+                        <span>Gaps Bloom</span><br><span class="text-[#808080]">Can Fill</span>
+                    </h2>
+                </div>
+
+                <div class="fade-in gap-bento-grid">
+                    <div class="gap-bento">
+                        <div class="gap-bento-accent" style="color:var(--bloom-blush);">01 — UPI + Splitting</div>
+                        <p class="gap-bento-title">Nobody Does Both</p>
+                        <p class="gap-bento-body">GPay, PhonePe, POP, Navi all handle payments — zero splitting. Splitwise splits — no UPI. Bloom unifies both.</p>
+                        <style>.gap-bento:nth-child(1)::before{background:var(--bloom-blush);}</style>
+                    </div>
+                    <div class="gap-bento">
+                        <div class="gap-bento-accent" style="color:var(--bloom-lavender);">02 — Categorization</div>
+                        <p class="gap-bento-title">Zero Apps Categorize UPI Spend</p>
+                        <p class="gap-bento-body">52.9% want auto-categorization. Completely unmet by every existing app.</p>
+                        <style>.gap-bento:nth-child(2)::before{background:var(--bloom-lavender);}</style>
+                    </div>
+                    <div class="gap-bento">
+                        <div class="gap-bento-accent" style="color:var(--bloom-sage);">03 — Saving Goals</div>
+                        <p class="gap-bento-title">0 Out of 7 Apps Have It</p>
+                        <p class="gap-bento-body">64.7% want saving goals with a progress tracker. A pure, unaddressed gap.</p>
+                        <style>.gap-bento:nth-child(3)::before{background:var(--bloom-sage);}</style>
+                    </div>
+                    <div class="gap-bento">
+                        <div class="gap-bento-accent" style="color:var(--bloom-peach);">04 — Focus</div>
+                        <p class="gap-bento-title">Super-Apps Too Heavy for Gen Z</p>
+                        <p class="gap-bento-body">Gen Z wants something focused, fast, and actually beautiful.</p>
+                        <style>.gap-bento:nth-child(4)::before{background:var(--bloom-peach);}</style>
+                    </div>
+                    <div class="gap-bento span-2">
+                        <div class="gap-bento-accent" style="color:var(--bloom-sand);">05 — Rewards</div>
+                        <p class="gap-bento-title">Rewards Without Financial Awareness</p>
+                        <p class="gap-bento-body">Bloom combines rewards with real insights — earn on every transaction and actually understand where your money goes.</p>
+                        <style>.gap-bento:nth-child(5)::before{background:var(--bloom-sand);}</style>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- What Bloom Does -->
+            <div class="flex flex-col gap-6">
+                <div class="fade-in">
+                    <div class="section-chip">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        </svg>
+                        The Solution
+                    </div>
+                    <h2
+                        class="font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase text-white leading-tight tracking-wider">
+                        <span>What</span><br><span class="text-[#808080]">Bloom Does</span>
+                    </h2>
+                    <p class="text-[#808080] text-sm lg:text-base leading-relaxed mt-3">A fintech app for Gen Z that
+                        combines everything missing from every other app — in a design that actually has a personality.
+                    </p>
+                </div>
+
+                <div class="fade-in bento-grid">
+                    <div class="bento-cell">
+                        <div class="bento-icon" style="background:rgba(242,196,206,0.1)">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--bloom-blush)"
+                                stroke-width="2">
+                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                            </svg>
+                        </div>
+                        <p class="bento-label">UPI Payments</p>
+                        <p class="bento-desc">Fast, clean payments with every major bank supported.</p>
+                    </div>
+                    <div class="bento-cell">
+                        <div class="bento-icon" style="background:rgba(214,204,232,0.1)">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--bloom-lavender)"
+                                stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
+                        </div>
+                        <p class="bento-label">Smart Bill Splits</p>
+                        <p class="bento-desc">One tap to split, zero awkward reminders.</p>
+                    </div>
+                    <div class="bento-cell">
+                        <div class="bento-icon" style="background:rgba(200,216,192,0.1)">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--bloom-sage)"
+                                stroke-width="2">
+                                <path d="M4 6h16M4 12h16M4 18h7" />
+                            </svg>
+                        </div>
+                        <p class="bento-label">Auto-Categorization</p>
+                        <p class="bento-desc">Every UPI txn automatically tagged and sorted.</p>
+                    </div>
+                    <div class="bento-cell wide">
+                        <div class="bento-icon" style="background:rgba(245,217,200,0.1)">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--bloom-peach)"
+                                stroke-width="2">
+                                <path d="M18 20V10M12 20V4M6 20v-6" />
+                            </svg>
+                        </div>
+                        <p class="bento-label">Saving Goals + Progress</p>
+                        <p class="bento-desc">Set a goal, watch it grow. 64.7% of users wanted this.</p>
+                    </div>
+                    <div class="bento-cell">
+                        <div class="bento-icon" style="background:rgba(237,227,216,0.1)">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--bloom-sand)"
+                                stroke-width="2">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                            </svg>
+                        </div>
+                        <p class="bento-label">Spending Insights</p>
+                        <p class="bento-desc">Weekly summaries so you're never surprised.</p>
+                    </div>
+                    <div class="bento-cell">
+                        <div class="bento-icon" style="background:rgba(242,196,206,0.1)">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--bloom-blush)"
+                                stroke-width="2">
+                                <circle cx="12" cy="8" r="6" />
+                                <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
+                            </svg>
+                        </div>
+                        <p class="bento-label">Rewards System</p>
+                        <p class="bento-desc">Earn on every transaction, understand where it went.</p>
+                    </div>
+                    <div class="bento-cell wide">
+                        <div class="bento-icon" style="background:rgba(214,204,232,0.1)">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--bloom-lavender)"
+                                stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                            </svg>
+                        </div>
+                        <p class="bento-label">Design-First — Actually Has a Personality</p>
+                        <p class="bento-desc">82.4% of respondents want a lifestyle vibe. Design is the product.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- In Progress -->
+            <div class="flex flex-col gap-6 pb-12">
+                <div class="fade-in">
+                    <div class="section-chip">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
+                        What's Next
+                    </div>
+                    <h2
+                        class="font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl uppercase text-white leading-tight tracking-wider">
+                        <span>In</span><br><span class="text-[#808080]">Progress</span>
+                    </h2>
+                </div>
+
+                <div class="fade-in flex flex-col gap-2 lg:w-4/5">
+                    <div class="comp-row" style="grid-template-columns:28px 1fr auto">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#505050" stroke-width="2.5">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        <span class="comp-name" style="font-size:0.84rem;">Survey Research (28 respondents)</span>
+                        <span
+                            style="font-family:'Satoshi-Medium',sans-serif;font-size:0.7rem;color:#505050;">Done</span>
+                    </div>
+                    <div class="comp-row" style="grid-template-columns:28px 1fr auto">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#505050" stroke-width="2.5">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        <span class="comp-name" style="font-size:0.84rem;">Competitive Audit (7 apps, v3)</span>
+                        <span
+                            style="font-family:'Satoshi-Medium',sans-serif;font-size:0.7rem;color:#505050;">Done</span>
+                    </div>
+                    <div class="comp-row" style="grid-template-columns:28px 1fr auto">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--bloom-blush)"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
+                        <span class="comp-name" style="font-size:0.84rem;color:var(--bloom-blush);">User Personas</span>
+                        <span
+                            style="font-family:'Satoshi-Medium',sans-serif;font-size:0.7rem;color:var(--bloom-blush);">In
+                            progress</span>
+                    </div>
+                    <div class="comp-row" style="grid-template-columns:28px 1fr auto">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#303030" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                        </svg>
+                        <span class="comp-name" style="font-size:0.84rem;color:#404040;">Information Architecture</span>
+                        <span
+                            style="font-family:'Satoshi-Medium',sans-serif;font-size:0.7rem;color:#383838;">Upcoming</span>
+                    </div>
+                    <div class="comp-row" style="grid-template-columns:28px 1fr auto">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#303030" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                        </svg>
+                        <span class="comp-name" style="font-size:0.84rem;color:#404040;">Wireframes</span>
+                        <span
+                            style="font-family:'Satoshi-Medium',sans-serif;font-size:0.7rem;color:#383838;">Upcoming</span>
+                    </div>
+                    <div class="comp-row" style="grid-template-columns:28px 1fr auto">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#303030" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                        </svg>
+                        <span class="comp-name" style="font-size:0.84rem;color:#404040;">High-Fidelity UI Design</span>
+                        <span
+                            style="font-family:'Satoshi-Medium',sans-serif;font-size:0.7rem;color:#383838;">Upcoming</span>
+                    </div>
+                    <div class="comp-row" style="grid-template-columns:28px 1fr auto">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#303030" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                        </svg>
+                        <span class="comp-name" style="font-size:0.84rem;color:#404040;">Prototype + Usability
+                            Testing</span>
+                        <span
+                            style="font-family:'Satoshi-Medium',sans-serif;font-size:0.7rem;color:#383838;">Upcoming</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="/src/animation.js"></script>
+    <script>
+        // ── Progress bar slide-in on first scroll into view ──────────────────
+        (function () {
+            const bars = document.querySelectorAll('.progress-fill');
+            if (!bars.length) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bar = entry.target;
+                        // Small delay so the card fade-in finishes first
+                        setTimeout(() => bar.classList.add('animated'), 120);
+                        observer.unobserve(bar);
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            bars.forEach(bar => observer.observe(bar));
+        })();
+    </script>
+
+</body>
+
+</html>
