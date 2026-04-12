@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link rel="stylesheet" href="/src/satoshi.css">
     <link rel="stylesheet" href="/src/output.css">
     <link rel="stylesheet" href="/src/animations.css">
@@ -627,7 +627,7 @@
                 backdrop-filter: blur(20px);
                 -webkit-backdrop-filter: blur(20px);
                 /* Safe area for notched phones */
-                padding-bottom: env(safe-area-inset-bottom);
+                padding-bottom: 34px;
             }
 
             .nav-link {
@@ -738,7 +738,7 @@
 
             /* Push page content up so bottom nav doesn't cover it */
             body {
-                padding-bottom: calc(72px + env(safe-area-inset-bottom)) !important;
+                padding-bottom: 106px !important;
             }
         }
     </style>
@@ -1378,12 +1378,11 @@
                         setTimeout(() => bar.classList.add('animated'), 120);
                         observer.unobserve(bar);
                     }
-                             });
+             
+                });
             }, { threshold: 0.1 });
-
             document.querySelectorAll('.skill-bar').forEach(bar => observer.observe(bar));
         });
     </script>
 </body>
-
 </html>
