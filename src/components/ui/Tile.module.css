@@ -6,7 +6,7 @@
   display: grid;
   place-items: center;
   background: var(--tile);
-  padding: 6px;
+  padding: var(--gap-xs);
   overflow: hidden;
   color: var(--fg);
 }
@@ -18,7 +18,7 @@
 }
 
 .label {
-  font-size: 0.7rem;
+  font-size: var(--fs-tiny);
   font-weight: var(--w-semibold);
   text-align: center;
   line-height: 1.1;

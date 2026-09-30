@@ -4,7 +4,7 @@
 
 .rule {
   border: 0;
-  border-top: 1px solid var(--footer-rule);
+  border-top: var(--hairline) solid var(--footer-rule);
   margin: 0;
 }
 
@@ -19,7 +19,7 @@
 .item {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--gap-xs);
   min-width: 0;
 }
 

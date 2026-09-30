@@ -28,7 +28,7 @@
 .link {
   font-size: var(--fs-body);
   color: var(--fg);
-  text-underline-offset: 4px;
+  text-underline-offset: var(--underline-offset);
 }
 
 @media (max-width: 900px) {

@@ -5,10 +5,10 @@
   overflow: hidden;
   font-size: var(--hero-size);
   font-weight: var(--w-semibold);
-  letter-spacing: -0.05em;
+  letter-spacing: var(--track-hero);
   line-height: 1.1;
   text-align: center;
-  padding-top: 0.14em;
+  padding-top: var(--trim-hero);
   white-space: nowrap;
   pointer-events: none;
   user-select: none;
@@ -21,6 +21,6 @@
 @media (max-width: 900px) {
   .hero {
     font-size: 12vw;
-    padding-top: 0.1em;
+    padding-top: var(--trim-hero-sm);
   }
 }

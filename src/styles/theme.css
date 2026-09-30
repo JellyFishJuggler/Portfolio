@@ -115,6 +115,46 @@
   --scale-hover: 1.03;
   --dur-media: 400ms;
   --dur-reveal: 500ms;
+
+  /* micro-spacing */
+  --hairline: 1px;
+  --gap-xxs: 4px;
+  --gap-xs: 6px;
+  --gap-sm: 8px;
+
+  /* optical nudges */
+  --nudge: 2px;
+  --nudge-lg: 6px;
+  --underline-offset: 3px;
+  --focus-width: 2px;
+
+  /* remaining type sizes */
+  --fs-card-label: 1.125rem;
+  --fs-tiny: 0.7rem;
+  --fs-marquee-sm: 36px;
+  --fs-metric: clamp(2rem, 3.2vw, 3.5rem);
+  --fs-code: 14px;
+
+  /* tracking + optical leading trims */
+  --track-label: -0.01em;
+  --track-hero: -0.05em;
+  --trim-hero: 0.14em;
+  --trim-hero-sm: 0.1em;
+  --trim-marquee: 0.06em;
+  --trim-row-label: 0.3em;
+  --trim-link-row: 0.4em;
+
+  /* home grid sizing */
+  --home-row-min: 200px;
+  --home-stack-min: 400px;
+  --card-inset-sm: 20px;
+
+  /* default marquee loop, overridden per instance */
+  --dur-marquee: 22s;
+  --metric-min: 180px;
+
+  /* theme transition */
+  --dur-theme: 0.3s;
 }
 
 html.light {

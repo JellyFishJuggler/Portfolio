@@ -29,7 +29,7 @@
 }
 
 .link:hover .arrow {
-  transform: translateX(6px);
+  transform: translateX(var(--nudge-lg));
 }
 
 @media (max-width: 900px) {

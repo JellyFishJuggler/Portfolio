@@ -16,7 +16,7 @@ html,
 body {
   background: var(--bg);
   color: var(--fg);
-  transition: background 0.3s, color 0.3s;
+  transition: background var(--dur-theme), color var(--dur-theme);
 }
 
 body {
@@ -59,8 +59,8 @@ body::before {
 
 /* Keep a visible focus ring everywhere; components only add offset. */
 :focus-visible {
-  outline: 2px solid var(--fg);
-  outline-offset: 3px;
+  outline: var(--focus-width) solid var(--fg);
+  outline-offset: var(--underline-offset);
 }
 
 ::selection {

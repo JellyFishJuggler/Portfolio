@@ -1,12 +1,31 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--metric-min), 1fr));
+  gap: var(--gap);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Two narrow tiles cannot hold a 32px metric value; drop to one. */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .tile {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--gap-sm);
   padding: var(--sp-24);
 }
 
 .value {
-  font-size: clamp(2rem, 3.2vw, 3.5rem);
+  font-size: var(--fs-metric);
   font-weight: var(--w-medium);
   letter-spacing: var(--track-metric);
   line-height: 1.05;

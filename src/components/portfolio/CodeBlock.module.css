@@ -12,7 +12,7 @@
   margin: 0;
   overflow-x: auto;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 14px;
+  font-size: var(--fs-code);
   line-height: 1.6;
   color: var(--body);
   tab-size: 2;

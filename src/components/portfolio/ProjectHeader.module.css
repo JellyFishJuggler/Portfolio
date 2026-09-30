@@ -15,7 +15,7 @@
 }
 
 .category {
-  margin-top: 8px;
+  margin-top: var(--gap-sm);
   font-size: var(--fs-body);
   color: var(--muted-2);
 }
@@ -27,7 +27,7 @@
   gap: var(--sp-24);
   flex: none;
   font-size: var(--fs-body);
-  padding-top: 0.4em;
+  padding-top: var(--trim-link-row);
 }
 
 @media (max-width: 900px) {

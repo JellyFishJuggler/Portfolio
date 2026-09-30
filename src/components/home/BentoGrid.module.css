@@ -60,7 +60,7 @@
   .grid {
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: none;
-    grid-auto-rows: minmax(200px, 44vw);
+    grid-auto-rows: minmax(var(--home-row-min), 44vw);
     margin-top: var(--sp-24);
   }
 
@@ -71,6 +71,6 @@
   }
 
   .stackCol {
-    min-height: 400px;
+    min-height: var(--home-stack-min);
   }
 }

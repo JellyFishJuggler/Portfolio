@@ -4,7 +4,7 @@
   overflow: hidden;
   border-radius: var(--radius);
   background: var(--card);
-  border: 1px solid var(--edge);
+  border: var(--hairline) solid var(--edge);
   color: var(--fg);
   text-decoration: none;
   transition: background var(--dur), border-color var(--dur);

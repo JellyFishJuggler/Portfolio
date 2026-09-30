@@ -25,7 +25,7 @@
 .table td {
   text-align: left;
   padding: var(--sp-24) 0;
-  border-top: 1px solid var(--row-rule);
+  border-top: var(--hairline) solid var(--row-rule);
   color: var(--body);
 }
 

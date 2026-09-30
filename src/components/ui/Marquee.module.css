@@ -23,7 +23,7 @@
   gap: var(--gap);
   width: max-content;
   flex: none;
-  animation: scroll var(--marquee-duration, 22s) linear infinite;
+  animation: scroll var(--marquee-duration, var(--dur-marquee)) linear infinite;
 }
 
 .pause:hover .track {

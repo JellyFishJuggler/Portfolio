@@ -2,9 +2,9 @@
   position: absolute;
   left: var(--card-pad);
   bottom: var(--card-pad);
-  font-size: 1.125rem;
+  font-size: var(--fs-card-label);
   font-weight: var(--w-regular);
-  letter-spacing: -0.01em;
+  letter-spacing: var(--track-label);
 }
 
 .arrow {
@@ -17,20 +17,20 @@
 
 .card:hover .arrow,
 .card:focus-visible .arrow {
-  transform: translate(2px, -2px);
+  transform: translate(var(--nudge), calc(-1 * var(--nudge)));
 }
 
 @media (max-width: 900px) {
   .label,
   .arrow {
-    bottom: 20px;
+    bottom: var(--card-inset-sm);
   }
 
   .label {
-    left: 20px;
+    left: var(--card-inset-sm);
   }
 
   .arrow {
-    right: 20px;
+    right: var(--card-inset-sm);
   }
 }
