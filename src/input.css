@@ -1,2 +1,8 @@
 @import "tailwindcss";
 @import url('satoshi.css');
+
+/* Static HTML pages that load the generated output.css.
+   Explicit @source is required: v4 auto-scans only non-ignored files,
+   and archive/ is listed in .gitignore. */
+@source "../tabs/*.html";
+@source "../archive/*.html";

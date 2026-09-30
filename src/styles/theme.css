@@ -1,0 +1,73 @@
+/* theme.css — every design token in one place.
+   Fonts use relative url() so Vite fingerprints them; this keeps them working
+   under vite.config.js `base: './'` on any deploy subpath. */
+
+/* ---------- Inter Tight (latin + latin-ext) ----------
+   latin-ext is required: "Dādri" uses ā (U+0101), which is NOT in the
+   latin subset. Both are served from one variable file, 400-700. */
+@font-face {
+  font-family: "Inter Tight";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("../assets/fonts/inter-tight-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Inter Tight";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("../assets/fonts/inter-tight-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* type */
+  --font-sans: "Inter Tight", system-ui, sans-serif;
+  --w-regular: 400;
+  --w-medium: 500;
+  --w-semibold: 600;
+
+  /* surface */
+  --bg: #000;
+  --fg: #fff;
+  --muted: rgba(255, 255, 255, 0.7);
+  --card: rgba(255, 255, 255, 0.035);
+  --card-hover: rgba(255, 255, 255, 0.06);
+  --edge: rgba(255, 255, 255, 0.06);
+  --tile: #1a1a1a;
+  --arrow: rgba(255, 255, 255, 0.8);
+  --grain-page: 0.04;
+  --grain-card: 0.05;
+  --blur: 16px;
+
+  /* geometry */
+  --pad: 16px;
+  --gap: 16px;
+  --radius: 32px;
+  --tile-radius: 18px;
+  --card-pad: 32px;
+  --tile-size: 72px;
+  --logo-size: 32px;
+  --hero-size: 7vw;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 200ms;
+}
+
+html.light {
+  --bg: #ecebe8;
+  --fg: #111;
+  --muted: rgba(17, 17, 17, 0.62);
+  --card: rgba(0, 0, 0, 0.045);
+  --card-hover: rgba(0, 0, 0, 0.075);
+  --edge: rgba(0, 0, 0, 0.08);
+  --tile: #dcdbd7;
+  --arrow: rgba(17, 17, 17, 0.8);
+  --grain-page: 0.03;
+  --grain-card: 0.04;
+}
