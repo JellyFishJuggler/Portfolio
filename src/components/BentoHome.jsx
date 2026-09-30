@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import "./bento.css";
 
@@ -16,6 +16,29 @@ export const home = {
     { name: "Python" }, { name: "NumPy" }, { name: "Pandas" }, { name: "scikit-learn" },
     { name: "XGBoost" }, { name: "Streamlit" }, { name: "SQL" }, { name: "Git" },
   ],
+};
+
+/* Brand marks, inlined from simple-icons v13 so the marquee needs no new
+   dependency. NumPy and pandas are forced to white: their brand colors
+   (#4BA8C0 / #150458) are near-invisible on the #1a1a1a tile. XGBoost has
+   no simple-icons entry and SQL has no generic brand mark, so both fall
+   through to the text label in StackTicker. */
+const BRAND = {
+  Python: "#3776AB",
+  NumPy: "#fff",
+  pandas: "#fff",
+  "scikit-learn": "#F7931E",
+  Streamlit: "#FF4B4B",
+  Git: "#F05032",
+};
+
+const SKILL_LOGOS = {
+  Python: "M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z",
+  NumPy: "M10.315 4.876L6.3048 2.8517l-4.401 2.1965 4.1186 2.0683zm1.8381.9277l4.2045 2.1223-4.3622 2.1906-4.125-2.0718zm5.6153-2.9213l4.3193 2.1658-3.863 1.9402-4.2131-2.1252zm-1.859-.9329L12.021 0 8.1742 1.9193l4.0068 2.0208zm-3.0401 16.7443V24l4.7107-2.3507-.0053-5.3085zm4.7037-4.2057l-.0052-5.2528-4.6985 2.3356v5.2546zm5.6553-.9845v5.327l-4.0178 2.0052-.0029-5.3028zm0-1.8626V6.4214l-4.0253 2.001.0034 5.2633zm-4.0884 9.1721l-3.9887 1.9956-.0034-5.3028 3.9921-1.9981zm9.7543-9.1835l4.1071 2.0573-.0034 5.372-4.1037-2.0573zm-4.7305 11.6112l-4.0028 2.001.0034 5.3028 3.9994-2.001zm4.7305 1.6654l4.1067 2.0547-.0034 5.3028-4.1033-2.0547z",
+  pandas: "M16.922 0h2.623v18.104h-2.623zm-4.126 12.94h2.623v2.57h-2.623zm0-7.037h2.623v5.446h-2.623zm0 11.197h2.623v5.446h-2.623zM4.456 5.896h2.622V24H4.455zm4.213 2.559h2.623v2.57H8.67zm0 4.151h2.623v5.447H8.67zm0 6.94h2.623V24H8.67zM0 6.501h2.122v16.738H0zm2.122 5.437h2.623v2.57H2.122zm0 4.112h2.623v5.447h-2.623z",
+  "scikit-learn": "M15.601 5.53c-1.91.035-3.981.91-5.63 2.56-2.93 2.93-2.083 8.53-1.088 9.525.805.804 6.595 1.843 9.526-1.088a9.74 9.74 0 0 0 .584-.643c.043-.292.205-.66.489-1.106a1.848 1.848 0 0 1-.537.176c-.144.675-1.32 1.713-2.545 1.695-1.218-.017-1.752-.82-1.41-1.253.27-.343 1.121-1.075 1.107-1.752-.106.004-2.041 1.441-2.024 2.947.002.334.029.751.123 1.124-1.948-1.058-2.178-4.645-1.01-6.4 1.454-2.177 4.521-2.977 6.547-1.612.407.275.774.634 1.037 1.054.107.17.207.42.266.638.09.334.13.75.09 1.16-.04.41-.166.845-.374 1.203a4.28 4.28 0 0 1-1.12 1.372c-.2.14-.427.26-.66.36-.2.09-.42.16-.63.22-.21.05-.42.1-.63.14-.29.05-.59.09-.89.09s-.6-.04-.89-.09c-.21-.04-.42-.09-.63-.14-.21-.06-.43-.13-.63-.22-.23-.1-.46-.22-.66-.36a4.28 4.28 0 0 1-1.12-1.372 4.06 4.06 0 0 1-.374-1.203c-.04-.41 0-.826.09-1.16.06-.218.159-.468.266-.638.263-.42.63-.779 1.037-1.054 2.026-1.365 5.093-.565 6.547 1.612 1.168 1.755.938 5.342-1.01 6.4z",
+  Streamlit: "M16.673 11.32l6.862-3.618c.233-.136.554.12.442.387L20.463 17.1zm-8.556-.229l3.473-5.187c.203-.328.578-.316.793-.028l7.886 11.75zm-3.375 7.25c-.28 0-.835-.284-.993-.716l-3.72-9.46c-.118-.331.139-.6.474-.6h8.413c.416 0 .618.436.362.762L4.714 18.34c-.16.24-.4.4-.672.4zM8.18 2.03a1.09 1.09 0 0 0-.99-.616l-4.24.808c-.45.086-.728.54-.64.99l3.637 18.77c.097.51.59.86 1.11.82l4.232-.806c.4-.076.66-.47.6-.87l-.13-1.32c-.04-.4-.4-.7-.8-.67l-2.53.48c-.26.05-.5-.14-.55-.39L4.16 5.02c-.07-.33.14-.65.47-.71l2.53-.48c.26-.05.5.14.55.39l.13 1.32c.04.4.4.7.8.67l2.51-.48a.5.5 0 0 1 .58.62l-.14.8z",
+  Git: "M23.546 10.93L13.067.452c-.604-.603-1.582-.603-2.188 0L8.708 2.627l2.76 2.76c.645-.215 1.379-.07 1.889.441.516.515.658 1.258.438 1.9l2.658 2.66c.645-.223 1.387-.078 1.9.435.721.72.721 1.884 0 2.604-.719.72-1.886.72-2.604 0l-2.682-2.682v7.283c.533.146 1.147.42 1.47.875.476.676.476 1.63 0 2.306-.685.685-3.205 1.572-4.87 1.372-.571-.068-1.023-.3-1.41-.571-.39-.275-.712-.633-.9-1.036-.184-.4-.277-.848-.277-1.303 0-.455.093-.903.277-1.303.19-.403.51-.76.9-1.036.387-.27.84-.503 1.41-.571.17-.02.347-.034.534-.04.688 0 1.355.2 1.8.6.45.4.764 1.02.764 1.67 0 .65-.313 1.27-.764 1.67-.445.4-1.112.6-1.8.6-.187-.006-.364-.02-.534-.04.025.2.04.4.04.6 0 .455-.093.903-.277 1.303-.19.403-.51.76-.9 1.036-.387.27-.84.503-1.41.571-1.665.2-4.185-.687-4.87-1.372a2.62 2.62 0 0 1 0-4.606c.3-.244.7-.447 1.14-.589v-7.28c-.2-.006-.395-.02-.573-.04-.571-.068-1.023-.3-1.41-.571a2.62 2.62 0 0 1-1.177-1.803c0-.65.313-1.27.763-1.67.45-.4 1.113-.6 1.8-.6.187.006.364.02.534.04.024-.2.04-.4.04-.6 0-.455-.093-.903-.277-1.303a2.65 2.65 0 0 0-.9-1.036 2.72 2.72 0 0 0-1.41-.571C5.232 2.6 2.712 3.488 2.042 4.175a2.62 2.62 0 0 0 0 4.606c.3.244.7.447 1.14.589v7.28c-.44.142-.84.345-1.14.589a2.62 2.62 0 0 0 0 4.606c.67.687 3.19 1.575 4.87 1.372.571-.068 1.023-.3 1.41-.571.39-.275.712-.633.9-1.036.184-.4.277-.848.277-1.303 0-.2-.015-.4-.04-.6.187.02.364.034.534.04.688 0 1.355-.2 1.8-.6.45-.4.764-1.02.764-1.67 0-.65-.313-1.27-.764-1.67a2.35 2.35 0 0 0-1.8-.6c-.187.006-.364.02-.534.04v-7.283l2.682 2.682c-.718.72-1.885.72-2.604 0a2.62 2.62 0 0 1 0-4.606 2.62 2.62 0 0 1 4.186 0c.32.455.467.98.42 1.511l2.76 2.76z",
 };
 
 /* ---------- hooks ---------- */
@@ -48,10 +71,10 @@ export function Header({ name, role, location, timeZone }) {
   const [light, toggle] = useTheme();
   return (
     <header className="top">
-      <div>{name}</div>
+      <div className="name">{name}</div>
       <div className="role">{role}</div>
       <div className="end">
-        {location} • {time}
+        <span aria-live="off">{location} • {time}</span>
         <button
           className="theme-dot"
           onClick={toggle}
@@ -64,15 +87,16 @@ export function Header({ name, role, location, timeZone }) {
 
 /* Text behind the grid. Old text exits upward, new text rises in from below. */
 export function HeroText({ text }) {
+  const reduce = useReducedMotion();
   return (
     <div className="hero-text" aria-hidden="true">
       <AnimatePresence initial={false}>
         <motion.div
           key={text}
-          initial={{ y: "100%" }}
+          initial={reduce ? false : { y: "100%" }}
           animate={{ y: 0 }}
-          exit={{ y: "-100%" }}
-          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          exit={reduce ? undefined : { y: "-100%" }}
+          transition={{ duration: reduce ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}
         >
           {text}
         </motion.div>
@@ -92,10 +116,10 @@ export function BentoCard({ label, href, onActive, className = "", children }) {
       }
     : {};
   const inner = children ?? (
-    <span className="label">
-      {label}
-      <ArrowUpRight className="arrow" size={22} strokeWidth={1.6} />
-    </span>
+    <>
+      <span className="label">{label}</span>
+      <ArrowUpRight className="arrow" size={16} strokeWidth={1.5} aria-hidden="true" />
+    </>
   );
   // Swap <a> for react-router's <Link to={href}> for internal routes.
   return href ? (
@@ -111,11 +135,20 @@ export function StackTicker({ items }) {
     <div className="bento-card">
       <div className="ticker" aria-label={`Stack: ${items.map((i) => i.name).join(", ")}`}>
         <div className="ticker-track">
-          {loop.map((it, i) => (
-            <div className="tile" key={i} aria-hidden={i >= items.length}>
-              {it.icon ? <img src={it.icon} alt="" /> : it.name}
-            </div>
-          ))}
+          {loop.map((it, i) => {
+            const d = SKILL_LOGOS[it.name];
+            return (
+              <div className="tile" key={i} aria-hidden={i >= items.length}>
+                {d ? (
+                  <svg viewBox="0 0 24 24" role="img" aria-label={it.name}>
+                    <path fill={BRAND[it.name]} d={d} />
+                  </svg>
+                ) : (
+                  <span className="fallback">{it.name}</span>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
@@ -136,16 +169,16 @@ export default function Home() {
       <HeroText text={text} />
 
       <main className="bento">
-        <BentoCard label="About" href="/about" onActive={setActive} />
-        <BentoCard label="Portfolio" href="/portfolio" onActive={setActive} className="md-span-3" />
+        <BentoCard label="About" href="/about" onActive={setActive} className="span-3" />
+        <BentoCard label="Portfolio" href="/portfolio" onActive={setActive} className="span-9" />
 
-        <BentoCard label="Contact" href="/contact" onActive={setActive} className="span-2" />
+        <BentoCard label="Contact" href="/contact" onActive={setActive} className="span-6" />
 
-        <div className="bento-card photo">
+        <div className="bento-card photo span-3">
           <img src={home.photo} alt={home.name} />
         </div>
 
-        <div className="stack-col">
+        <div className="stack-col span-3">
           <StackTicker items={home.stack} />
           <BentoCard label="Resume" href={home.resume} onActive={setActive} />
         </div>
