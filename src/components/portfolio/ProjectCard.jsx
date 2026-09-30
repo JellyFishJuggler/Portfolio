@@ -19,7 +19,9 @@ export function ProjectCard({ project, eager = false, className }) {
       <div className={styles.media}>
         <MediaFigure
           src={project.cover}
-          alt={`${project.title} — ${project.category}`}
+          /* The caption below already names the project, so the cover is
+             decorative here; a descriptive alt would be announced twice. */
+          alt=""
           variant="card"
           radius="sm"
           hint={`/img/projects/${project.slug}/cover.webp`}

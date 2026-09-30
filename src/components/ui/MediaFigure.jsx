@@ -50,7 +50,9 @@ export function MediaFigure({
             decoding="async"
           />
         ) : (
-          <div className={styles.placeholder}>
+          /* Scaffolding, not content: hidden so it doesn't leak into the
+             accessible name of an enclosing link. */
+          <div className={styles.placeholder} aria-hidden="true">
             <span>Add image</span>
             {hint && <span>{hint}</span>}
           </div>
