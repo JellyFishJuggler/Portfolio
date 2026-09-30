@@ -1,0 +1,60 @@
+.card {
+  display: block;
+  text-decoration: none;
+}
+
+/* The media is inset by the card padding; the caption takes its own inset. */
+.media {
+  margin: var(--pad) var(--pad) 0;
+  overflow: hidden;
+}
+
+/* The hover zoom is driven from the card so it stays inside the card's
+   overflow clip. Plain `img` selectors survive CSS Modules, so this can
+   target MediaFigure's image without threading a className through it. */
+.card img {
+  transition: transform var(--dur-media) var(--ease);
+}
+
+.card:hover img,
+.card:focus-visible img {
+  transform: scale(var(--scale-hover));
+}
+
+.caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-24);
+  height: var(--caption-h);
+  padding: 0 var(--sp-24);
+}
+
+.title {
+  font-size: var(--fs-card-title);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--track-tight);
+  color: var(--fg);
+}
+
+.category {
+  flex: none;
+  font-size: var(--fs-body);
+  color: var(--muted-2);
+  text-align: right;
+}
+
+@media (max-width: 900px) {
+  .caption {
+    height: auto;
+    min-height: var(--caption-h);
+    padding: var(--sp-24) 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .category {
+    text-align: left;
+  }
+}

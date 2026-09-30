@@ -1,0 +1,16 @@
+.title {
+  max-width: var(--page-max);
+  margin: var(--sp-48) 0;
+  font-size: var(--fs-h1);
+  font-weight: var(--w-semibold);
+  letter-spacing: var(--track-title);
+  line-height: 1.12;
+  color: var(--fg);
+  text-wrap: balance;
+}
+
+@media (max-width: 900px) {
+  .title {
+    margin: var(--sp-32) 0;
+  }
+}
