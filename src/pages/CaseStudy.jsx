@@ -2,6 +2,7 @@ import { Navigate, useParams } from "react-router-dom";
 import { PageShell, SiteFooter, SiteHeader } from "../components/layout";
 import {
   ComingSoon,
+  MarkTile,
   MetricTiles,
   NextProject,
   ProjectHeader,
@@ -34,12 +35,11 @@ function CaseStudyView({ slug }) {
       <ProjectHeader project={project} />
 
       <Reveal>
-        <MediaFigure
-          src={project.hero}
-          alt={`${project.title} — ${project.category}`}
-          hint={project.hero ?? `/img/projects/${project.slug}/hero.webp`}
-          eager
-        />
+        {project.hero ? (
+          <MediaFigure src={project.hero} alt={`${project.title} — ${project.category}`} eager />
+        ) : (
+          <MarkTile mark={project.mark} />
+        )}
       </Reveal>
 
       <ProjectMeta meta={project.meta} stack={project.stack} />

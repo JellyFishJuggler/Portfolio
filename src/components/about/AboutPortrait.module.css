@@ -1,0 +1,45 @@
+.column {
+  min-width: 0;
+  /* Stretch to the row's full height so the sticky wrapper below has room to
+     travel while the narrative column scrolls past. */
+  align-self: stretch;
+}
+
+/* Sticky wrapper: the column stays put while the narrative column scrolls
+   past it. The offset clears the fixed site header. */
+.sticky {
+  position: sticky;
+  top: calc(var(--header-h) + var(--sp-48));
+  /* Intentional empty space to the LEFT of the portrait. Applied as padding
+     on the wrapper rather than a margin on the image, so the image's right
+     edge still aligns with the page's right margin and the inset can never
+     push it past the column. Do not collapse this. */
+  padding-left: var(--about-portrait-inset);
+}
+
+.image {
+  width: 100%;
+  /* Sized to the viewport so a tall portrait stays fully visible while
+     sticky, without distorting: `contain` does the fitting. */
+  height: var(--about-portrait-max-h);
+  object-fit: contain;
+  /* No frame of any kind. The asset is an opaque rectangle and is shown
+     as-is rather than dressed up as a cutout. */
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+
+@media (max-width: 900px) {
+  /* Portrait returns to normal document flow: sticky is released so it
+     cannot trap a short mobile viewport. */
+  .sticky {
+    position: static;
+    padding-left: 0;
+  }
+
+  .image {
+    height: auto;
+    max-height: none;
+  }
+}

@@ -1,0 +1,22 @@
+.mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: var(--ar-hero);
+  border-radius: var(--radius-md);
+  background: var(--tile);
+  overflow: hidden;
+}
+
+.card {
+  aspect-ratio: var(--ar-card);
+  border-radius: var(--radius-sm);
+}
+
+.text {
+  font-size: clamp(3rem, 12vw, 7rem);
+  font-weight: var(--w-semibold);
+  letter-spacing: var(--track-tight);
+  color: var(--muted-2);
+  user-select: none;
+}

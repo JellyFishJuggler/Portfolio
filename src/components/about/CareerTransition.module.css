@@ -1,0 +1,22 @@
+.transition {
+  max-width: 46ch;
+  margin: 0;
+  padding: var(--sp-96) 0;
+  border-top: var(--hairline) solid var(--row-rule);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--muted-2);
+  transition: color var(--dur-reveal) var(--ease);
+}
+
+/* Reached on scroll: lift to full white. Doubled class so it outranks the
+   rule above without needing !important. */
+.lit {
+  color: var(--fg);
+}
+
+@media (max-width: 900px) {
+  .transition {
+    padding: var(--sp-64) 0;
+  }
+}

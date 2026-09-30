@@ -2,6 +2,22 @@
   margin: 0;
 }
 
+.title {
+  margin: 0;
+  font-size: var(--fs-h3);
+  font-weight: var(--w-semibold);
+  letter-spacing: var(--track-tight);
+  color: var(--fg);
+}
+
+/* The decision's own title sits above its explanation. */
+.label {
+  display: block;
+  margin-bottom: var(--gap-xxs);
+  font-weight: var(--w-medium);
+  color: var(--fg);
+}
+
 .row {
   padding: var(--sp-48) 0;
 }

@@ -6,7 +6,7 @@ import styles from "./NotFound.module.css";
 
 /**
  * Catch-all route. Reached by any URL the router does not match, including
- * /about and /contact, which are still unresolved pages.
+ * /contact, which is still an unresolved page.
  */
 export default function NotFound() {
   useDocumentTitle("Not found — Srijan Gupta");
@@ -19,7 +19,7 @@ export default function NotFound() {
         <p className={styles.code}>404</p>
         <h1 className={styles.title}>This page doesn&apos;t exist yet.</h1>
         <p className={styles.body}>
-          About and Contact are still to be built. The work so far is on the portfolio.
+          Contact is still to be built. The work so far is on the portfolio.
         </p>
         <Link className={styles.link} to="/portfolio">
           View portfolio

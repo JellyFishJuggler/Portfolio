@@ -1,6 +1,7 @@
 export { default as ComingSoon } from "./ComingSoon";
 export { default as CodeBlock } from "./CodeBlock";
 export { default as DecisionList } from "./DecisionList";
+export { default as MarkTile } from "./MarkTile";
 export { default as MarqueeHeading } from "./MarqueeHeading";
 export { default as MetricTiles } from "./MetricTiles";
 export { default as NextProject } from "./NextProject";

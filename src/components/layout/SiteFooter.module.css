@@ -23,10 +23,21 @@
   min-width: 0;
 }
 
-/* LinkedIn sits under Phone: col 2, row 2. */
+/* Social profiles form a second column running down the right, so the
+   first row stays as short as it was with a single profile. */
 .linkedin {
   grid-column: 2;
   grid-row: 2;
+}
+
+.behance {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.leetcode {
+  grid-column: 3;
+  grid-row: 3;
 }
 
 .label {
@@ -56,7 +67,20 @@
     grid-template-columns: 1fr;
   }
 
+  /* The value size is tuned for laptop reading, but a 22-character email
+     at that size wraps to two lines on a narrow phone. Step it down on
+     small screens only; laptops keep the larger value. */
+  .value {
+    font-size: clamp(1.5rem, 7.5vw, var(--fs-footer-value));
+  }
+
   .linkedin {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .behance,
+  .leetcode {
     grid-column: 1;
     grid-row: auto;
   }

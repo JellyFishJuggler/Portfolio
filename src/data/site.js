@@ -31,7 +31,12 @@ export const site = {
   location: "Dādri",
   timeZone: "Asia/Kolkata",
   photo: "/img/pfp.png",
-  resume: "#", // TODO: ML resume link
+  /**
+   * Resume. The PDF lives at public/resume/SRIJAN_RESUME.pdf and is served
+   * from /resume/SRIJAN_RESUME.pdf by Vite. Opens in a new tab so the
+   * browser's own PDF viewer or download prompt handles it.
+   */
+  resume: "/resume/SRIJAN_RESUME.pdf",
   /**
    * Skills in marquee order. A name present in SKILL_LOGOS renders as a
    * brand mark; anything else falls back to its text label, which is how
@@ -44,10 +49,18 @@ export const site = {
   contact: {
     email: "guptasrijan85@gmail.com",
     phone: "(+91) 8510888675",
-    github: { label: "@JellyFishJuggler", href: "https://github.com/JellyFishJuggler" },
-    // Value taken from tabs/contact.html, which is the live source in this
-    // repo. The srijang fallback in the brief did not match it.
-    linkedin: { label: "@srijananandgupta", href: "https://linkedin.com/in/srijananandgupta" },
+    /** E.164 form, used for the `tel:` href. */
+    phoneHref: "tel:+9185108888675",
+    /**
+     * Social profiles are labelled by platform, not by username: the
+     * footer is a directory of where to find me, and a handle adds nothing
+     * once the platform name is right there. Handles stay visible on hover
+     * via the link's title.
+     */
+    github: { label: "GitHub", title: "github.com/JellyFishJuggler", href: "https://github.com/JellyFishJuggler" },
+    linkedin: { label: "LinkedIn", title: "linkedin.com/in/srijang", href: "https://www.linkedin.com/in/srijang" },
+    behance: { label: "Behance", title: "behance.net/srijananandgupta", href: "https://www.behance.net/srijananandgupta" },
+    leetcode: { label: "LeetCode", title: "leetcode.com/u/jellyfishjugglerdawg", href: "https://leetcode.com/u/jellyfishjugglerdawg" },
   },
 };
 

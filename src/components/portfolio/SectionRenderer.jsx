@@ -58,11 +58,7 @@ export const sectionRegistry = {
     </Reveal>
   ),
 
-  decisions: ({ items = [] }) => (
-    <Reveal>
-      <DecisionList items={items} />
-    </Reveal>
-  ),
+  decisions: ({ title, items = [] }) => <DecisionList title={title} items={items} />,
 };
 
 /**

@@ -1,0 +1,71 @@
+.section {
+  padding: var(--sp-48) 0 var(--sp-96);
+}
+
+.heading {
+  margin: 0 0 var(--sp-48);
+  font-size: var(--fs-h1);
+  font-weight: var(--w-semibold);
+  letter-spacing: var(--track-title);
+  line-height: 1.12;
+}
+
+/* Hairline-separated stack, not a card grid. */
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  margin: 0;
+  padding: var(--sp-32) 0;
+  border-top: var(--hairline) solid var(--row-rule);
+}
+
+.quote {
+  margin: 0;
+  max-width: 58ch;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+/* Typographic quote mark, hung into the left margin of the first line. */
+.mark {
+  display: inline-block;
+  margin-right: 2px;
+  color: var(--muted-2);
+}
+
+/* The attribution stays muted even after the block lights up — it is a
+   caption, not body copy. */
+.attribution {
+  margin-top: var(--gap-sm);
+  font-size: var(--fs-tiny);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+
+/* Scroll-linked colour cue: the heading and quotes start grey and lift to
+   white once the block is reached. `.lit` is toggled by useInView, so the
+   doubled-class selectors below outrank the plain ones without !important. */
+.heading,
+.quote {
+  color: var(--muted-2);
+  transition: color var(--dur-reveal) var(--ease);
+}
+
+.lit .heading,
+.lit .quote {
+  color: var(--fg);
+}
+
+@media (max-width: 900px) {
+  .section {
+    padding-bottom: var(--sp-64);
+  }
+
+  .heading {
+    margin-bottom: var(--sp-32);
+  }
+}

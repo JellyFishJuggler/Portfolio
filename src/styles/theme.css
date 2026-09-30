@@ -70,28 +70,37 @@
   --header-dot: 14px;
   --header-side-gap: 24px;
   --header-end-gap: 118px;
-  --fs-base: 16px;
+  --fs-base: 18px;
 
   /* footer */
   --footer-rule: rgba(255, 255, 255, 0.1);
   --footer-space: 58px;
   --footer-row-gap: 40px;
   --footer-pad-b: 100px;
-  --fs-label: 14px;
-  --fs-footer-value: 28px;
+  --fs-label: 15px;
+  --fs-footer-value: 32px;
 
-  /* typography */
-  --muted-2: rgba(255, 255, 255, 0.5);
-  --body: rgba(255, 255, 255, 0.85);
+  /* Typography
+     Sizes are bumped from the original scale for laptop legibility: 16px
+     body and 14px labels were fine on a desktop monitor but read as small
+     on a 13" laptop at typical viewing distance. Tokens stay a mix of px and
+     rem, so the root font-size is deliberately NOT changed — that would
+     scale spacing unevenly against the px-based tokens below. */
+  --muted-2: rgba(255, 255, 255, 0.55);
+  --body: rgba(255, 255, 255, 0.88);
   --rule: rgba(255, 255, 255, 0.1);
   --row-rule: rgba(255, 255, 255, 0.08);
-  --fs-h1: clamp(2rem, 2.7vw, 3.25rem);
-  --fs-case-title: 40px;
-  --fs-marquee: 56px;
-  --fs-card-title: 20px;
-  --fs-body: 16px;
-  --lh-body: 1.55;
-  --measure: 65ch;
+  --fs-h1: clamp(2.25rem, 3vw, 3.75rem);
+  /* Subsection heading, between --fs-h1 and --fs-body. Was referenced but
+     never defined, which silently dropped the declaration and let these
+     headings inherit 16px from their parent. */
+  --fs-h3: clamp(1.5rem, 2.2vw, 2rem);
+  --fs-case-title: 44px;
+  --fs-marquee: 60px;
+  --fs-card-title: 22px;
+  --fs-body: 18px;
+  --lh-body: 1.6;
+  --measure: 68ch;
   --track-tight: -0.02em;
   --track-title: -0.03em;
   --track-metric: -0.04em;
@@ -129,11 +138,11 @@
   --focus-width: 2px;
 
   /* remaining type sizes */
-  --fs-card-label: 1.125rem;
-  --fs-tiny: 0.7rem;
-  --fs-marquee-sm: 36px;
-  --fs-metric: clamp(2rem, 3.2vw, 3.5rem);
-  --fs-code: 14px;
+  --fs-card-label: 1.25rem;
+  --fs-tiny: 0.8125rem;
+  --fs-marquee-sm: 38px;
+  --fs-metric: clamp(2.25rem, 3.4vw, 3.75rem);
+  --fs-code: 15px;
 
   /* tracking + optical leading trims */
   --track-label: -0.01em;
@@ -152,6 +161,26 @@
   /* default marquee loop, overridden per instance */
   --dur-marquee: 22s;
   --metric-min: 180px;
+
+  /* about page */
+  /* Narrative column vs. sticky portrait column. The portrait keeps the
+     larger share so it can stay visually large at desktop widths. */
+  --about-narrative-col: minmax(0, 7fr);
+  --about-portrait-col: minmax(0, 5fr);
+  --about-col-gap: var(--sp-64);
+  /* Oversized editorial display size for the About heading. */
+  --fs-about-title: clamp(3.25rem, 11vw, 10.5rem);
+  /* Hero introduction. Large enough to read as editorial body copy against
+     the heading, well below the marquee's display size. */
+  --fs-about-intro: clamp(1.25rem, 1.9vw, 1.75rem);
+  /* Portrait is sized to the viewport so it stays fully visible while
+     sticky, with room for the fixed header. */
+  --about-portrait-max-h: calc(100vh - var(--header-h) - var(--sp-48));
+  /* Intentional empty space to the left of the portrait. Not a bug. */
+  --about-portrait-inset: clamp(0px, 6vw, 90px);
+  /* How far the intro is offset to the right of the About heading. */
+  --about-intro-offset: clamp(0px, 7vw, 110px);
+  --about-section-gap: var(--sp-150);
 
   /* theme transition */
   --dur-theme: 0.3s;

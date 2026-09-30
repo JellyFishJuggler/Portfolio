@@ -1,0 +1,35 @@
+.hero {
+  padding-bottom: var(--sp-96);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--fs-about-title);
+  font-weight: var(--w-semibold);
+  letter-spacing: var(--track-hero);
+  line-height: 0.9;
+  color: var(--fg);
+}
+
+/* Offset to the right of the heading. Collapses on small screens, where
+   there is no room for the offset and it would only read as broken
+   alignment rather than intent. */
+.intro {
+  max-width: 52ch;
+  margin: var(--sp-48) 0 0 var(--about-intro-offset);
+  font-size: var(--fs-about-intro);
+  font-weight: var(--w-regular);
+  line-height: var(--lh-body);
+  color: var(--body);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    padding-bottom: var(--sp-64);
+  }
+
+  .intro {
+    margin-top: var(--sp-32);
+    font-size: var(--fs-body);
+  }
+}

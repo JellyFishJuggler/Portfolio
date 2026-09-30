@@ -1,0 +1,25 @@
+/* The whole page body is this grid: narrative scrolls, portrait sticks.
+   Both columns must stay `stretch` (the grid default). The sticky element is
+   the portrait's inner wrapper, and a sticky box can only travel within its
+   containing block — so the portrait column has to be as tall as the
+   narrative column, not shrink-wrapped to its own image. */
+.layout {
+  display: grid;
+  grid-template-columns: var(--about-narrative-col) var(--about-portrait-col);
+  column-gap: var(--about-col-gap);
+  margin-top: var(--sp-48);
+}
+
+.narrative {
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  /* Single column: the portrait leaves its sticky context and joins the
+     normal flow below the narrative. */
+  .layout {
+    grid-template-columns: 1fr;
+    row-gap: var(--sp-48);
+    margin-top: var(--sp-32);
+  }
+}

@@ -16,11 +16,12 @@ import styles from "./BentoCard.module.css";
  * @param {string} [props.label] - tile label; also the hero swap text.
  * @param {string} [props.href] - external/unresolved URL.
  * @param {string} [props.to] - internal route for a <Link>.
+ * @param {string} [props.target] - link target, for files opened in a new tab.
  * @param {(label: string|null) => void} [props.onActive]
  * @param {string} [props.className] - grid placement.
  * @param {React.ReactNode} [props.children] - replaces the label + arrow.
  */
-export function BentoCard({ label, href, to, onActive, className, children }) {
+export function BentoCard({ label, href, to, target, onActive, className, children }) {
   const handlers =
     onActive && label
       ? {
@@ -54,8 +55,10 @@ export function BentoCard({ label, href, to, onActive, className, children }) {
     );
   }
   if (href) {
+    /* A new-tab target needs noopener/noreferrer so the opened document
+       can't reach back through window.opener. */
     return (
-      <Card as="a" href={href} {...cardProps}>
+      <Card as="a" href={href} target={target} rel={target === "_blank" ? "noopener noreferrer" : undefined} {...cardProps}>
         {inner}
       </Card>
     );

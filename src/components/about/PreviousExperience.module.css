@@ -1,0 +1,97 @@
+.section {
+  padding: var(--sp-48) 0 var(--sp-96);
+}
+
+.heading {
+  margin: 0 0 var(--sp-48);
+  font-size: var(--fs-h1);
+  font-weight: var(--w-semibold);
+  letter-spacing: var(--track-title);
+  line-height: 1.12;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* No descriptions supplied yet, so the third track is dropped rather than
+   left as dead space. See PreviousExperience.jsx. */
+.noDescriptions .row {
+  grid-template-columns: 3fr 4fr;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 3fr 4fr 5fr;
+  gap: var(--gap);
+  padding: var(--sp-32) 0;
+  border-top: var(--hairline) solid var(--row-rule);
+}
+
+/* Date and organisation stay muted throughout: they are metadata. */
+.period {
+  font-size: var(--fs-label);
+  color: var(--muted-2);
+  padding-top: var(--trim-row-label);
+}
+
+.role {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xxs);
+  min-width: 0;
+}
+
+.roleName {
+  font-size: var(--fs-body);
+}
+
+.organization {
+  font-size: var(--fs-body);
+  color: var(--muted-2);
+}
+
+.description {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  max-width: var(--measure);
+}
+
+/* Scroll-linked colour cue: heading and role names start grey and lift to
+   white once the block is reached. `.lit` is toggled by useInView. */
+.heading,
+.roleName,
+.description {
+  color: var(--muted-2);
+  transition: color var(--dur-reveal) var(--ease);
+}
+
+.lit .heading,
+.lit .roleName,
+.lit .description {
+  color: var(--fg);
+}
+
+@media (max-width: 900px) {
+  .section {
+    padding-bottom: var(--sp-64);
+  }
+
+  .heading {
+    margin-bottom: var(--sp-32);
+  }
+
+  /* Matches `.noDescriptions .row` on specificity, which would otherwise
+     outrank this and leave two columns on mobile. */
+  .row,
+  .noDescriptions .row {
+    grid-template-columns: 1fr;
+    gap: var(--gap-xs);
+    padding: var(--sp-24) 0;
+  }
+
+  .period {
+    padding-top: 0;
+  }
+}
