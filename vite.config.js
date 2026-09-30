@@ -4,5 +4,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: './',
+  // Absolute base: nested routes (/portfolio/:slug) make relative asset
+  // URLs resolve against the wrong directory. Requires an SPA fallback
+  // rewrite on the host (see README note in the final report).
+  base: '/',
 });

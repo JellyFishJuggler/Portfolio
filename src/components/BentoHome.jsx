@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import "./bento.css";
 
@@ -106,7 +107,7 @@ export function HeroText({ text }) {
 }
 
 /* Glass + noise card. `label` also drives HeroText on hover/focus. */
-export function BentoCard({ label, href, onActive, className = "", children }) {
+export function BentoCard({ label, href, to, onActive, className = "", children }) {
   const props = onActive && label
     ? {
         onMouseEnter: () => onActive(label),
@@ -121,7 +122,12 @@ export function BentoCard({ label, href, onActive, className = "", children }) {
       <ArrowUpRight className="arrow" size={16} strokeWidth={1.5} aria-hidden="true" />
     </>
   );
-  // Swap <a> for react-router's <Link to={href}> for internal routes.
+  // Internal routes use <Link to>; external/unresolved ones stay plain <a href>.
+  if (to) {
+    return (
+      <Link to={to} className={`bento-card ${className}`} {...props}>{inner}</Link>
+    );
+  }
   return href ? (
     <a href={href} className={`bento-card ${className}`} {...props}>{inner}</a>
   ) : (
@@ -170,7 +176,7 @@ export default function Home() {
 
       <main className="bento">
         <BentoCard label="About" href="/about" onActive={setActive} className="span-3" />
-        <BentoCard label="Portfolio" href="/portfolio" onActive={setActive} className="span-9" />
+        <BentoCard label="Portfolio" to="/portfolio" onActive={setActive} className="span-9" />
 
         <BentoCard label="Contact" href="/contact" onActive={setActive} className="span-6" />
 
