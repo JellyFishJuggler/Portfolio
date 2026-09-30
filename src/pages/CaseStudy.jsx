@@ -1,19 +1,72 @@
-import { useEffect } from "react";
+import { Navigate, useParams } from "react-router-dom";
+import { PageShell, SiteFooter, SiteHeader } from "../components/layout";
+import {
+  ComingSoon,
+  MetricTiles,
+  NextProject,
+  ProjectHeader,
+  ProjectMeta,
+  SectionRenderer,
+} from "../components/portfolio";
+import { MediaFigure, Reveal } from "../components/ui";
+import useDocumentTitle from "../hooks/useDocumentTitle";
+import { getNextProject, getProject } from "../data/projects";
 
 /**
- * @param {string} title - full document.title for this page.
- * @returns {void}
+ * Case study for one project. Reads the registry by slug; an unknown slug
+ * redirects to the listing rather than rendering an empty page.
+ *
+ * @param {object} props
+ * @param {string} props.slug - project slug from the route.
  */
-export function useDocumentTitle(title) {
-  useEffect(() => {
-    document.title = title;
-  }, [title]);
+function CaseStudyView({ slug }) {
+  const project = getProject(slug);
+  const next = getNextProject(slug);
+
+  useDocumentTitle(project ? `${project.title} — Srijan Gupta` : "Portfolio — Srijan Gupta");
+
+  if (!project) return <Navigate to="/portfolio" replace />;
+
+  return (
+    <PageShell constrain>
+      <SiteHeader variant="back" />
+
+      <ProjectHeader project={project} />
+
+      <Reveal>
+        <MediaFigure
+          src={project.hero}
+          alt={`${project.title} — ${project.category}`}
+          hint={project.hero ?? `/img/projects/${project.slug}/hero.webp`}
+          eager
+        />
+      </Reveal>
+
+      <ProjectMeta meta={project.meta} stack={project.stack} />
+
+      {/* Headline results sit in the masthead. A `metrics` section type also
+          exists for metrics that belong partway through the narrative; the
+          seed data uses only this one. */}
+      <Reveal>
+        <MetricTiles items={project.metrics} />
+      </Reveal>
+
+      {project.sections.length === 0 ? (
+        <ComingSoon project={project} />
+      ) : (
+        project.sections.map((section, i) => (
+          <SectionRenderer key={section.type + i} section={section} />
+        ))
+      )}
+
+      <NextProject project={next} />
+
+      <SiteFooter />
+    </PageShell>
+  );
 }
 
-/**
- * @returns {null} placeholder; real page lands in a later commit.
- */
 export default function CaseStudy() {
-  useDocumentTitle("Srijan Gupta — AI/ML Engineer");
-  return null;
+  const { slug } = useParams();
+  return <CaseStudyView slug={slug} />;
 }

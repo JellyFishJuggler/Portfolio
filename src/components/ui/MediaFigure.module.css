@@ -7,7 +7,23 @@
   overflow: hidden;
   border-radius: var(--radius-md);
   background: var(--tile);
-  aspect-ratio: var(--ar);
+  aspect-ratio: var(--ar, var(--ar-hero));
+}
+
+/* Standard ratios live in CSS rather than an inline style so they can change
+   at breakpoints; `aspect` remains available for one-off ratios. */
+.hero {
+  aspect-ratio: var(--ar-hero);
+}
+
+.card {
+  aspect-ratio: var(--ar-card);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    aspect-ratio: var(--ar-hero-sm);
+  }
 }
 
 .sm {

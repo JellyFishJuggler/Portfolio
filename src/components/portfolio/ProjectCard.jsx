@@ -20,7 +20,7 @@ export function ProjectCard({ project, eager = false, className }) {
         <MediaFigure
           src={project.cover}
           alt={`${project.title} — ${project.category}`}
-          aspect="var(--ar-card)"
+          variant="card"
           radius="sm"
           hint={`/img/projects/${project.slug}/cover.webp`}
           eager={eager}

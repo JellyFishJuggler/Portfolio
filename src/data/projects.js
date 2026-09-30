@@ -13,15 +13,21 @@
  * meta      { context, role, year, duration, status } — status/role are free text
  * stack     string[] tool names
  * links     { github?, demo?, report? } — only render what is present
- * metrics   [{ value, label }] headline results
+ * metrics   [{ value, label }] headline results, rendered under the meta row
  * sections  ordered blocks; empty/absent renders ComingSoon
  * order     optional sort key, ascending
  * featured  optional flag; ordering falls back to array position
  *
+ * A `metrics` block also exists for results that belong partway through the
+ * narrative. Don't use both for the same numbers — top-level `metrics` is
+ * rendered in the masthead.
+ *
  * Section block types (see SectionRenderer's registry):
  *   { type: "marquee",   title }
  *   { type: "rows",      rows: [{ label, body }] }
- *   { type: "media",     src, alt, caption, aspect, fit }
+ *   { type: "media",     src, path, alt, caption, aspect, fit }
+ *                            src may be null; `path` names the expected
+ *                            asset and is what the placeholder shows.
  *   { type: "metrics",   items: [{ value, label }] }
  *   { type: "table",     caption, columns, rows, highlightRow }
  *   { type: "code",      caption, language, code }
@@ -50,7 +56,14 @@ export const projects = [
     sections: [
       { type: "marquee", title: "From readings to forecasts" },
       { type: "rows", rows: [{ label: "Context", body: "TODO: what the model had to predict and why." }] },
-      { type: "media", src: null, alt: "", caption: "TODO: caption", aspect: "888 / 570" },
+      {
+        type: "media",
+        src: null,
+        path: "/img/projects/aquis/context.webp",
+        alt: "TODO: describe the image",
+        caption: "TODO: caption",
+        aspect: "888 / 570",
+      },
       { type: "rows", rows: [{ label: "Approach", body: "TODO: features, model choice, validation." }] },
       { type: "metrics", items: [] },
       { type: "rows", rows: [{ label: "Result", body: "TODO: what improved, and for whom." }] },
@@ -81,7 +94,14 @@ export const projects = [
     sections: [
       { type: "marquee", title: "Catching the transaction that shouldn't exist" },
       { type: "rows", rows: [{ label: "Context", body: "TODO: the hackathon brief and dataset." }] },
-      { type: "media", src: null, alt: "", caption: "TODO: caption", aspect: "888 / 570" },
+      {
+        type: "media",
+        src: null,
+        path: "/img/projects/aquis/context.webp",
+        alt: "TODO: describe the image",
+        caption: "TODO: caption",
+        aspect: "888 / 570",
+      },
       { type: "rows", rows: [{ label: "Approach", body: "TODO: features, model choice, validation." }] },
       {
         type: "table",

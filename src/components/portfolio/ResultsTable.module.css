@@ -1,0 +1,52 @@
+.wrap {
+  padding: var(--sp-24);
+}
+
+.caption {
+  font-size: var(--fs-label);
+  color: var(--muted-2);
+  margin-bottom: var(--sp-24);
+}
+
+/* Scrolls sideways on narrow screens rather than squashing the columns. */
+.scroll {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-body);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: var(--sp-24) 0;
+  border-top: 1px solid var(--row-rule);
+  color: var(--body);
+}
+
+.table th {
+  font-size: var(--fs-label);
+  font-weight: var(--w-regular);
+  color: var(--muted-2);
+}
+
+.table th:not(:first-child),
+.table td:not(:first-child) {
+  padding-left: var(--sp-24);
+}
+
+.highlight td {
+  color: var(--fg);
+  font-weight: var(--w-medium);
+}
+
+/* Row headers are data, not headings: normal weight, muted like the rest. */
+.rowHead {
+  font-weight: var(--w-regular);
+  color: var(--muted-2);
+}

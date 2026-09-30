@@ -1,0 +1,20 @@
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: var(--sp-24);
+}
+
+.value {
+  font-size: clamp(2rem, 3.2vw, 3.5rem);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--track-metric);
+  line-height: 1.05;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+
+.label {
+  font-size: var(--fs-label);
+  color: var(--muted-2);
+}

@@ -1,0 +1,18 @@
+.list {
+  margin: 0;
+}
+
+.row {
+  padding: var(--sp-48) 0;
+}
+
+.num {
+  color: var(--muted-2);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 900px) {
+  .row {
+    padding: var(--sp-32) 0;
+  }
+}

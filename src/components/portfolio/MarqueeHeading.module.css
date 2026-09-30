@@ -1,0 +1,25 @@
+.wrap {
+  margin: var(--sp-96) 0;
+  /* Full-bleed: cancels the page padding so the line runs to both edges. */
+  margin-inline: calc(-1 * var(--shell-pad, var(--page-pad)));
+}
+
+.line {
+  white-space: nowrap;
+  font-size: var(--fs-marquee);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--track-title);
+  color: var(--fg);
+  line-height: 1.1;
+  padding-block: 0.06em;
+}
+
+@media (max-width: 900px) {
+  .wrap {
+    margin-block: var(--sp-64);
+  }
+
+  .line {
+    font-size: 36px;
+  }
+}

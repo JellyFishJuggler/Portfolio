@@ -1,0 +1,19 @@
+.wrap {
+  padding: var(--sp-24);
+}
+
+.caption {
+  font-size: var(--fs-label);
+  color: var(--muted-2);
+  margin-bottom: var(--sp-24);
+}
+
+.code {
+  margin: 0;
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--body);
+  tab-size: 2;
+}

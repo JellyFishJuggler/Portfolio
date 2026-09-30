@@ -1,0 +1,38 @@
+.meta {
+  margin-top: var(--sp-64);
+  display: grid;
+  /* Start columns at ~0 / 28 / 52 / 68 / 84% of the content width. */
+  grid-template-columns: 28fr 24fr 16fr 16fr 16fr;
+  column-gap: var(--gap);
+  row-gap: var(--sp-24);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.label {
+  font-size: var(--fs-label);
+  color: var(--muted-2);
+}
+
+.value {
+  font-size: var(--fs-body);
+  color: var(--fg);
+  overflow-wrap: anywhere;
+}
+
+.stack {
+  margin-top: var(--sp-24);
+  font-size: var(--fs-label);
+  color: var(--muted-2);
+}
+
+@media (max-width: 900px) {
+  .meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

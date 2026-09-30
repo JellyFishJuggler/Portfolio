@@ -1,0 +1,27 @@
+.wrap {
+  margin-top: var(--sp-48);
+  padding: var(--sp-64) var(--sp-48);
+  text-align: center;
+}
+
+.title {
+  font-size: var(--fs-h1);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--track-title);
+  color: var(--fg);
+  margin: 0 0 var(--sp-24);
+}
+
+.body {
+  margin: 0;
+  font-size: var(--fs-body);
+  color: var(--muted-2);
+  max-width: var(--measure);
+  margin-inline: auto;
+}
+
+@media (max-width: 900px) {
+  .wrap {
+    padding: var(--sp-48) var(--sp-24);
+  }
+}
