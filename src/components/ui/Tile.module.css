@@ -1,0 +1,26 @@
+.tile {
+  flex: none;
+  width: var(--tile-size);
+  height: var(--tile-size);
+  border-radius: var(--tile-radius);
+  display: grid;
+  place-items: center;
+  background: var(--tile);
+  padding: 6px;
+  overflow: hidden;
+  color: var(--fg);
+}
+
+.media {
+  width: var(--logo-size);
+  height: var(--logo-size);
+  object-fit: contain;
+}
+
+.label {
+  font-size: 0.7rem;
+  font-weight: var(--w-semibold);
+  text-align: center;
+  line-height: 1.1;
+  word-break: break-word;
+}

@@ -1,0 +1,22 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted-2);
+  text-decoration: none;
+  transition: color var(--dur);
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--fg);
+}
+
+.arrow {
+  flex: none;
+  transition: transform var(--dur) var(--ease);
+}
+
+.link:hover .arrow {
+  transform: translate(2px, -2px);
+}

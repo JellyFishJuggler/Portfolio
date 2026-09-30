@@ -1,0 +1,76 @@
+.grid {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  gap: var(--gap);
+  /* minmax(0, …), not plain 1fr: the tools marquee is `width: max-content`,
+     and an auto-min track would be floored by its intrinsic width and blow
+     the grid far past the viewport. */
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  /* Pull the grid up so the top row overlaps the bottom of the wordmark;
+     the cards' backdrop blur smears the glyphs behind them. */
+  margin-top: calc(var(--hero-size) * -0.4);
+}
+
+.grid > * {
+  min-width: 0;
+}
+
+.span3 {
+  grid-column: span 3;
+}
+
+.span6 {
+  grid-column: span 6;
+}
+
+.span9 {
+  grid-column: span 9;
+}
+
+/* Photo wrapper exists only to own the grid placement, so it has to hand
+   the full cell to whatever tile the page passed in. */
+.fill {
+  display: flex;
+  min-height: 0;
+}
+
+.fill > * {
+  flex: 1;
+  min-width: 0;
+}
+
+.stackCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  min-width: 0;
+}
+
+.stackCol > * {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-auto-rows: minmax(200px, 44vw);
+    margin-top: var(--sp-24);
+  }
+
+  .span3,
+  .span6,
+  .span9 {
+    grid-column: 1 / -1;
+  }
+
+  .stackCol {
+    min-height: 400px;
+  }
+}

@@ -1,0 +1,63 @@
+.footer {
+  padding-bottom: var(--footer-pad-b);
+}
+
+.rule {
+  border: 0;
+  border-top: 1px solid var(--footer-rule);
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 4fr 3fr 3fr;
+  column-gap: var(--gap);
+  row-gap: var(--footer-row-gap);
+  padding-top: var(--footer-space);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+/* LinkedIn sits under Phone: col 2, row 2. */
+.linkedin {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.label {
+  font-size: var(--fs-label);
+  color: var(--muted-2);
+}
+
+.value {
+  font-size: var(--fs-footer-value);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--track-tight);
+  color: var(--fg);
+  text-decoration: none;
+  /* Selectable on purpose: this is contact info people copy. */
+  -webkit-user-select: text;
+  user-select: text;
+  transition: opacity var(--dur);
+  overflow-wrap: anywhere;
+}
+
+.value:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .linkedin {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}

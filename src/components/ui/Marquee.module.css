@@ -1,0 +1,51 @@
+.marquee {
+  display: flex;
+  align-items: center;
+  /* Fills its parent so the stack ticker centers its tiles inside the card. */
+  height: 100%;
+  width: 100%;
+  /* The track is max-content and must never widen its container. */
+  min-width: 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* Section headings are full-bleed and fade at the viewport edges; the
+   stack ticker fades inside its own card. */
+.bleed {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.track {
+  display: flex;
+  gap: var(--gap);
+  width: max-content;
+  flex: none;
+  animation: scroll var(--marquee-duration, 22s) linear infinite;
+}
+
+.pause:hover .track {
+  animation-play-state: paused;
+}
+
+.group {
+  display: flex;
+  gap: var(--gap);
+  flex: none;
+}
+
+/* The track's own gap sits *between* the two copies, so a plain -50% would
+   land half a gap short of the seam and visibly jump. Compensate for it. */
+@keyframes scroll {
+  to {
+    transform: translateX(calc(-50% - var(--gap) / 2));
+  }
+}
+
+/* Reduced motion: render the single copy only, statically. */
+.static {
+  width: 100%;
+  justify-content: center;
+}

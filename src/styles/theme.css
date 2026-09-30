@@ -57,6 +57,64 @@
   --hero-size: 7vw;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --dur: 200ms;
+
+  /* page shell */
+  --page-pad: 32px;
+  --page-max: 1330px;
+  --page-pad-sm: 20px;
+
+  /* header */
+  --header-h: 76px;
+  --header-pad: 24px;
+  --header-gap: 120px;
+  --header-dot: 14px;
+  --header-side-gap: 24px;
+  --header-end-gap: 118px;
+  --fs-base: 16px;
+
+  /* footer */
+  --footer-rule: rgba(255, 255, 255, 0.1);
+  --footer-space: 58px;
+  --footer-row-gap: 40px;
+  --footer-pad-b: 100px;
+  --fs-label: 14px;
+  --fs-footer-value: 28px;
+
+  /* typography */
+  --muted-2: rgba(255, 255, 255, 0.5);
+  --body: rgba(255, 255, 255, 0.85);
+  --rule: rgba(255, 255, 255, 0.1);
+  --row-rule: rgba(255, 255, 255, 0.08);
+  --fs-h1: clamp(2rem, 2.7vw, 3.25rem);
+  --fs-case-title: 40px;
+  --fs-marquee: 56px;
+  --fs-card-title: 20px;
+  --fs-body: 16px;
+  --lh-body: 1.55;
+  --measure: 65ch;
+  --track-tight: -0.02em;
+  --track-title: -0.03em;
+  --track-metric: -0.04em;
+
+  /* radii + spacing used by portfolio */
+  --radius-md: 24px;
+  --radius-sm: 20px;
+  --sp-24: 24px;
+  --sp-32: 32px;
+  --sp-48: 48px;
+  --sp-64: 64px;
+  --sp-96: 96px;
+  --sp-150: 150px;
+  --sp-200: 200px;
+  --caption-h: 64px;
+
+  /* media aspect ratios */
+  --ar-card: 888 / 570;
+  --ar-hero: 2.2 / 1;
+  --ar-hero-sm: 4 / 3;
+  --scale-hover: 1.03;
+  --dur-media: 400ms;
+  --dur-reveal: 500ms;
 }
 
 html.light {
@@ -70,4 +128,9 @@ html.light {
   --arrow: rgba(17, 17, 17, 0.8);
   --grain-page: 0.03;
   --grain-card: 0.04;
+  --muted-2: rgba(17, 17, 17, 0.55);
+  --body: rgba(17, 17, 17, 0.85);
+  --footer-rule: rgba(0, 0, 0, 0.12);
+  --rule: rgba(0, 0, 0, 0.12);
+  --row-rule: rgba(0, 0, 0, 0.1);
 }

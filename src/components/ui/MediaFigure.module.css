@@ -1,0 +1,47 @@
+.figure {
+  display: block;
+}
+
+.frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--tile);
+  aspect-ratio: var(--ar);
+}
+
+.sm {
+  border-radius: var(--radius-sm);
+}
+
+.media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contain .media {
+  object-fit: contain;
+}
+
+/* Placeholder: names the file that is expected here, so a missing asset is
+   self-documenting instead of a silent gap. */
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 4px;
+  padding: var(--sp-24);
+  text-align: center;
+  color: var(--muted-2);
+  font-size: var(--fs-label);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  word-break: break-all;
+}
+
+.caption {
+  margin: var(--sp-24) 0 0;
+  font-size: var(--fs-label);
+  color: var(--muted-2);
+}

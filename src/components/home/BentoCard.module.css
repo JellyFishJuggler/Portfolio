@@ -1,0 +1,36 @@
+.label {
+  position: absolute;
+  left: var(--card-pad);
+  bottom: var(--card-pad);
+  font-size: 1.125rem;
+  font-weight: var(--w-regular);
+  letter-spacing: -0.01em;
+}
+
+.arrow {
+  position: absolute;
+  right: var(--card-pad);
+  bottom: var(--card-pad);
+  color: var(--arrow);
+  transition: transform var(--dur) var(--ease);
+}
+
+.card:hover .arrow,
+.card:focus-visible .arrow {
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 900px) {
+  .label,
+  .arrow {
+    bottom: 20px;
+  }
+
+  .label {
+    left: 20px;
+  }
+
+  .arrow {
+    right: 20px;
+  }
+}

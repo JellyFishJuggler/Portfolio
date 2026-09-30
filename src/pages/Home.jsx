@@ -1,22 +1,36 @@
-import { useEffect } from "react";
-import BentoHome from "../components/BentoHome";
-
-export const PAGE_TITLES = {
-  portfolio: "Portfolio — Srijan Gupta",
-  caseStudy: (title) => `${title} — Srijan Gupta`,
-};
+import { useState } from "react";
+import { PageShell, SiteHeader } from "../components/layout";
+import { BentoGrid, HeroText, PhotoCard, StackTicker } from "../components/home";
+import { VisuallyHidden } from "../components/ui";
+import useDocumentTitle from "../hooks/useDocumentTitle";
+import { site } from "../data/site";
 
 /**
- * @param {string} title - full document.title for this page.
- * @returns {void}
+ * Home. A fixed-viewport bento grid with an oversized wordmark behind it;
+ * hovering or focusing a card swaps the wordmark to that card's label.
  */
-function useDocumentTitle(title) {
-  useEffect(() => {
-    document.title = title;
-  }, [title]);
-}
-
 export default function Home() {
   useDocumentTitle("Srijan Gupta — AI/ML Engineer");
-  return <BentoHome />;
+  const [active, setActive] = useState(null);
+
+  return (
+    <PageShell compact>
+      <SiteHeader variant="name" />
+
+      {/* The wordmark behind the grid is decorative; this is the real h1. */}
+      <h1>
+        <VisuallyHidden>
+          {site.name} — {site.role}
+        </VisuallyHidden>
+      </h1>
+
+      <HeroText text={active ?? site.name} />
+
+      <BentoGrid
+        onActive={setActive}
+        photo={<PhotoCard src={site.photo} alt={site.name} />}
+        ticker={<StackTicker items={site.stack} />}
+      />
+    </PageShell>
+  );
 }
