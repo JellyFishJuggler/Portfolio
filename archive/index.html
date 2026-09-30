@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="stylesheet" href="/src/satoshi.css">
+    <link rel="stylesheet" href="/src/output.css">
+    <link rel="stylesheet" href="/src/animations.css">
+    <script type="text/javascript">
+        (function (c, l, a, r, i, t, y) {
+            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "walr28ksqs");
+    </script>
+    <title>Srijan | Portfolio</title>
+    <style>
+        /* ── Global Nav — Desktop pill ── */
+        .global-nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            background: rgba(33, 33, 33, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            padding: 6px 8px;
+        }
+
+        .nav-link {
+            font-family: 'Satoshi-Medium', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #808080;
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 999px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            color: #f1f1f1;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-link.active {
+            color: #212121;
+            background: #f1f1f1;
+        }
+
+        .nav-resume {
+            font-family: 'Satoshi-Bold', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #212121;
+            background: #f1f1f1;
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 999px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-resume:hover {
+            background: #ffffff;
+        }
+
+        /* ── Custom cursor — desktop only ── */
+        @media (min-width: 1024px) {
+            * {
+                cursor: none !important;
+            }
+
+            #custom-cursor {
+                position: fixed;
+                width: 18px;
+                height: 18px;
+                background: #f1f1f1;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 99999;
+                transform: translate(-50%, -50%);
+                transition: width 0.22s ease, height 0.22s ease, opacity 0.3s ease;
+                will-change: left, top;
+                mix-blend-mode: difference;
+            }
+
+            #custom-cursor.hovering {
+                width: 46px;
+                height: 46px;
+            }
+        }
+
+        /* ── Typography hierarchy — section labels elevated ── */
+        .section-eyebrow {
+            font-family: 'Satoshi-Medium', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #505050;
+        }
+
+        /* ── Sticky profile card — desktop only ── */
+        @media (min-width: 1024px) {
+            .profile-card {
+                max-height: calc(100vh - 7rem);
+                overflow-y: auto;
+            }
+        }
+
+        /* ── Mobile / Tablet Nav ── */
+        @media (max-width: 1023px) {
+
+            /* Hide floating pill, show bottom bar */
+            .global-nav {
+                top: auto;
+                bottom: 0;
+                left: 50%;
+
+                transform: translateX(-50%);
+                width: 100vw;
+                border-radius: 0;
+                border: none;
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
+                padding: 0;
+                gap: 0;
+                justify-content: stretch;
+                background: rgba(22, 22, 22, 0.96);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                /* Safe area for notched phones */
+                padding-bottom: 34px;
+            }
+
+            .nav-link {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 4px;
+                padding: 10px 4px 10px;
+                border-radius: 0;
+                font-size: 0.6rem;
+                letter-spacing: 0.08em;
+                color: #606060;
+                background: transparent !important;
+            }
+
+            .nav-link::before {
+                content: '';
+                display: block;
+                width: 20px;
+                height: 20px;
+                background-color: #606060;
+                mask-repeat: no-repeat;
+                mask-position: center;
+                mask-size: contain;
+                -webkit-mask-repeat: no-repeat;
+                -webkit-mask-position: center;
+                -webkit-mask-size: contain;
+                transition: background-color 0.2s ease;
+            }
+
+            .nav-link[href="/"]::before {
+                -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z'/%3E%3Cpolyline points='9 22 9 12 15 12 15 22'/%3E%3C/svg%3E");
+                mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z'/%3E%3Cpolyline points='9 22 9 12 15 12 15 22'/%3E%3C/svg%3E");
+            }
+
+            .nav-link[href="/tabs/about.html"]::before {
+                -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 20c0-4 3.6-7 8-7s8 3 8 7'/%3E%3C/svg%3E");
+                mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 20c0-4 3.6-7 8-7s8 3 8 7'/%3E%3C/svg%3E");
+            }
+
+            /* Contact link — targets the obfuscated mailto href */
+            .nav-link:not([href="/"]):not([href="/tabs/about.html"]):not(.nav-resume)::before {
+                -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='4' width='20' height='16' rx='2'/%3E%3Cpath d='M2 7l10 7 10-7'/%3E%3C/svg%3E");
+                mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='4' width='20' height='16' rx='2'/%3E%3Cpath d='M2 7l10 7 10-7'/%3E%3C/svg%3E");
+            }
+
+            .nav-link.active {
+                color: #f1f1f1;
+                background: transparent !important;
+            }
+
+            .nav-link.active::before {
+                background-color: #f1f1f1;
+            }
+
+            .nav-link:hover {
+                color: #f1f1f1;
+                background: transparent !important;
+            }
+
+            .nav-link:hover::before {
+                background-color: #f1f1f1;
+            }
+
+            /* Resume becomes a tab too */
+            .nav-resume {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 4px;
+                padding: 10px 4px 10px;
+                border-radius: 0;
+                font-size: 0.6rem;
+                letter-spacing: 0.08em;
+                background: transparent;
+                color: #606060;
+            }
+
+            .nav-resume::before {
+                content: '';
+                display: block;
+                width: 20px;
+                height: 20px;
+                background-color: #606060;
+                -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z'/%3E%3Cpolyline points='14 2 14 8 20 8'/%3E%3Cline x1='16' y1='13' x2='8' y2='13'/%3E%3Cline x1='16' y1='17' x2='8' y2='17'/%3E%3Cpolyline points='10 9 9 9 8 9'/%3E%3C/svg%3E");
+                mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z'/%3E%3Cpolyline points='14 2 14 8 20 8'/%3E%3Cline x1='16' y1='13' x2='8' y2='13'/%3E%3Cline x1='16' y1='17' x2='8' y2='17'/%3E%3Cpolyline points='10 9 9 9 8 9'/%3E%3C/svg%3E");
+                mask-repeat: no-repeat;
+                mask-position: center;
+                mask-size: contain;
+                -webkit-mask-repeat: no-repeat;
+                -webkit-mask-position: center;
+                -webkit-mask-size: contain;
+                transition: background-color 0.2s ease;
+            }
+
+            .nav-resume:hover {
+                background: transparent;
+                color: #f1f1f1;
+            }
+
+            .nav-resume:hover::before {
+                background-color: #f1f1f1;
+            }
+
+            /* Push page content up so bottom nav doesn't cover it */
+            body {
+                padding-bottom: 106px !important;
+            }
+        }
+    </style>
+    <script>
+        window.addEventListener('load', () => {
+            const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in');
+            animatedElements.forEach((el) => el.classList.add('visible'));
+        });
+    </script>
+</head>
+
+<body class="bg-[#212121] my-6 py-8 mx-4 sm:my-8 sm:mx-6 md:my-12 md:mx-12 lg:my-8 lg:mx-48">
+
+    <!-- Global Navigation -->
+    <nav class="global-nav">
+        <a href="/" class="nav-link active">Home</a>
+        <a href="/tabs/about.html" class="nav-link">About</a>
+        <a href="/tabs/contact.html" class="nav-link">Contact</a>
+        <a href="https://drive.google.com/file/d/1e7O-35jjluVZhToTnGrjFI1ogg5BSLTm/view?usp=sharing" target="_blank"
+            class="nav-resume">Résumé ↗</a>
+    </nav>
+
+    <section class="flex flex-col lg:flex-row items-start p-0 gap-6 sm:gap-8 lg:gap-20 pt-16 lg:pt-4">
+
+        <!-- Left white card — consistent with index.html (lg:gap-4) -->
+        <div
+            class="fade-in bg-white border-4 p-6 flex flex-col items-center gap-4 sm:gap-6 lg:gap-4 w-full lg:w-[580px] rounded-2xl lg:sticky lg:top-10 lg:self-start">
+            <img src="/img/pfp.png" alt="profile_picture" class="w-full h-[250px] sm:h-[290px] object-cover rounded-lg">
+            <h1
+                class="font-satoshi-black text-2xl sm:text-3xl lg:text-4xl items-center uppercase flex flex-col leading-tight w-full lg:w-auto text-center">
+                <span class="block">Srijan Anand</span>
+                <span class="block mt-1">Gupta</span>
+            </h1>
+            <p
+                class="w-full align-middle text-center font-satoshi-medium text-[#808080] text-sm sm:text-base lg:text-xl leading-relaxed">
+                Computer Science Engineer specialising in Data Science and Product Design.
+            </p>
+            <div class="flex flex-row w-full justify-evenly px-2 sm:px-4 lg:px-8">
+                <a href="https://instagram.com/srijanux" target="_blank">
+                    <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/instagram-svgrepo-com.svg" alt="instagram">
+                </a>
+                <a href="/cdn-cgi/l/email-protection#36514346425745445f5c57580e0376515b575f5a1855595b">
+                    <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/mail-svgrepo-com.svg" alt="mail">
+                </a>
+                <a href="https://www.behance.net/srijananandgupta" target="_blank">
+                    <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/behance-163-svgrepo-com.svg"
+                        alt="behance-163">
+                </a>
+                <a href="https://www.artstation.com/jellyfishjuggler" target="_blank">
+                    <img class="w-5 sm:w-[22px] icon-hover" src="/img/icons/artstation-svgrepo-com.svg"
+                        alt="artstation">
+                </a>
+            </div>
+        </div>
+
+        <!-- Right content -->
+        <div class="flex flex-col gap-10 sm:gap-12 lg:gap-6 w-full lg:min-h-[200vh]">
+
+            <!-- Hero -->
+            <div class="flex flex-col gap-6 sm:gap-8 lg:gap-12">
+                <div class="flex flex-col gap-3 sm:gap-4">
+                    <h1
+                        class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
+                        <span>Product</span>
+                        <span class="text-[#808080]">Designer</span>
+                    </h1>
+                    <p class="fade-in text-[#808080] w-full lg:w-2/3 text-sm sm:text-base lg:text-xl leading-relaxed">
+                        CS Engineer specialising in Data Science and Product Design — engineering-led UX with full
+                        ownership of end-to-end design systems.
+                    </p>
+                </div>
+
+                <div class="flex flex-row w-full lg:w-fit gap-3 sm:gap-4 lg:gap-12 justify-between">
+                    <div
+                        class="fade-in uppercase text-white flex flex-col items-center flex-1 sm:flex-initial sm:w-[80px] lg:w-[100px]">
+                        <h2 class="text-3xl sm:text-4xl lg:text-7xl font-satoshi-bold">+1</h2>
+                        <h3
+                            class="text-center font-satoshi-medium text-[#808080] text-[10px] sm:text-xs lg:text-base leading-tight">
+                            Year of experience</h3>
+                    </div>
+                    <div
+                        class="fade-in uppercase text-white flex flex-col items-center flex-1 sm:flex-initial sm:w-[80px] lg:w-[100px]">
+                        <h2 class="text-3xl sm:text-4xl lg:text-7xl font-satoshi-bold">+6</h2>
+                        <h3
+                            class="text-center font-satoshi-medium text-[#808080] text-[10px] sm:text-xs lg:text-base leading-tight">
+                            Projects Completed</h3>
+                    </div>
+                    <div
+                        class="fade-in uppercase text-white flex flex-col items-center flex-1 sm:flex-initial sm:w-[80px] lg:w-[150px]">
+                        <h2 class="text-3xl sm:text-4xl lg:text-7xl font-satoshi-bold">&infin;</h2>
+                        <h3
+                            class="text-center font-satoshi-medium text-[#808080] text-[10px] sm:text-xs lg:text-base leading-tight">
+                            Endless Passion to learn</h3>
+                    </div>
+                </div>
+
+                <div class="fade-in w-full lg:w-1/3">
+                    <a href="/cdn-cgi/l/email-protection#dcbba9aca8bdafaeb5b6bdb2e4e99cbbb1bdb5b0f2bfb3b1"
+                        onmouseover="this.style.backgroundColor='#f1f1f1'; this.style.color='#212121';"
+                        onmouseout="this.style.backgroundColor='transparent'; this.style.color='white';"
+                        style="background-color: transparent; color: white; border: 2px solid white; transition: all 0.3s ease-in-out;"
+                        class="font-satoshi-black text-sm sm:text-base lg:text-xl tracking-widest uppercase w-full p-3 sm:p-4 rounded-sm block text-center">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+
+            <!-- Recent Projects -->
+            <div class="flex flex-col gap-4 sm:gap-6 mt-8 sm:mt-12 lg:mt-58">
+                <div class="flex flex-col gap-4 sm:gap-6 lg:gap-4">
+                    <h1
+                        class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
+                        <span>recent</span>
+                        <span class="text-[#808080]">projects</span>
+                    </h1>
+
+                    <div class="flex flex-col w-full lg:w-[800px] gap-6 sm:gap-8 lg:gap-10">
+
+                        <!-- Bloom — case study internal page -->
+                        <a href="/tabs/projects.html" class="block">
+                            <div
+                                class="fade-in card-hover bg-[#232323] p-4 sm:p-6 lg:p-8 text-white flex flex-col md:flex-row items-center gap-6 rounded-lg cursor-pointer transition-all hover:bg-[#2a2a2a]">
+                                <div class="w-full md:w-[450px] h-[180px] md:h-[250px] shrink-0 overflow-hidden rounded-md"
+                                    style="background:linear-gradient(135deg,#f7eef0 0%,#ede8f5 50%,#eaf1f7 100%); display:flex; align-items:center; justify-content:center;">
+                                    <span
+                                        style="font-family:'Satoshi-Black',sans-serif; font-size:clamp(2.5rem,8vw,4rem); letter-spacing:-0.03em; text-transform:uppercase; background:linear-gradient(135deg,#c08090 0%,#8878b8 50%,#a09070 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">Bloom</span>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <div
+                                        style="display:inline-flex; align-items:center; gap:6px; font-family:'Satoshi-Medium',sans-serif; font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; color:#c08090; border:1px solid rgba(192,128,144,0.3); border-radius:999px; padding:3px 10px; width:fit-content;">
+                                        Active Case Study
+                                    </div>
+                                    <h2 class="text-xl sm:text-2xl lg:text-3xl font-satoshi-bold uppercase">Bloom —
+                                        Fintech</h2>
+                                    <p
+                                        class="font-satoshi-medium text-sm sm:text-base lg:text-lg text-[#808080] leading-relaxed">
+                                        A Gen Z fintech app combining UPI payments, bill splitting, auto-categorization,
+                                        saving goals, and rewards in one design-first product.
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- AQUIS -->
+                        <a href="https://www.behance.net/gallery/239139313/AQUIS-Real-Time-Groundwater-Monitoring-Platform"
+                            target="_blank" class="block">
+                            <div
+                                class="fade-in card-hover bg-[#232323] p-4 sm:p-6 lg:p-8 text-white flex flex-col md:flex-row items-center gap-6 rounded-lg cursor-pointer transition-all hover:bg-[#2a2a2a]">
+                                <div
+                                    class="w-full md:w-[450px] h-[180px] md:h-[250px] shrink-0 overflow-hidden rounded-md">
+                                    <img src="/img/recent-work/image-3.webp" alt="aquis"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <h2 class="text-xl sm:text-2xl lg:text-3xl font-satoshi-bold uppercase">AQUIS</h2>
+                                    <p
+                                        class="font-satoshi-medium text-sm sm:text-base lg:text-lg text-[#808080] leading-relaxed">
+                                        Groundwater monitoring dashboard for citizens and government officers —
+                                        simplifying complex sensor data into accessible visualisations.
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Zehra's Makeovers -->
+                        <a href="https://zehrasmakeovers.com/" target="_blank" class="block">
+                            <div
+                                class="fade-in card-hover bg-[#232323] p-4 sm:p-6 lg:p-8 text-white flex flex-col md:flex-row items-center gap-6 rounded-lg cursor-pointer transition-all hover:bg-[#2a2a2a]">
+                                <div
+                                    class="w-full md:w-[280px] h-[180px] md:h-[200px] shrink-0 overflow-hidden rounded-md">
+                                    <img src="/img/recent-work/image-2.webp" alt="zehras-makeovers"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <h2 class="text-xl sm:text-2xl lg:text-3xl font-satoshi-bold uppercase">Zehra's
+                                        Makeovers</h2>
+                                    <p
+                                        class="font-satoshi-medium text-sm sm:text-base lg:text-lg text-[#808080] leading-relaxed">
+                                        Brand identity and Framer website for a Hyderabad-based makeover artist —
+                                        converting social traffic into bookings.
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- ConfiSmile -->
+                        <a href="https://www.behance.net/gallery/237322081/ConfiSmile-Dental-Care-Landing-Page"
+                            target="_blank" class="block">
+                            <div
+                                class="fade-in card-hover bg-[#232323] p-4 sm:p-6 lg:p-8 text-white flex flex-col md:flex-row items-center gap-6 rounded-lg cursor-pointer transition-all hover:bg-[#2a2a2a]">
+                                <div
+                                    class="w-full md:w-[280px] h-[180px] md:h-[200px] shrink-0 overflow-hidden rounded-md">
+                                    <img src="/img/recent-work/image-1.webp" alt="confi-smile"
+                                        class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <h2 class="text-xl sm:text-2xl lg:text-3xl font-satoshi-bold uppercase">ConfiSmile
+                                    </h2>
+                                    <p
+                                        class="font-satoshi-medium text-sm sm:text-base lg:text-lg text-[#808080] leading-relaxed">
+                                        Dental care landing page — 1.1K unique visitors and 9K pageviews in 30 days.
+                                        Conversion-centred hierarchy built on Framer.
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience -->
+            <div class="flex flex-col gap-4 sm:gap-6 mt-8 sm:mt-12 lg:mt-58">
+                <div class="flex flex-col gap-4 sm:gap-6 lg:gap-4">
+                    <h1
+                        class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
+                        <span>my</span>
+                        <span class="text-[#808080]">experience</span>
+                    </h1>
+                    <div class="flex flex-col w-full lg:w-[700px] gap-3 sm:gap-4">
+
+                        <div
+                            class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col items-start gap-2 sm:gap-3 lg:gap-4 rounded-sm">
+                            <div class="flex flex-col gap-0.5">
+                                <h2 class="text-lg sm:text-xl lg:text-2xl font-satoshi-bold uppercase leading-tight">
+                                    Freelance UI/UX & No-code Designer</h2>
+                                <p class="font-satoshi-medium text-xs sm:text-sm text-[#808080]">Self-Employed</p>
+                            </div>
+                            <h3
+                                class="font-satoshi-medium text-sm sm:text-base lg:text-xl text-[#808080] leading-relaxed">
+                                Developing high-performance Framer-based websites for early-stage clients, focusing on
+                                conversion-centred layouts and optimised interaction states. Managing the end-to-end
+                                design lifecycle from stakeholder brief to responsive, high-fidelity UI.
+                            </h3>
+                            <h4 class="font-satoshi-medium text-xs sm:text-sm text-[#808080]">Dec 2025 – Present</h4>
+                        </div>
+
+                        <div
+                            class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col items-start gap-2 sm:gap-3 lg:gap-4 rounded-sm">
+                            <div class="flex flex-col gap-0.5">
+                                <h2 class="text-lg sm:text-xl lg:text-2xl font-satoshi-bold uppercase leading-tight">
+                                    UI/UX Design Volunteer</h2>
+                                <p class="font-satoshi-medium text-xs sm:text-sm text-[#808080]">Remineralise the Earth
+                                </p>
+                            </div>
+                            <h3
+                                class="font-satoshi-medium text-sm sm:text-base lg:text-xl text-[#808080] leading-relaxed">
+                                Collaborating with a global team to redesign the NGO's public website — improving
+                                navigation and content structure to better communicate reforestation initiatives.
+                            </h3>
+                            <h4 class="font-satoshi-medium text-xs sm:text-sm text-[#808080]">Jan 2026 – Present</h4>
+                        </div>
+
+                        <div
+                            class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col items-start gap-2 sm:gap-3 lg:gap-4 rounded-sm">
+                            <div class="flex flex-col gap-0.5">
+                                <h2 class="text-lg sm:text-xl lg:text-2xl font-satoshi-bold uppercase leading-tight">
+                                    UI/UX Design Intern</h2>
+                                <p class="font-satoshi-medium text-xs sm:text-sm text-[#808080]">Scorpleo Technologies
+                                </p>
+                            </div>
+                            <h3
+                                class="font-satoshi-medium text-sm sm:text-base lg:text-xl text-[#808080] leading-relaxed">
+                                Designed multi-role dashboards for students and mentors, structuring complex course
+                                management tasks into clear, task-based flows. Collaborated with engineering teams in a
+                                TypeScript-based stack to align interaction behaviour and design implementation.
+                            </h3>
+                            <h4 class="font-satoshi-medium text-xs sm:text-sm text-[#808080]">May 2025 – Aug 2025</h4>
+                        </div>
+
+                        <div
+                            class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col items-start gap-2 sm:gap-3 lg:gap-4 rounded-sm">
+                            <div class="flex flex-col gap-0.5">
+                                <h2 class="text-lg sm:text-xl lg:text-2xl font-satoshi-bold uppercase leading-tight">3D
+                                    Animator Intern</h2>
+                                <p class="font-satoshi-medium text-xs sm:text-sm text-[#808080]">Horizon9</p>
+                            </div>
+                            <h3
+                                class="font-satoshi-medium text-sm sm:text-base lg:text-xl text-[#808080] leading-relaxed">
+                                Created high-end 3D product animations for D2C brands using Blender and After Effects —
+                                handling lighting, rendering, and compositing across multiple client campaigns.
+                            </h3>
+                            <h4 class="font-satoshi-medium text-xs sm:text-sm text-[#808080]">Sep 2024 – Apr 2025</h4>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Testimonials -->
+                <div class="flex flex-col gap-4 sm:gap-6 mt-8 sm:mt-12 lg:mt-58">
+                    <div class="flex flex-col gap-4 sm:gap-6 lg:gap-4">
+                        <h1
+                            class="fade-in font-satoshi-black text-4xl sm:text-5xl md:text-6xl lg:text-8xl items-start flex flex-col tracking-wider uppercase text-white leading-tight">
+                            <span>Voice</span>
+                            <span class="text-[#808080]">of Trust</span>
+                        </h1>
+                        <div class="flex flex-col w-full lg:w-[700px] gap-3 sm:gap-4">
+
+                            <div
+                                class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col items-start gap-2 sm:gap-3 lg:gap-4 rounded-sm">
+                                <h3
+                                    class="font-satoshi-medium text-sm sm:text-base lg:text-xl text-[#808080] leading-relaxed">
+                                    Srijan designed our web pages with great attention to detail and patience. He was
+                                    extremely cooperative throughout the process and handled every request calmly and
+                                    professionally. The final outcome reflected a clear understanding of our brand.
+                                </h3>
+                                <div class="flex flex-col">
+                                    <h4 class="font-satoshi-medium text-xs sm:text-sm text-white">Zehra's Makeovers</h4>
+                                    <h4 class="font-satoshi-medium text-xs sm:text-sm text-[#808080]">Dec 10, 2025</h4>
+                                </div>
+                            </div>
+
+                            <div
+                                class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col items-start gap-2 sm:gap-3 lg:gap-4 rounded-sm">
+                                <h3
+                                    class="font-satoshi-medium text-sm sm:text-base lg:text-xl text-[#808080] leading-relaxed">
+                                    Working with Srijan was a great experience. He approached our project with care,
+                                    quickly implemented feedback, and created a seamless user experience that made
+                                    navigating the site effortless. The turnaround time exceeded expectations, and his
+                                    designs truly supported the impact we aimed to make.
+                                </h3>
+                                <div class="flex flex-col">
+                                    <h4 class="font-satoshi-medium text-xs sm:text-sm text-white">Collective Networks
+                                    </h4>
+                                    <h4 class="font-satoshi-medium text-xs sm:text-sm text-[#808080]">Aug 14, 2025</h4>
+                                </div>
+                            </div>
+
+                            <div
+                                class="fade-in card-hover bg-[#232323] py-3 px-4 sm:py-4 sm:px-6 lg:px-12 text-white flex flex-col items-start gap-2 sm:gap-3 lg:gap-4 rounded-sm">
+                                <h3
+                                    class="font-satoshi-medium text-sm sm:text-base lg:text-xl text-[#808080] leading-relaxed">
+                                    Srijan approaches design with creativity and precision, translating abstract ideas
+                                    into visually compelling solutions. Even as an intern, he delivered high-quality
+                                    work and demonstrated strong potential. With continued polish, he's on track to
+                                    consistently create impactful design outputs.
+                                </h3>
+                                <div class="flex flex-col">
+                                    <h4 class="font-satoshi-medium text-xs sm:text-sm text-white">Horizon9 — Advertising
+                                        Agency</h4>
+                                    <h4 class="font-satoshi-medium text-xs sm:text-sm text-[#808080]">Apr 22, 2025</h4>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="custom-cursor"></div>
+    <script>
+        (function () {
+            var cursor = document.getElementById('custom-cursor');
+            if (!cursor || window.innerWidth < 1024) { if (cursor) cursor.style.display = 'none'; return; }
+            document.addEventListener('mousemove', function (e) {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+            document.addEventListener('mouseleave', function () { cursor.style.opacity = '0'; });
+            document.addEventListener('mouseenter', function () { cursor.style.opacity = '1'; });
+            document.querySelectorAll('a, button, [role="button"]').forEach(function (el) {
+                el.addEventListener('mouseenter', function () { cursor.classList.add('hovering'); });
+                el.addEventListener('mouseleave', function () { cursor.classList.remove('hovering'); });
+            });
+        })();
+    </script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+</body>
+
+</html>
