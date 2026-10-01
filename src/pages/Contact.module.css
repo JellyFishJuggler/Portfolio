@@ -1,0 +1,24 @@
+.grid {
+  display: grid;
+  grid-template-columns: 4fr 6fr;
+  column-gap: var(--sp-64);
+  align-items: start;
+  /* The heading already carries a 48px bottom margin; this brings the
+     gap to ~80px before the details/card grid. */
+  margin-top: var(--sp-32);
+}
+
+.card {
+  padding: 48px;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    row-gap: var(--sp-64);
+  }
+
+  .card {
+    padding: 24px;
+  }
+}

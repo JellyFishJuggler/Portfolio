@@ -1,0 +1,9 @@
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  /* ContactItem reads these tokens; the values are the page-level
+     override on top of the footer's defaults. */
+  --label-size: var(--fs-detail-label);
+  --value-size: var(--fs-detail-value);
+}
