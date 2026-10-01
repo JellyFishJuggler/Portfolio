@@ -1,0 +1,37 @@
+/* The bar hangs off the bottom of the wordmark, which useIntro measures and
+   hands over as --intro-bar-top, and fades itself in once the wordmark has
+   started to rise. */
+.bar {
+  position: absolute;
+  left: 50%;
+  top: var(--intro-bar-top, 50%);
+  margin-top: var(--intro-bar-gap);
+  z-index: 20;
+  width: var(--intro-bar-w);
+  height: var(--intro-bar-h);
+  transform: translateX(-50%);
+  border-radius: var(--intro-bar-radius);
+  background: var(--intro-track);
+  overflow: hidden;
+  opacity: 0;
+  animation: intro-bar-in var(--intro-bar-fade) var(--intro-bar-delay) var(--ease) forwards;
+}
+
+/* The fill is scaled, not resized: originX is set in JS so it grows from the
+   left without a layout pass. */
+.fill {
+  position: absolute;
+  inset: 0;
+  background: var(--fg);
+  transform-origin: left center;
+}
+
+@keyframes intro-bar-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

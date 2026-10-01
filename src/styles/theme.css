@@ -238,6 +238,27 @@
 
   /* theme transition */
   --dur-theme: 0.3s;
+
+  /* first-visit intro (home)
+     The sequence is half CSS and half JS: the flight, the fonts gate and the
+     progress easing are in src/data/intro.js, and everything below is what
+     CSS animates. The two halves are kept in step by deriving the reveal
+     delays from --intro-flight, which is the same length as INTRO.flight. */
+  --intro-flight: 1s;
+  --intro-rise: 0.8s;
+  --intro-bar-delay: 0.4s;
+  --intro-bar-fade: 0.3s;
+  --intro-bar-hold: 250ms; /* JS-only, but the number belongs with its peers */
+  --intro-bar-gap: 32px;
+  --intro-bar-w: clamp(160px, 22vw, 360px);
+  --intro-bar-h: 2px;
+  --intro-bar-radius: 1px;
+  --intro-track: rgba(255, 255, 255, 0.14);
+  --intro-reveal: 0.6s;
+  --intro-header-delay: calc(var(--intro-flight) * 0.6);
+  --intro-cards-delay: calc(var(--intro-flight) * 0.55);
+  --intro-card-stagger: 70ms;
+  --intro-card-y: 24px;
 }
 
 html.light {
@@ -275,6 +296,9 @@ html.light {
      same light grey the dark theme uses in reverse */
   --header-bg: rgba(236, 235, 232, 0.72);
   --toggle-track: rgba(0, 0, 0, 0.1);
+  /* intro loading bar, light theme: the track is the dark theme's track
+     reversed, so the bar reads the same in both. */
+  --intro-track: rgba(0, 0, 0, 0.14);
 
   /* form fields + primary action (contact page), light theme */
   --field: rgba(0, 0, 0, 0.045);
