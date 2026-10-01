@@ -28,7 +28,6 @@ export const SKILL_LOGOS = {
 export const site = {
   name: "Srijan Gupta",
   role: "AI/ML Engineer",
-  location: "Dādri",
   timeZone: "Asia/Kolkata",
   photo: "/img/pfp.png",
   /**

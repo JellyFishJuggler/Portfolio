@@ -1,7 +1,9 @@
 .shell {
   position: relative;
   z-index: 1;
-  padding: 0 var(--page-pad);
+  /* Top padding reserves the fixed header's height, so the first block of
+     every page still starts below it. */
+  padding: var(--header-h) var(--page-pad) 0;
   /* Published so full-bleed children can cancel exactly this padding. */
   --shell-pad: var(--page-pad);
   min-height: 100vh;
@@ -13,7 +15,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding: var(--pad);
+  padding: var(--header-h) var(--pad) var(--pad);
   --shell-pad: var(--pad);
 }
 

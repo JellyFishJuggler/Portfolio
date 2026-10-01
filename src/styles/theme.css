@@ -67,6 +67,8 @@
   --logo-size: 32px;
   --hero-size: 7vw;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  /* the RollingText easing, shared by anything that should feel like it */
+  --ease-roll: cubic-bezier(0.76, 0, 0.24, 1);
   --dur: 200ms;
 
   /* page shell */
@@ -96,10 +98,23 @@
   --header-h: 76px;
   --header-pad: 24px;
   --header-gap: 120px;
-  --header-dot: 14px;
   --header-side-gap: 24px;
   --header-end-gap: 118px;
   --fs-base: 18px;
+  /* The header is fixed, so it needs its own surface: content scrolling
+     underneath would otherwise run straight through the text. */
+  --header-bg: rgba(0, 0, 0, 0.55);
+
+  /* theme toggle: a 14px dot that opens into a 44x22 track. The knob grows
+     only to 16px and travels 11px, so the switch stays as close to the size
+     of the dot it replaces as a readable pill allows. The 3px inset is what
+     fixes that travel; see --knob-travel in ThemeToggle.module.css. */
+  --toggle-track: rgba(255, 255, 255, 0.1);
+  --toggle-w: 44px;
+  --toggle-h: 22px;
+  --toggle-knob: 16px;
+  --toggle-dot: 14px;
+  --toggle-inset: 3px;
 
   /* footer */
   --footer-rule: rgba(255, 255, 255, 0.1);
@@ -238,19 +253,28 @@ html.light {
   --grain-card: 0.04;
 
   /* bento tiles (home), light theme: white glass reads as a frosted panel
-     against the page, where a white tint on a near-white page would not */
+     against the page, where a white tint on a near-white page would not.
+     Hover is only a shade darker than the resting tint — inverting to
+     black here would fight the light palette — so the text keeps the
+     regular foreground colour. */
   --bento: rgba(255, 255, 255, 0.55);
-  --bento-hover: rgba(12, 12, 12, 0.9);
+  --bento-hover: rgba(0, 0, 0, 0.08);
   --bento-edge: rgba(0, 0, 0, 0.09);
-  --bento-hover-edge: rgba(0, 0, 0, 0.2);
-  --bento-fg: rgba(255, 255, 255, 0.92);
-  --bento-arrow: rgba(255, 255, 255, 0.85);
+  --bento-hover-edge: rgba(0, 0, 0, 0.14);
+  --bento-fg: var(--fg);
+  --bento-arrow: var(--arrow);
   --grain-bento: 0.09;
   --muted-2: rgba(17, 17, 17, 0.55);
   --body: rgba(17, 17, 17, 0.85);
   --footer-rule: rgba(0, 0, 0, 0.12);
   --rule: rgba(0, 0, 0, 0.12);
   --row-rule: rgba(0, 0, 0, 0.1);
+
+  /* fixed header + theme toggle, light theme: the header picks up the page
+     colour so the blur reads as the surface behind it, and the track is the
+     same light grey the dark theme uses in reverse */
+  --header-bg: rgba(236, 235, 232, 0.72);
+  --toggle-track: rgba(0, 0, 0, 0.1);
 
   /* form fields + primary action (contact page), light theme */
   --field: rgba(0, 0, 0, 0.045);

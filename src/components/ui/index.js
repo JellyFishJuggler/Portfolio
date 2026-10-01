@@ -8,5 +8,6 @@ export { default as Reveal } from "./Reveal";
 export { default as RollingText } from "./RollingText";
 export { default as ScrollRevealText } from "./ScrollRevealText";
 export { default as SectionRow } from "./SectionRow";
+export { default as ThemeToggle } from "./ThemeToggle";
 export { default as Tile } from "./Tile";
 export { default as VisuallyHidden } from "./VisuallyHidden";

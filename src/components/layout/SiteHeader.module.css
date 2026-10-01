@@ -1,17 +1,24 @@
+/* Fixed to the top of every page, so it needs its own surface: without one,
+   body text would scroll straight through it. PageShell reserves
+   --header-h of top padding to match. The header sits 24px from the viewport
+   edge while body content sits at the page padding. */
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
   display: flex;
   align-items: center;
   min-height: var(--header-h);
+  padding-inline: var(--header-pad);
   font-size: var(--fs-base);
   font-weight: var(--w-medium);
   color: var(--fg);
-}
-
-/* The header is 24px from the viewport edge while body content sits at the
-   page padding, so it breaks out of PageShell by exactly that padding. */
-.full {
-  margin-inline: calc(-1 * var(--shell-pad, var(--page-pad)));
-  padding-inline: var(--header-pad);
+  background: var(--header-bg);
+  -webkit-backdrop-filter: blur(var(--blur));
+  backdrop-filter: blur(var(--blur));
+  transition: background var(--dur-theme);
 }
 
 /* The 120px gap is between the left item and the role, so the role always
@@ -56,23 +63,6 @@
 
 .clock {
   font-variant-numeric: tabular-nums;
-}
-
-.dot {
-  width: var(--header-dot);
-  height: var(--header-dot);
-  border-radius: 50%;
-  border: 0;
-  padding: 0;
-  background: var(--fg);
-  cursor: pointer;
-  flex: none;
-}
-
-@media (max-width: 900px) {
-  .full {
-    margin-inline: calc(-1 * var(--shell-pad, var(--page-pad-sm)));
-  }
 }
 
 @media (max-width: 640px) {

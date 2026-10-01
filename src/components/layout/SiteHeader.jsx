@@ -3,14 +3,13 @@ import { ArrowLeft } from "lucide-react";
 import useClock from "../../hooks/useClock";
 import useTheme from "../../hooks/useTheme";
 import { site } from "../../data/site";
-import { RollingText } from "../ui";
-import { cx } from "../../utils/cx";
+import { RollingText, ThemeToggle } from "../ui";
 import styles from "./SiteHeader.module.css";
 
 /**
- * Site header. The left item is either the name (home) or a back link
- * (portfolio pages); the role sits a fixed gap after it, and the live
- * clock plus theme dot sit at the right.
+ * Site header, fixed to the top of the viewport. The left item is either the
+ * name (home) or a back link (portfolio pages); the role sits a fixed gap
+ * after it, and the live clock plus the theme switch sit at the right.
  *
  * The back link prefers real history and falls back to /portfolio, so a
  * case study opened cold in a new tab still has somewhere to go.
@@ -22,7 +21,7 @@ import styles from "./SiteHeader.module.css";
  */
 export function SiteHeader({ variant = "name", backLabel = "Back", fallbackTo = "/portfolio" }) {
   const time = useClock(site.timeZone);
-  const [light, toggle] = useTheme();
+  const [, toggle, theme] = useTheme();
   const navigate = useNavigate();
 
   const goBack = (e) => {
@@ -56,20 +55,18 @@ export function SiteHeader({ variant = "name", backLabel = "Back", fallbackTo = 
   }
 
   return (
-    <header className={cx(styles.header, styles.full)}>
+    <header className={styles.header}>
       <div className={styles.start}>
         {left}
         <span className={styles.role}>{site.role}</span>
       </div>
       <div className={styles.end}>
+        {/* Clock only: the old hardcoded city was the developer's, not the
+            visitor's, so it's been removed. */}
         <span className={styles.clock} aria-live="off">
-          {site.location} • {time}
+          {time}
         </span>
-        <button
-          className={styles.dot}
-          onClick={toggle}
-          aria-label={light ? "Switch to dark theme" : "Switch to light theme"}
-        />
+        <ThemeToggle theme={theme} onToggle={toggle} />
       </div>
     </header>
   );

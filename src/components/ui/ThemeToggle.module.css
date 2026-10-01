@@ -1,0 +1,137 @@
+/* The switch at rest is exactly the old header dot: a 14px solid circle of
+   the foreground colour in a 14x14 box, so nothing in the header shifts.
+   Track and hit area are absolutely positioned on top of that box. */
+.toggle {
+  position: relative;
+  flex: none;
+  width: var(--toggle-dot);
+  height: var(--toggle-dot);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--fg);
+  cursor: pointer;
+  /* Centred at rest. The open states move the knob to one end, far enough
+     that --toggle-inset of track is left beyond it — derived rather than
+     hardcoded, so changing the track or knob size can't desync the travel. */
+  --knob-x: 0px;
+  --knob-travel: calc(
+    (var(--toggle-w) - 2 * var(--toggle-inset) - var(--toggle-knob)) / 2
+  );
+  --knob-open-x: var(--knob-travel);
+}
+
+.toggle[data-theme="light"] {
+  --knob-open-x: calc(-1 * var(--knob-travel));
+}
+
+/* The global focus ring would trace the small box; the ring is moved onto
+   the open track instead, in the expanded rules below. */
+.toggle:focus-visible {
+  outline: none;
+}
+
+/* Fixed at the track's size in both states, so the pointer never leaves the
+   target and the track cannot flicker in and out as it grows. */
+.hit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--toggle-w);
+  height: var(--toggle-h);
+  transform: translate(-50%, -50%);
+}
+
+/* No hover to aim with, so the target grows to the 44px touch minimum. */
+@media (hover: none) {
+  .hit {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+.track {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--toggle-dot);
+  height: var(--toggle-dot);
+  border: 1px solid var(--edge);
+  border-radius: 999px;
+  background: var(--toggle-track);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  /* Size and fade are quick; the knob's travel below is the slow part. */
+  transition:
+    width 120ms var(--ease-roll),
+    height 120ms var(--ease-roll),
+    opacity 120ms var(--ease-roll);
+}
+
+.knob {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--toggle-dot);
+  height: var(--toggle-dot);
+  border-radius: 50%;
+  background: var(--fg);
+  pointer-events: none;
+  transform: translate(calc(-50% + var(--knob-x)), -50%);
+  transition:
+    width 350ms var(--ease-roll),
+    height 350ms var(--ease-roll),
+    transform 350ms var(--ease-roll);
+}
+
+/* Open: keyboard focus, or the peek that follows a press. */
+.toggle:is(:focus-visible, [data-peek]) {
+  --knob-x: var(--knob-open-x);
+}
+
+.toggle:is(:focus-visible, [data-peek]) .track {
+  width: var(--toggle-w);
+  height: var(--toggle-h);
+  opacity: 1;
+}
+
+.toggle:is(:focus-visible, [data-peek]) .knob {
+  width: var(--toggle-knob);
+  height: var(--toggle-knob);
+}
+
+/* The focus ring traces the expanded track, not the 14px box. */
+.toggle:is(:focus-visible, [data-peek]) .track {
+  outline: var(--focus-width) solid var(--fg);
+  outline-offset: var(--underline-offset);
+}
+
+/* Open: hover. Gated on a pointer that has one, because a tap on touch can
+   leave :hover stuck on, and the switch would stay expanded. The same
+   declarations as above, deliberately: putting them here rather than in one
+   shared :is() list means a touch device never matches a hover rule at all,
+   so there is nothing to override and no specificity tie to get wrong. */
+@media (hover: hover) and (pointer: fine) {
+  .toggle:hover {
+    --knob-x: var(--knob-open-x);
+  }
+
+  .toggle:hover .track {
+    width: var(--toggle-w);
+    height: var(--toggle-h);
+    opacity: 1;
+  }
+
+  .toggle:hover .knob {
+    width: var(--toggle-knob);
+    height: var(--toggle-knob);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track,
+  .knob {
+    transition: none;
+  }
+}

@@ -6,6 +6,18 @@
     <meta name="description" content="Srijan Gupta — AI/ML Engineer building machine learning systems and interfaces." />
     <meta name="theme-color" content="#000000" />
     <title>Srijan Gupta — AI/ML Engineer</title>
+    <script>
+      /* Apply the stored theme before first paint, so a light-theme reload
+         never flashes the dark palette. Wrapped in try/catch because
+         localStorage throws in private/blocked contexts. */
+      try {
+        if (localStorage.getItem("theme") === "light") {
+          document.documentElement.classList.add("light");
+        }
+      } catch (e) {
+        /* storage unavailable; the app defaults to dark */
+      }
+    </script>
   </head>
   <body class="antialiased">
     <div id="root"></div>
