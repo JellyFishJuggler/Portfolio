@@ -1,0 +1,23 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+/* Honeypot: invisible to people, open to automated bots. Left in the DOM
+   (not display:none) so naive fillers still write to it; aria-hidden and
+   tabindex -1 keep it out of the accessibility tree. */
+.hp {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

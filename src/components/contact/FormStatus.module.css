@@ -1,0 +1,10 @@
+.status {
+  margin: 0;
+  font-size: var(--fs-body);
+  letter-spacing: var(--track-label);
+  color: var(--muted);
+}
+
+.statusError {
+  color: var(--danger);
+}
