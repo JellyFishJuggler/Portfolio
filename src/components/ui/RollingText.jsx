@@ -18,17 +18,24 @@ import styles from "./RollingText.module.css";
  *   roll from the nearest interactive ancestor (a, button, [data-roll-trigger]),
  *   falling back to the text itself; "self" only from the text.
  * @param {number} [props.stagger=0.015] - seconds per character; capped so
- *   long strings finish the roll in ~0.4s.
- * @param {number} [props.duration=0.25] - roll duration for one character.
- * @param {number[]} [props.ease=[0.76, 0, 0.24, 1]] - cubic-bezier easing.
+ *   long strings finish the roll in ~0.55s.
+ * @param {number} [props.stiffness=340] - spring pull: higher starts and
+ *   stops harder.
+ * @param {number} [props.damping=30] - spring drag: higher glides into the
+ *   stop with less ring-out. This is the "weight" of the roll; the default
+ *   is just under critical, so it lands softly with a hair of overshoot
+ *   (which the clip hides).
+ * @param {number} [props.mass=0.85] - spring inertia; higher makes it feel
+ *   heavier and slower to start.
  * @param {string} [props.className]
  */
 export function RollingText({
   text,
   trigger = "parent",
   stagger = 0.015,
-  duration = 0.25,
-  ease = [0.76, 0, 0.24, 1],
+  stiffness = 340,
+  damping = 30,
+  mass = 0.85,
   className,
 }) {
   const rootRef = useRef(null);
@@ -40,7 +47,7 @@ export function RollingText({
     [text],
   );
   /* Cap the total ripple so long labels (some 28px footer values run past
-     twenty characters) finish within ~0.4s rather than crawling. */
+     twenty characters) finish within ~0.55s rather than crawling. */
   const step = useMemo(
     () => Math.min(stagger, 0.15 / Math.max(list.length, 1)),
     [stagger, list.length],
@@ -95,6 +102,12 @@ export function RollingText({
     );
   }
 
+  /* A damped spring rather than a fixed-duration tween: reversing mid-roll
+     keeps the current velocity, so pulling the pointer off early eases back
+     instead of snapping to a fresh animation. `damping` is the one knob for
+     the weight of the roll; the per-character delay walks the ripple. */
+  const spring = { type: "spring", stiffness, damping, mass };
+
   const layer = (variants) => (
     <span className={styles.layer} aria-hidden="true">
       {list.map((ch, i) => (
@@ -103,7 +116,7 @@ export function RollingText({
           className={styles.char}
           variants={variants}
           animate={active ? "active" : "idle"}
-          transition={{ duration, ease, delay: i * step }}
+          transition={{ ...spring, delay: i * step }}
         >
           {ch}
         </motion.span>

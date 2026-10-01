@@ -3,11 +3,11 @@ import { cx } from "../../utils/cx";
 
 /* One soft rise per group, groups offset slightly so a page cascades in
    rather than appearing all at once. */
-const DURATION = 0.5;
+const DURATION = 0.8;
 const STAGGER = 0.09;
 
 /**
- * Fades content up over 0.5s, in one of two ways.
+ * Fades content up over 0.8s, in one of two ways.
  *
  * `group` numbers the top-level blocks of a page: they animate as the tab
  * opens, one after another. Without it the element reveals as it scrolls
