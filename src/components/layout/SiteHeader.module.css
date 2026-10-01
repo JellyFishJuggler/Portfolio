@@ -65,6 +65,20 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* Home intro: the header is the last thing to arrive, fading in over the last
+   stretch of the wordmark's flight (see useIntro and --intro-header-delay). */
+[data-intro="measuring"] .header,
+[data-intro="loading"] .header {
+  opacity: 0;
+}
+
+[data-intro="exiting"] .header {
+  opacity: 1;
+  transition:
+    background var(--dur-theme),
+    opacity var(--intro-reveal) var(--ease) var(--intro-header-delay);
+}
+
 @media (max-width: 640px) {
   .role {
     display: none;

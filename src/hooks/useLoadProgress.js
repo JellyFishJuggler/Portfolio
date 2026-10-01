@@ -85,6 +85,11 @@ export function useLoadProgress({ active, onComplete }) {
       ready(fontsReady()),
       ready(photoDecoded()),
       ready(windowLoaded()),
+      // The creep is the floor, not decoration: waiting on it is what stops a
+      // warm cache from flashing the whole intro past in a single frame. The
+      // cap is the ceiling on the waiting, so a task that never settles
+      // doesn't strand the page.
+      Promise.resolve(creepRef.current),
       wait(INTRO.taskCap),
     ]).then(() => {
       if (live) complete();

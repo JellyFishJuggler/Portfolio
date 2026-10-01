@@ -18,8 +18,15 @@ import styles from "./SiteHeader.module.css";
  * @param {"name"|"home"|"back"} [props.variant="name"] - left item style.
  * @param {string} [props.backLabel="Back"]
  * @param {string} [props.fallbackTo="/portfolio"]
+ * @param {boolean} [props.inert=false] - take the header out of play, which
+ *   the home intro does while it owns the screen.
  */
-export function SiteHeader({ variant = "name", backLabel = "Back", fallbackTo = "/portfolio" }) {
+export function SiteHeader({
+  variant = "name",
+  backLabel = "Back",
+  fallbackTo = "/portfolio",
+  inert = false,
+}) {
   const time = useClock(site.timeZone);
   const [, toggle, theme] = useTheme();
   const navigate = useNavigate();
@@ -55,7 +62,7 @@ export function SiteHeader({ variant = "name", backLabel = "Back", fallbackTo = 
   }
 
   return (
-    <header className={styles.header}>
+    <header className={styles.header} inert={inert}>
       <div className={styles.start}>
         {left}
         <span className={styles.role}>{site.role}</span>

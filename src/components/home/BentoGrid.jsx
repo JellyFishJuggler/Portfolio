@@ -19,10 +19,12 @@ import styles from "./BentoGrid.module.css";
  * @param {(label: string|null) => void} props.onActive
  * @param {React.ReactNode} props.photo
  * @param {React.ReactNode} props.ticker
+ * @param {boolean} [props.inert=false] - take the grid out of play, which the
+ *   home intro does while it owns the screen.
  */
-export function BentoGrid({ onActive, photo, ticker }) {
+export function BentoGrid({ onActive, photo, ticker, inert = false }) {
   return (
-    <main className={styles.grid}>
+    <main className={styles.grid} inert={inert}>
       <BentoCard label="About" to="/about" onActive={onActive} className={styles.span3} />
       <BentoCard label="Portfolio" to="/portfolio" onActive={onActive} className={styles.span9} />
       <BentoCard label="Contact" to="/contact" onActive={onActive} className={styles.span6} />

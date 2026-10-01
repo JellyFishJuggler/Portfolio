@@ -12,12 +12,14 @@ import styles from "./HeroText.module.css";
  *
  * @param {object} props
  * @param {string} props.text - current wordmark.
+ * @param {React.RefObject<HTMLElement>} [props.heroRef] - the clip box, which
+ *   the home intro poses and flies.
  */
-export function HeroText({ text }) {
+export function HeroText({ text, heroRef }) {
   const reduce = useReducedMotion();
 
   return (
-    <div className={styles.hero} aria-hidden="true">
+    <div className={styles.hero} ref={heroRef} aria-hidden="true">
       <AnimatePresence initial={false}>
         <motion.div
           key={text}

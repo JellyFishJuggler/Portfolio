@@ -188,10 +188,24 @@ export function useIntro({ heroRef, barRef }) {
         }, ms);
       });
 
+    /* Taking the pose off is the whole promise of the intro: at the end the
+       hero must be byte-for-byte what the page would have rendered without
+       any of this. Stopping the flight is not enough on its own — framer has
+       a frame in flight that can write the pose straight back after the
+       cleanup, which is how a resize jump used to leave the wordmark scaled
+       up in a "done" page. So the pose is cleared again on the next frame,
+       after the animation has definitely stopped writing. */
+    const unpose = () => {
+      flight?.stop();
+      flight = null;
+      clearPose(heroRef.current);
+      const again = requestAnimationFrame(() => clearPose(heroRef.current));
+      pending.add(() => cancelAnimationFrame(again));
+    };
+
     const settle = () => {
       markIntroSeen();
-      flight?.stop();
-      clearPose(heroRef.current);
+      unpose();
       root?.removeAttribute("aria-busy");
       setPhase("done");
     };
@@ -291,10 +305,11 @@ export function useIntro({ heroRef, barRef }) {
       disarm();
       window.removeEventListener("resize", jump);
       window.removeEventListener("orientationchange", jump);
-      flight?.stop();
+      unpose();
+      // After unpose, so the frame it just queued is cancelled rather than
+      // firing into a run that may already be starting again.
       pending.forEach((resolve) => resolve());
       pending.clear();
-      clearPose(heroRef.current);
       root?.removeAttribute("aria-busy");
     };
   }, [complete, eligible, heroRef, barRef]);

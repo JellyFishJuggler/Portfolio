@@ -56,6 +56,55 @@
   min-width: 0;
 }
 
+/* The intro reveals the cards in DOM order once the wordmark has landed. The
+   index each one waits its turn is set here, because this is the only file
+   that knows the order: About, Portfolio, Contact, photo, tools, Resume. */
+.grid > :not(.stackCol):nth-child(1) {
+  --i: 0;
+}
+
+.grid > :not(.stackCol):nth-child(2) {
+  --i: 1;
+}
+
+.grid > :not(.stackCol):nth-child(3) {
+  --i: 2;
+}
+
+.grid > :not(.stackCol):nth-child(4) {
+  --i: 3;
+}
+
+.stackCol > :nth-child(1) {
+  --i: 4;
+}
+
+.stackCol > :nth-child(2) {
+  --i: 5;
+}
+
+/* The cards start below their final place and come up as the wordmark flies
+   home, staggered. The column itself is left alone: its children are the
+   ones that animate, and fading the parent as well would double both. */
+[data-intro="measuring"] .grid > :not(.stackCol),
+[data-intro="measuring"] .stackCol > *,
+[data-intro="loading"] .grid > :not(.stackCol),
+[data-intro="loading"] .stackCol > * {
+  opacity: 0;
+  transform: translateY(var(--intro-card-y));
+}
+
+[data-intro="exiting"] .grid > :not(.stackCol),
+[data-intro="exiting"] .stackCol > * {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--intro-reveal) var(--ease)
+      calc(var(--intro-cards-delay) + var(--i, 0) * var(--intro-card-stagger)),
+    transform var(--intro-reveal) var(--ease)
+      calc(var(--intro-cards-delay) + var(--i, 0) * var(--intro-card-stagger));
+}
+
 @media (max-width: 900px) {
   .grid {
     grid-template-columns: minmax(0, 1fr);

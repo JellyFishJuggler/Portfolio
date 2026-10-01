@@ -18,6 +18,30 @@
   grid-area: 1 / 1;
 }
 
+/* The intro (see useIntro) poses this box before the wordmark is shown, so
+   it stays hidden until the pose is in place and the rise starts. */
+[data-intro="measuring"] .hero {
+  visibility: hidden;
+}
+
+/* The same slide the label swap uses, at the intro's length: the wordmark
+   rises into the centred pose from below its own clip. Declarations here beat
+   the swap's inline transform while it runs, and the two never overlap —
+   cards can't be hovered until the intro is over. */
+[data-intro="loading"] .hero > div {
+  animation: intro-rise var(--intro-rise) var(--ease-roll) both;
+}
+
+@keyframes intro-rise {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 900px) {
   .hero {
     font-size: 12vw;
