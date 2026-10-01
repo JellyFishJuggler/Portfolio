@@ -1,7 +1,7 @@
 import { PageShell, SiteFooter, SiteHeader } from "../components/layout";
 import { ProjectGrid } from "../components/portfolio";
-import { PageHeading } from "../components/ui";
-import useDocumentTitle from "../hooks/useDocumentTitle";
+import { PageHeading, Reveal } from "../components/ui";
+import { useDocumentTitle, useSmoothScroll } from "../hooks";
 import { sortedProjects } from "../data/projects";
 
 export const PORTFOLIO_INTRO =
@@ -13,6 +13,7 @@ export const PORTFOLIO_INTRO =
  */
 export default function Portfolio() {
   useDocumentTitle("Portfolio — Srijan Gupta");
+  useSmoothScroll();
 
   return (
     <PageShell constrain>
@@ -20,7 +21,9 @@ export default function Portfolio() {
 
       <PageHeading>{PORTFOLIO_INTRO}</PageHeading>
 
-      <ProjectGrid projects={sortedProjects} />
+      <Reveal>
+        <ProjectGrid projects={sortedProjects} />
+      </Reveal>
 
       <SiteFooter topSpace={150} />
     </PageShell>

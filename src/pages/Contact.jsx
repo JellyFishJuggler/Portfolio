@@ -1,8 +1,8 @@
 import { ContactDetails, ContactForm } from "../components/contact";
 import { PageShell, SiteFooter, SiteHeader } from "../components/layout";
-import { Card, PageHeading } from "../components/ui";
+import { Card, PageHeading, Reveal } from "../components/ui";
 import { contact } from "../data/contact";
-import useDocumentTitle from "../hooks/useDocumentTitle";
+import { useDocumentTitle, useSmoothScroll } from "../hooks";
 import styles from "./Contact.module.css";
 
 /**
@@ -12,6 +12,7 @@ import styles from "./Contact.module.css";
  */
 export default function Contact() {
   useDocumentTitle("Contact — Srijan Gupta");
+  useSmoothScroll();
 
   return (
     <PageShell constrain>
@@ -19,12 +20,12 @@ export default function Contact() {
 
       <PageHeading>{contact.heading}</PageHeading>
 
-      <div className={styles.grid}>
+      <Reveal className={styles.grid}>
         <ContactDetails />
         <Card className={styles.card}>
           <ContactForm />
         </Card>
-      </div>
+      </Reveal>
 
       <SiteFooter topSpace={81} />
     </PageShell>

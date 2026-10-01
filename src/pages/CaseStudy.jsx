@@ -10,7 +10,7 @@ import {
   SectionRenderer,
 } from "../components/portfolio";
 import { MediaFigure, Reveal } from "../components/ui";
-import useDocumentTitle from "../hooks/useDocumentTitle";
+import { useDocumentTitle, useSmoothScroll } from "../hooks";
 import { getNextProject, getProject } from "../data/projects";
 
 /**
@@ -25,6 +25,7 @@ function CaseStudyView({ slug }) {
   const next = getNextProject(slug);
 
   useDocumentTitle(project ? `${project.title} — Srijan Gupta` : "Portfolio — Srijan Gupta");
+  useSmoothScroll();
 
   if (!project) return <Navigate to="/portfolio" replace />;
 
@@ -32,7 +33,9 @@ function CaseStudyView({ slug }) {
     <PageShell constrain>
       <SiteHeader variant="back" />
 
-      <ProjectHeader project={project} />
+      <Reveal>
+        <ProjectHeader project={project} />
+      </Reveal>
 
       <Reveal>
         {project.hero ? (
@@ -42,7 +45,9 @@ function CaseStudyView({ slug }) {
         )}
       </Reveal>
 
-      <ProjectMeta meta={project.meta} stack={project.stack} />
+      <Reveal>
+        <ProjectMeta meta={project.meta} stack={project.stack} />
+      </Reveal>
 
       {/* Headline results sit in the masthead. A `metrics` section type also
           exists for metrics that belong partway through the narrative; the
@@ -52,14 +57,18 @@ function CaseStudyView({ slug }) {
       </Reveal>
 
       {project.sections.length === 0 ? (
-        <ComingSoon project={project} />
+        <Reveal>
+          <ComingSoon project={project} />
+        </Reveal>
       ) : (
         project.sections.map((section, i) => (
           <SectionRenderer key={section.type + i} section={section} />
         ))
       )}
 
-      <NextProject project={next} />
+      <Reveal>
+        <NextProject project={next} />
+      </Reveal>
 
       <SiteFooter />
     </PageShell>

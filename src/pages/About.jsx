@@ -7,7 +7,8 @@ import {
   EarlierWork,
   PreviousExperience,
 } from "../components/about";
-import useDocumentTitle from "../hooks/useDocumentTitle";
+import { Reveal } from "../components/ui";
+import { useDocumentTitle, useSmoothScroll } from "../hooks";
 import { marquee } from "../data/about";
 import styles from "./About.module.css";
 
@@ -28,6 +29,7 @@ import styles from "./About.module.css";
  */
 export default function About() {
   useDocumentTitle("About — Srijan Gupta");
+  useSmoothScroll();
 
   return (
     <PageShell constrain>
@@ -40,9 +42,18 @@ export default function About() {
 
       <main className={styles.layout}>
         <div className={styles.narrative}>
-          <CareerTransition />
-          <EarlierWork />
-          <PreviousExperience />
+          {/* The sections have their own inView colour lift; Reveal only
+              adds the soft rise, and the portrait stays out of it so its
+              sticky column keeps the full track height it needs. */}
+          <Reveal>
+            <CareerTransition />
+          </Reveal>
+          <Reveal>
+            <EarlierWork />
+          </Reveal>
+          <Reveal>
+            <PreviousExperience />
+          </Reveal>
         </div>
 
         <AboutPortrait />
