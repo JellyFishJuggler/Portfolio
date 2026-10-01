@@ -1,7 +1,9 @@
 export { default as Card } from "./Card";
+export { default as ContactItem } from "./ContactItem";
 export { default as ExternalLink } from "./ExternalLink";
 export { default as Marquee } from "./Marquee";
 export { default as MediaFigure } from "./MediaFigure";
+export { default as PageHeading } from "./PageHeading";
 export { default as Reveal } from "./Reveal";
 export { default as ScrollRevealText } from "./ScrollRevealText";
 export { default as SectionRow } from "./SectionRow";

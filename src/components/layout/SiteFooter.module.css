@@ -1,4 +1,5 @@
 .footer {
+  padding-top: var(--footer-top, 0);
   padding-bottom: var(--footer-pad-b);
 }
 
@@ -14,13 +15,6 @@
   column-gap: var(--gap);
   row-gap: var(--footer-row-gap);
   padding-top: var(--footer-space);
-}
-
-.item {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-xs);
-  min-width: 0;
 }
 
 /* Social profiles form a second column running down the right, so the
@@ -40,38 +34,9 @@
   grid-row: 3;
 }
 
-.label {
-  font-size: var(--fs-label);
-  color: var(--muted-2);
-}
-
-.value {
-  font-size: var(--fs-footer-value);
-  font-weight: var(--w-medium);
-  letter-spacing: var(--track-tight);
-  color: var(--fg);
-  text-decoration: none;
-  /* Selectable on purpose: this is contact info people copy. */
-  -webkit-user-select: text;
-  user-select: text;
-  transition: opacity var(--dur);
-  overflow-wrap: anywhere;
-}
-
-.value:hover {
-  opacity: 0.7;
-}
-
 @media (max-width: 900px) {
   .grid {
     grid-template-columns: 1fr;
-  }
-
-  /* The value size is tuned for laptop reading, but a 22-character email
-     at that size wraps to two lines on a narrow phone. Step it down on
-     small screens only; laptops keep the larger value. */
-  .value {
-    font-size: clamp(1.5rem, 7.5vw, var(--fs-footer-value));
   }
 
   .linkedin {

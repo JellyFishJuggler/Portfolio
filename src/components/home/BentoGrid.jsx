@@ -10,8 +10,7 @@ import styles from "./BentoGrid.module.css";
  *   row 2  Contact(6) photo(3)   [marquee / Resume](3)
  *
  * The right column is an equal split of the tools marquee and Resume.
- * About and Portfolio are internal routes and use a router <Link>; Contact
- * is still an unresolved plain <a> and deliberately out of scope.
+ * About, Portfolio and Contact are internal routes and use a router <Link>.
  *
  * `photo` and `ticker` are passed in as nodes so the page owns what they
  * are; this component only decides where they sit.
@@ -26,7 +25,7 @@ export function BentoGrid({ onActive, photo, ticker }) {
     <main className={styles.grid}>
       <BentoCard label="About" to="/about" onActive={onActive} className={styles.span3} />
       <BentoCard label="Portfolio" to="/portfolio" onActive={onActive} className={styles.span9} />
-      <BentoCard label="Contact" href="/contact" onActive={onActive} className={styles.span6} />
+      <BentoCard label="Contact" to="/contact" onActive={onActive} className={styles.span6} />
 
       <div className={cx(styles.span3, styles.fill)}>{photo}</div>
 

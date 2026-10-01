@@ -9,6 +9,5 @@ export { default as ProjectCard } from "./ProjectCard";
 export { default as ProjectGrid } from "./ProjectGrid";
 export { default as ProjectHeader } from "./ProjectHeader";
 export { default as ProjectMeta } from "./ProjectMeta";
-export { default as ProjectTitleBlock } from "./ProjectTitleBlock";
 export { default as ResultsTable } from "./ResultsTable";
 export { default as SectionRenderer } from "./SectionRenderer";

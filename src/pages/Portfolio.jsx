@@ -1,5 +1,6 @@
 import { PageShell, SiteFooter, SiteHeader } from "../components/layout";
-import { ProjectGrid, ProjectTitleBlock } from "../components/portfolio";
+import { ProjectGrid } from "../components/portfolio";
+import { PageHeading } from "../components/ui";
 import useDocumentTitle from "../hooks/useDocumentTitle";
 import { sortedProjects } from "../data/projects";
 
@@ -17,11 +18,11 @@ export default function Portfolio() {
     <PageShell constrain>
       <SiteHeader variant="home" />
 
-      <ProjectTitleBlock>{PORTFOLIO_INTRO}</ProjectTitleBlock>
+      <PageHeading>{PORTFOLIO_INTRO}</PageHeading>
 
       <ProjectGrid projects={sortedProjects} />
 
-      <SiteFooter />
+      <SiteFooter topSpace={150} />
     </PageShell>
   );
 }
