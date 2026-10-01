@@ -1,0 +1,104 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+  min-width: 0;
+}
+
+.label {
+  font-size: var(--fs-body);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--track-label);
+  color: var(--fg);
+}
+
+.required {
+  margin-left: 2px;
+  color: var(--danger);
+}
+
+/* Shared control look. 50px tall, radius 12, filled with the field
+   token and bordered with the field-border token so an error just swaps
+   the border colour. */
+.input,
+.textarea {
+  width: 100%;
+  border: var(--hairline) solid var(--field-border);
+  border-radius: 12px;
+  background: var(--field);
+  color: var(--fg);
+  font-size: var(--fs-body);
+  letter-spacing: var(--track-label);
+  transition:
+    border-color var(--dur),
+    box-shadow var(--dur);
+}
+
+.input {
+  height: 50px;
+  padding: 0 16px;
+}
+
+.textarea {
+  min-height: 160px;
+  padding: 14px 16px;
+  resize: vertical;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--placeholder);
+}
+
+.input:focus-visible,
+.textarea:focus-visible {
+  outline: var(--focus-width) solid var(--field-focus-border);
+  outline-offset: 2px;
+  border-color: var(--field-focus-border);
+}
+
+/* Error state is driven by FormField (data-invalid on the wrapper), so a
+   control never needs to know what surrounds it. */
+.field[data-invalid="true"] .input,
+.field[data-invalid="true"] .textarea {
+  border-color: var(--danger);
+}
+
+.error {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  letter-spacing: var(--track-label);
+  color: var(--danger);
+}
+
+.button {
+  width: 100%;
+  height: 50px;
+  padding: 0 32px;
+  border: none;
+  border-radius: 12px;
+  background: var(--button);
+  color: var(--fg);
+  font-size: var(--fs-body);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--track-label);
+  cursor: pointer;
+  transition:
+    background var(--dur),
+    opacity var(--dur);
+}
+
+.button:hover {
+  background: var(--button-hover);
+}
+
+.button:focus-visible {
+  outline: var(--focus-width) solid var(--field-focus-border);
+  outline-offset: 2px;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
