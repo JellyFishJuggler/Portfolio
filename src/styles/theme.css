@@ -144,6 +144,16 @@
   --fs-metric: clamp(2.25rem, 3.4vw, 3.75rem);
   --fs-code: 15px;
 
+  /* scroll reveal text (ScrollRevealText)
+     `--reveal-min` is an opacity floor, not a colour, so one value serves
+     both themes. `--reveal-soft` is the width of the lit/unlit boundary in
+     characters: higher is a softer, wider ramp that can sit mid-word. */
+  --reveal-min: 0.16;
+  --reveal-soft: 3;
+  --fs-reveal: clamp(1.5rem, 2.1vw, 2.75rem);
+  --fs-reveal-sm: clamp(1.375rem, 5vw, 1.75rem);
+  --reveal-max: 1300px;
+
   /* tracking + optical leading trims */
   --track-label: -0.01em;
   --track-hero: -0.05em;

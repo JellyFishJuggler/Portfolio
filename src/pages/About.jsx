@@ -33,9 +33,13 @@ export default function About() {
     <PageShell constrain>
       <SiteHeader variant="home" />
 
+      {/* Full content width, above the two-column grid: the reveal intro is
+          set to a ~1300px measure, which the narrative column (7fr of 12)
+          is too narrow to give it. */}
+      <AboutHero />
+
       <main className={styles.layout}>
         <div className={styles.narrative}>
-          <AboutHero />
           <CareerTransition />
           <EarlierWork />
           <PreviousExperience />

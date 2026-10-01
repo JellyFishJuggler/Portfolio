@@ -13,31 +13,11 @@
   color: var(--fg);
 }
 
-/* Flush with the heading's left edge. The old `--about-intro-offset` was
-   introduced to clear the 10.5rem display word; now that the heading is
-   --fs-h1, an indent would read as misalignment rather than intent. */
-.intro {
-  max-width: 52ch;
-  margin: var(--sp-48) 0 0;
-  font-size: var(--fs-about-intro);
-  font-weight: var(--w-regular);
-  line-height: var(--lh-body);
-  color: var(--muted-2);
-  transition: color var(--dur-reveal) var(--ease);
-}
-
-/* Reached on scroll: lift to full white and stay there. */
-.lit {
-  color: var(--fg);
-}
+/* The introduction is rendered by ScrollRevealText, which owns its own
+   typography and per-character reveal. Nothing to style here. */
 
 @media (max-width: 900px) {
   .hero {
     padding-bottom: var(--sp-64);
-  }
-
-  .intro {
-    margin-top: var(--sp-32);
-    font-size: var(--fs-body);
   }
 }
