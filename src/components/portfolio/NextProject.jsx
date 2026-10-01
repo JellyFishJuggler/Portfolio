@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { RollingText, VisuallyHidden } from "../ui";
+import { VisuallyHidden } from "../ui";
 import styles from "./NextProject.module.css";
 
 /**
@@ -17,7 +17,7 @@ export function NextProject({ project }) {
   return (
     <nav className={styles.wrap}>
       <Link className={styles.link} to={`/portfolio/${project.slug}`}>
-        <RollingText text="Next" />
+        Next
         <VisuallyHidden>{project.title}</VisuallyHidden>
         <ArrowRight className={styles.arrow} strokeWidth={1} aria-hidden="true" />
       </Link>

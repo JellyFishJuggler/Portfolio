@@ -35,6 +35,28 @@
   backdrop-filter: blur(var(--blur));
 }
 
+/* Bento shade: a translucent white (grey on the dark page) tint over the
+   blur, with heavier grain, so the tile reads as glass rather than flat
+   paint. Hover flips the surface to near-black and lifts the text to white;
+   the blur, the transparency and the hairline survive both states.
+   Declared after `.card` / `.interactive` so it wins on order. */
+.shade {
+  background: var(--bento);
+  border-color: var(--bento-edge);
+}
+
+.shade::before {
+  opacity: var(--grain-bento);
+  mix-blend-mode: soft-light;
+}
+
+.shade:hover,
+.shade:focus-visible {
+  background: var(--bento-hover);
+  border-color: var(--bento-hover-edge);
+  color: var(--bento-fg);
+}
+
 .sm {
   border-radius: var(--radius-md);
 }

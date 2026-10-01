@@ -1,5 +1,4 @@
 import { cx } from "../../utils/cx";
-import { RollingText } from "./RollingText";
 import styles from "./ContactItem.module.css";
 
 /**
@@ -12,15 +11,14 @@ import styles from "./ContactItem.module.css";
  * @param {string} props.value
  * @param {string} props.href
  * @param {string} [props.title] - hover text, used to surface the handle.
- * @param {boolean} [props.roll=false] - roll the value on hover/focus.
  * @param {string} [props.className]
  */
-export function ContactItem({ label, value, href, title, roll = false, className }) {
+export function ContactItem({ label, value, href, title, className }) {
   return (
     <div className={cx(styles.item, className)}>
       {label && <span className={styles.label}>{label}</span>}
       <a className={styles.value} href={href} title={title}>
-        {roll ? <RollingText text={value} /> : value}
+        {value}
       </a>
     </div>
   );

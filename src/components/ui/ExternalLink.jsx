@@ -1,5 +1,4 @@
 import { ArrowUpRight } from "lucide-react";
-import { RollingText } from "./RollingText";
 import styles from "./ExternalLink.module.css";
 
 /**
@@ -8,13 +7,11 @@ import styles from "./ExternalLink.module.css";
  *
  * @param {object} props
  * @param {string} props.href
- * @param {React.ReactNode} props.children - link text; a string when
- *   `roll` is set, since it becomes the RollingText label.
+ * @param {React.ReactNode} props.children - link text.
  * @param {number} [props.size=14] - arrow size in px.
- * @param {boolean} [props.roll=false] - roll the text on hover/focus.
  * @param {string} [props.className]
  */
-export function ExternalLink({ href, children, size = 14, roll = false, className }) {
+export function ExternalLink({ href, children, size = 14, className }) {
   return (
     <a
       className={`${styles.link} ${className ?? ""}`}
@@ -22,7 +19,7 @@ export function ExternalLink({ href, children, size = 14, roll = false, classNam
       target="_blank"
       rel="noreferrer noopener"
     >
-      {roll ? <RollingText text={String(children)} /> : children}
+      {children}
       <ArrowUpRight className={styles.arrow} size={size} strokeWidth={1.5} aria-hidden="true" />
     </a>
   );

@@ -46,6 +46,17 @@
   --grain-card: 0.05;
   --blur: 16px;
 
+  /* bento tiles (home): a translucent white tint over the blur, inverting to
+     near-black on hover. The blur and the transparency survive both states,
+     which is what keeps the tile glassmorphic rather than flat. */
+  --bento: rgba(255, 255, 255, 0.055);
+  --bento-hover: rgba(0, 0, 0, 0.85);
+  --bento-edge: rgba(255, 255, 255, 0.1);
+  --bento-hover-edge: rgba(255, 255, 255, 0.16);
+  --bento-fg: rgba(255, 255, 255, 0.92);
+  --bento-arrow: rgba(255, 255, 255, 0.85);
+  --grain-bento: 0.1;
+
   /* geometry */
   --pad: 16px;
   --gap: 16px;
@@ -225,6 +236,16 @@ html.light {
   --arrow: rgba(17, 17, 17, 0.8);
   --grain-page: 0.03;
   --grain-card: 0.04;
+
+  /* bento tiles (home), light theme: white glass reads as a frosted panel
+     against the page, where a white tint on a near-white page would not */
+  --bento: rgba(255, 255, 255, 0.55);
+  --bento-hover: rgba(12, 12, 12, 0.9);
+  --bento-edge: rgba(0, 0, 0, 0.09);
+  --bento-hover-edge: rgba(0, 0, 0, 0.2);
+  --bento-fg: rgba(255, 255, 255, 0.92);
+  --bento-arrow: rgba(255, 255, 255, 0.85);
+  --grain-bento: 0.09;
   --muted-2: rgba(17, 17, 17, 0.55);
   --body: rgba(17, 17, 17, 0.85);
   --footer-rule: rgba(0, 0, 0, 0.12);

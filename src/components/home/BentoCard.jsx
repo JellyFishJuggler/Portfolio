@@ -44,6 +44,7 @@ export function BentoCard({ label, href, to, target, onActive, className, childr
     className: cx(styles.card, className),
     interactive: true,
     frosted: true,
+    shade: true,
     ...handlers,
   };
 

@@ -19,9 +19,11 @@ export default function Portfolio() {
     <PageShell constrain>
       <SiteHeader variant="home" />
 
-      <PageHeading>{PORTFOLIO_INTRO}</PageHeading>
+      <Reveal group={0}>
+        <PageHeading>{PORTFOLIO_INTRO}</PageHeading>
+      </Reveal>
 
-      <Reveal>
+      <Reveal group={1}>
         <ProjectGrid projects={sortedProjects} />
       </Reveal>
 

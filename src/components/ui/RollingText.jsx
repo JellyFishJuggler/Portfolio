@@ -18,8 +18,8 @@ import styles from "./RollingText.module.css";
  *   roll from the nearest interactive ancestor (a, button, [data-roll-trigger]),
  *   falling back to the text itself; "self" only from the text.
  * @param {number} [props.stagger=0.015] - seconds per character; capped so
- *   long strings finish the roll in ~0.7s.
- * @param {number} [props.duration=0.5] - roll duration for one character.
+ *   long strings finish the roll in ~0.4s.
+ * @param {number} [props.duration=0.25] - roll duration for one character.
  * @param {number[]} [props.ease=[0.76, 0, 0.24, 1]] - cubic-bezier easing.
  * @param {string} [props.className]
  */
@@ -27,7 +27,7 @@ export function RollingText({
   text,
   trigger = "parent",
   stagger = 0.015,
-  duration = 0.5,
+  duration = 0.25,
   ease = [0.76, 0, 0.24, 1],
   className,
 }) {
@@ -40,9 +40,9 @@ export function RollingText({
     [text],
   );
   /* Cap the total ripple so long labels (some 28px footer values run past
-     twenty characters) finish within ~0.7s rather than crawling. */
+     twenty characters) finish within ~0.4s rather than crawling. */
   const step = useMemo(
-    () => Math.min(stagger, 0.3 / Math.max(list.length, 1)),
+    () => Math.min(stagger, 0.15 / Math.max(list.length, 1)),
     [stagger, list.length],
   );
 

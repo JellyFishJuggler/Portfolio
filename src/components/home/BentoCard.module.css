@@ -15,8 +15,11 @@
   transition: transform var(--dur) var(--ease);
 }
 
+/* The tile turns black on hover, so the arrow follows the text to white
+   alongside the existing nudge. */
 .card:hover .arrow,
 .card:focus-visible .arrow {
+  color: var(--bento-arrow);
   transform: translate(var(--nudge), calc(-1 * var(--nudge)));
 }
 
@@ -26,7 +29,7 @@
     bottom: var(--card-inset-sm);
   }
 
-  .label {
+.label {
     left: var(--card-inset-sm);
   }
 

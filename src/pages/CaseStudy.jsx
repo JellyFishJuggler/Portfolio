@@ -33,11 +33,14 @@ function CaseStudyView({ slug }) {
     <PageShell constrain>
       <SiteHeader variant="back" />
 
-      <Reveal>
+      {/* Groups 0-3 are the masthead block; the narrative sections continue
+          the cascade, then Next. Deeper blocks (rows, media) keep their own
+          scroll reveals inside SectionRenderer. */}
+      <Reveal group={0}>
         <ProjectHeader project={project} />
       </Reveal>
 
-      <Reveal>
+      <Reveal group={1}>
         {project.hero ? (
           <MediaFigure src={project.hero} alt={`${project.title} — ${project.category}`} eager />
         ) : (
@@ -45,28 +48,30 @@ function CaseStudyView({ slug }) {
         )}
       </Reveal>
 
-      <Reveal>
+      <Reveal group={2}>
         <ProjectMeta meta={project.meta} stack={project.stack} />
       </Reveal>
 
       {/* Headline results sit in the masthead. A `metrics` section type also
           exists for metrics that belong partway through the narrative; the
           seed data uses only this one. */}
-      <Reveal>
+      <Reveal group={3}>
         <MetricTiles items={project.metrics} />
       </Reveal>
 
       {project.sections.length === 0 ? (
-        <Reveal>
+        <Reveal group={4}>
           <ComingSoon project={project} />
         </Reveal>
       ) : (
         project.sections.map((section, i) => (
-          <SectionRenderer key={section.type + i} section={section} />
+          <Reveal key={section.type + i} group={4 + i}>
+            <SectionRenderer section={section} />
+          </Reveal>
         ))
       )}
 
-      <Reveal>
+      <Reveal group={4 + project.sections.length}>
         <NextProject project={next} />
       </Reveal>
 

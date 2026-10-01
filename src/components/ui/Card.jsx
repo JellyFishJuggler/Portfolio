@@ -10,6 +10,8 @@ import styles from "./Card.module.css";
  * @param {React.ElementType} [props.as="div"] - element or component to render.
  * @param {boolean} [props.interactive=false] - hover/focus lift.
  * @param {boolean} [props.frosted=false] - backdrop blur, for overlap layering.
+ * @param {boolean} [props.shade=false] - glass tint variant: translucent
+ *   white/grey over the blur, inverting to near-black on hover (bento tiles).
  * @param {"lg"|"md"} [props.size="lg"] - radius, lg = --radius, md = --radius-md.
  * @param {string} [props.className]
  * @param {React.ReactNode} props.children
@@ -18,6 +20,7 @@ export function Card({
   as: Tag = "div",
   interactive = false,
   frosted = false,
+  shade = false,
   size = "lg",
   className,
   children,
@@ -29,6 +32,7 @@ export function Card({
         styles.card,
         interactive && styles.interactive,
         frosted && styles.frosted,
+        shade && styles.shade,
         size === "md" && styles.sm,
         className,
       )}

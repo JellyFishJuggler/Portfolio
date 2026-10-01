@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Card, MediaFigure, RollingText } from "../ui";
+import { Card, MediaFigure } from "../ui";
 import { MarkTile } from "./MarkTile";
 import { cx } from "../../utils/cx";
 import styles from "./ProjectCard.module.css";
@@ -37,7 +37,7 @@ export function ProjectCard({ project, eager = false, className }) {
         )}
       </div>
       <div className={styles.caption}>
-        <RollingText text={project.title} className={styles.title} />
+        <span className={styles.title}>{project.title}</span>
         <span className={styles.category}>{project.category}</span>
       </div>
     </Card>

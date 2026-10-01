@@ -45,10 +45,12 @@ export function SiteHeader({ variant = "name", backLabel = "Back", fallbackTo = 
       />
     );
   } else {
+    /* The roll is reserved for the nav labels the home grid also uses
+       ("Home"); the back link reads as chrome, so it stays plain. */
     left = (
       <Link className={styles.back} to="/" onClick={variant === "back" ? goBack : undefined}>
         <ArrowLeft size={16} strokeWidth={1.5} aria-hidden="true" />
-        <RollingText text={variant === "back" ? backLabel : "Home"} />
+        {variant === "back" ? backLabel : <RollingText text="Home" />}
       </Link>
     );
   }
