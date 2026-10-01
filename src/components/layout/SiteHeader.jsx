@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import useClock from "../../hooks/useClock";
 import useTheme from "../../hooks/useTheme";
 import { site } from "../../data/site";
+import { RollingText } from "../ui";
 import { cx } from "../../utils/cx";
 import styles from "./SiteHeader.module.css";
 
@@ -34,12 +35,20 @@ export function SiteHeader({ variant = "name", backLabel = "Back", fallbackTo = 
 
   let left;
   if (variant === "name") {
-    left = <span className={styles.name}>{site.name}</span>;
+    /* The name is not a link, so it rolls on its own hover only, and is
+       left pointing where it always pointed (nowhere). */
+    left = (
+      <RollingText
+        text={site.name}
+        trigger="self"
+        className={styles.name}
+      />
+    );
   } else {
     left = (
       <Link className={styles.back} to="/" onClick={variant === "back" ? goBack : undefined}>
         <ArrowLeft size={16} strokeWidth={1.5} aria-hidden="true" />
-        {variant === "back" ? backLabel : "Home"}
+        <RollingText text={variant === "back" ? backLabel : "Home"} />
       </Link>
     );
   }

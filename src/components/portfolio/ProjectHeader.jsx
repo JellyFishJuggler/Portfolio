@@ -27,7 +27,7 @@ export function ProjectHeader({ project }) {
       {links.length > 0 && (
         <div className={styles.links}>
           {links.map(([key, label]) => (
-            <ExternalLink key={key} href={project.links[key]} size={14}>
+            <ExternalLink key={key} href={project.links[key]} size={14} roll>
               {label}
             </ExternalLink>
           ))}

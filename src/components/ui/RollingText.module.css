@@ -1,0 +1,24 @@
+.root {
+  /* The root is the text's own box: two layers stack in the same grid
+     cell so width/height never change and there is zero layout shift. */
+  display: inline-grid;
+  /* clip (hidden in older engines) keeps the sliding copy inside the
+     text frame; the padding/margin pair gives descenders/ascenders room
+     (j, p, g, y) without affecting surrounding layout. */
+  overflow: hidden;
+  overflow: clip;
+  padding-block: 0.1em;
+  margin-block: -0.1em;
+  /* Longer-than-one-word labels never wrap mid-roll. */
+  white-space: pre;
+}
+
+.layer {
+  grid-area: 1 / 1;
+}
+
+.char {
+  display: inline-block;
+  white-space: pre;
+  will-change: transform;
+}

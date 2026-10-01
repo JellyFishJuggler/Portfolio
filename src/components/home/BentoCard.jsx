@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import { Card } from "../ui";
+import { Card, RollingText } from "../ui";
 import { cx } from "../../utils/cx";
 import styles from "./BentoCard.module.css";
 
@@ -35,7 +35,7 @@ export function BentoCard({ label, href, to, target, onActive, className, childr
   const inner =
     children ?? (
       <>
-        <span className={styles.label}>{label}</span>
+        <RollingText text={label} className={styles.label} />
         <ArrowUpRight className={styles.arrow} size={16} strokeWidth={1.5} aria-hidden="true" />
       </>
     );

@@ -22,10 +22,10 @@ export function SiteFooter({ topSpace }) {
     >
       <hr className={styles.rule} />
       <div className={styles.grid}>
-        <ContactItem label="Email" value={email} href={`mailto:${email}`} />
-        <ContactItem label="Phone" value={phone} href={phoneHref} />
-        <ContactItem label="GitHub" value={github.label} href={github.href} title={github.title} />
-        <ContactItem value={linkedin.label} href={linkedin.href} title={linkedin.title} className={styles.linkedin} />
+        <ContactItem label="Email" value={email} href={`mailto:${email}`} roll />
+        <ContactItem label="Phone" value={phone} href={phoneHref} roll />
+        <ContactItem label="GitHub" value={github.label} href={github.href} title={github.title} roll />
+        <ContactItem value={linkedin.label} href={linkedin.href} title={linkedin.title} className={styles.linkedin} roll />
         <ContactItem value={behance.label} href={behance.href} title={behance.title} className={styles.behance} />
         <ContactItem value={leetcode.label} href={leetcode.href} title={leetcode.title} className={styles.leetcode} />
       </div>

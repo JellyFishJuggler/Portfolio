@@ -5,6 +5,7 @@ export { default as Marquee } from "./Marquee";
 export { default as MediaFigure } from "./MediaFigure";
 export { default as PageHeading } from "./PageHeading";
 export { default as Reveal } from "./Reveal";
+export { default as RollingText } from "./RollingText";
 export { default as ScrollRevealText } from "./ScrollRevealText";
 export { default as SectionRow } from "./SectionRow";
 export { default as Tile } from "./Tile";
