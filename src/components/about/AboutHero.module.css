@@ -6,8 +6,10 @@
   margin: 0;
   font-size: var(--fs-about-title);
   font-weight: var(--w-semibold);
-  letter-spacing: var(--track-hero);
-  line-height: 0.9;
+  /* Matches ProjectTitleBlock: --track-hero and line-height 0.9 were tuned
+     for a 10.5rem display word and look cramped at --fs-h1. */
+  letter-spacing: var(--track-title);
+  line-height: 1.12;
   color: var(--fg);
 }
 

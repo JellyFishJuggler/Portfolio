@@ -168,8 +168,10 @@
   --about-narrative-col: minmax(0, 7fr);
   --about-portrait-col: minmax(0, 5fr);
   --about-col-gap: var(--sp-64);
-  /* Oversized editorial display size for the About heading. */
-  --fs-about-title: clamp(3.25rem, 11vw, 10.5rem);
+  /* The About heading deliberately reuses --fs-h1 so it matches the page
+     header on /portfolio exactly. Set a separate token here if the About
+     hero should ever diverge again. */
+  --fs-about-title: var(--fs-h1);
   /* Hero introduction. Large enough to read as editorial body copy against
      the heading, well below the marquee's display size. */
   --fs-about-intro: clamp(1.25rem, 1.9vw, 1.75rem);
