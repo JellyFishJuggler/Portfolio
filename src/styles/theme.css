@@ -180,8 +180,6 @@
   --about-portrait-max-h: calc(100vh - var(--header-h) - var(--sp-48));
   /* Intentional empty space to the left of the portrait. Not a bug. */
   --about-portrait-inset: clamp(0px, 6vw, 90px);
-  /* How far the intro is offset to the right of the About heading. */
-  --about-intro-offset: clamp(0px, 7vw, 110px);
   --about-section-gap: var(--sp-150);
 
   /* theme transition */

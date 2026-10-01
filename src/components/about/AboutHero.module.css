@@ -13,16 +13,22 @@
   color: var(--fg);
 }
 
-/* Offset to the right of the heading. Collapses on small screens, where
-   there is no room for the offset and it would only read as broken
-   alignment rather than intent. */
+/* Flush with the heading's left edge. The old `--about-intro-offset` was
+   introduced to clear the 10.5rem display word; now that the heading is
+   --fs-h1, an indent would read as misalignment rather than intent. */
 .intro {
   max-width: 52ch;
-  margin: var(--sp-48) 0 0 var(--about-intro-offset);
+  margin: var(--sp-48) 0 0;
   font-size: var(--fs-about-intro);
   font-weight: var(--w-regular);
   line-height: var(--lh-body);
-  color: var(--body);
+  color: var(--muted-2);
+  transition: color var(--dur-reveal) var(--ease);
+}
+
+/* Reached on scroll: lift to full white and stay there. */
+.lit {
+  color: var(--fg);
 }
 
 @media (max-width: 900px) {

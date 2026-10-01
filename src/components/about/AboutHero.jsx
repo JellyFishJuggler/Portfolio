@@ -1,22 +1,32 @@
 import { Reveal } from "../ui";
+import useInView from "../../hooks/useInView";
 import { headings, intro } from "../../data/about";
+import { cx } from "../../utils/cx";
 import styles from "./AboutHero.module.css";
 
 /**
- * The oversized `About` heading plus the current-direction introduction.
+ * The `About` heading plus the current-direction introduction.
  *
- * Editorial and left-aligned: the heading sits hard against the left edge
- * and the introduction is pushed to its right by `--about-intro-offset`, so
- * the two never stack into a conventional centred hero block. The offset
- * collapses to zero below the desktop breakpoint.
+ * Left-aligned and flush: the introduction sits directly under the heading
+ * on the same left edge, at a 52ch measure so it stays readable while
+ * filling only the narrative column.
+ *
+ * The introduction starts grey and lifts to white as it is scrolled into
+ * view, and stays white — the same one-way cue used by the sections below.
  */
 export function AboutHero() {
+  /* requireScroll: this intro is above the fold, so the observer would
+     otherwise fire on the first frame and the cue would never be seen. */
+  const [ref, inView] = useInView({ requireScroll: true });
+
   return (
     <section className={styles.hero}>
       <h1 className={styles.title}>{headings.title}</h1>
 
       <Reveal>
-        <p className={styles.intro}>{intro}</p>
+        <p ref={ref} className={cx(styles.intro, inView && styles.lit)}>
+          {intro}
+        </p>
       </Reveal>
     </section>
   );
