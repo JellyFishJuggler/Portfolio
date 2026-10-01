@@ -18,7 +18,7 @@ export const INTRO = {
   /* the loading bar */
   barDelay: 0.4, // after the wordmark starts rising
   barFade: 0.3, // in, and out again
-  barHold: 0.25, // how long a full bar is held before it fades
+  barHold: 0.15, // how long a full bar is held before it fades
   barLead: 0.1, // the bar starts fading this long before the flight
   barGap: 32, // clearance between the wordmark and the bar
 
@@ -31,7 +31,7 @@ export const INTRO = {
 
   /* progress: a floor on how long the intro lasts, not a claim about work */
   ceiling: 0.85, // where the bar creeps to while anything is still loading
-  creep: 1.4, // time to reach that ceiling
+  creep: 1, // time to reach that ceiling; also the floor on bar visibility
   taskCap: 4, // stop waiting for real tasks after this and finish anyway
   settle: 0.3, // the last stretch from wherever progress is up to 100
   skipFill: 0.18, // how fast a skip fills the bar
