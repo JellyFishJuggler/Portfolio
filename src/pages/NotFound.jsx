@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
 import { PageShell, SiteFooter, SiteHeader } from "../components/layout";
 import { Card } from "../components/ui";
-import useDocumentTitle from "../hooks/useDocumentTitle";
+import useDocumentMeta from "../hooks/useDocumentMeta";
 import styles from "./NotFound.module.css";
 
 /**
  * Catch-all route. Reached by any URL the router does not match.
  */
 export default function NotFound() {
-  useDocumentTitle("Not found — Srijan Gupta");
+  useDocumentMeta({
+    title: "Not found — Srijan Gupta",
+    description: "This page doesn't exist.",
+  });
 
   return (
     <PageShell constrain>

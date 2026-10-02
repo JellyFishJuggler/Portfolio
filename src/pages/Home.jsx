@@ -2,9 +2,10 @@ import { useRef, useState } from "react";
 import { PageShell, SiteHeader } from "../components/layout";
 import { BentoGrid, HeroText, IntroBar, PhotoCard, StackTicker } from "../components/home";
 import { VisuallyHidden } from "../components/ui";
-import useDocumentTitle from "../hooks/useDocumentTitle";
+import useDocumentMeta from "../hooks/useDocumentMeta";
 import useIntro from "../hooks/useIntro";
 import { site } from "../data/site";
+import { routeMeta } from "../data/meta";
 
 /**
  * Home. A fixed-viewport bento grid with an oversized wordmark behind it;
@@ -15,7 +16,7 @@ import { site } from "../data/site";
  * phase it reports rides on the shell as `data-intro` for the reveal styles.
  */
 export default function Home() {
-  useDocumentTitle("Srijan Gupta — AI/ML Engineer");
+  useDocumentMeta(routeMeta["/"]);
   const [active, setActive] = useState(null);
   const heroRef = useRef(null);
   const barRef = useRef(null);

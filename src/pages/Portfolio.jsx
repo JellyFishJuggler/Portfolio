@@ -1,8 +1,9 @@
 import { PageShell, SiteFooter, SiteHeader } from "../components/layout";
 import { ProjectGrid } from "../components/portfolio";
 import { PageHeading, Reveal } from "../components/ui";
-import { useDocumentTitle, useSmoothScroll } from "../hooks";
+import { useDocumentMeta, useSmoothScroll } from "../hooks";
 import { sortedProjects } from "../data/projects";
+import { routeMeta } from "../data/meta";
 
 export const PORTFOLIO_INTRO =
   "Dive into a few projects that represent my most fulfilling AI and machine learning work";
@@ -12,7 +13,7 @@ export const PORTFOLIO_INTRO =
  * lives in the components.
  */
 export default function Portfolio() {
-  useDocumentTitle("Portfolio — Srijan Gupta");
+  useDocumentMeta(routeMeta["/portfolio"]);
   useSmoothScroll();
 
   return (

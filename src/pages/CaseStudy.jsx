@@ -10,8 +10,9 @@ import {
   SectionRenderer,
 } from "../components/portfolio";
 import { MediaFigure, Reveal } from "../components/ui";
-import { useDocumentTitle, useSmoothScroll } from "../hooks";
+import { useDocumentMeta, useSmoothScroll } from "../hooks";
 import { getNextProject, getProject } from "../data/projects";
+import { projectMeta } from "../data/meta";
 
 /**
  * Case study for one project. Reads the registry by slug; an unknown slug
@@ -24,7 +25,7 @@ function CaseStudyView({ slug }) {
   const project = getProject(slug);
   const next = getNextProject(slug);
 
-  useDocumentTitle(project ? `${project.title} — Srijan Gupta` : "Portfolio — Srijan Gupta");
+  useDocumentMeta(projectMeta(project));
   useSmoothScroll();
 
   if (!project) return <Navigate to="/portfolio" replace />;

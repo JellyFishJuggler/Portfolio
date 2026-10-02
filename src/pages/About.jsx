@@ -8,8 +8,9 @@ import {
   PreviousExperience,
 } from "../components/about";
 import { Reveal } from "../components/ui";
-import { useDocumentTitle, useSmoothScroll } from "../hooks";
+import { useDocumentMeta, useSmoothScroll } from "../hooks";
 import { marquee } from "../data/about";
+import { routeMeta } from "../data/meta";
 import styles from "./About.module.css";
 
 /**
@@ -28,7 +29,7 @@ import styles from "./About.module.css";
  * is unrelated and left untouched.
  */
 export default function About() {
-  useDocumentTitle("About — Srijan Gupta");
+  useDocumentMeta(routeMeta["/about"]);
   useSmoothScroll();
 
   return (

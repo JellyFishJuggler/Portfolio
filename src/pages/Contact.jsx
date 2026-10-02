@@ -2,7 +2,8 @@ import { ContactDetails, ContactForm } from "../components/contact";
 import { PageShell, SiteFooter, SiteHeader } from "../components/layout";
 import { Card, PageHeading, Reveal } from "../components/ui";
 import { contact } from "../data/contact";
-import { useDocumentTitle, useSmoothScroll } from "../hooks";
+import { routeMeta } from "../data/meta";
+import { useDocumentMeta, useSmoothScroll } from "../hooks";
 import styles from "./Contact.module.css";
 
 /**
@@ -11,7 +12,7 @@ import styles from "./Contact.module.css";
  * falls back to the visitor's mail client otherwise.
  */
 export default function Contact() {
-  useDocumentTitle("Contact — Srijan Gupta");
+  useDocumentMeta(routeMeta["/contact"]);
   useSmoothScroll();
 
   return (
