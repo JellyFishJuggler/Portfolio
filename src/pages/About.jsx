@@ -24,9 +24,6 @@ import styles from "./About.module.css";
  *
  * Order of content is deliberate: current AI/ML direction first, historical
  * design work below it.
- *
- * Note this is a separate page from the legacy static tabs/about.html, which
- * is unrelated and left untouched.
  */
 export default function About() {
   useDocumentMeta(routeMeta["/about"]);

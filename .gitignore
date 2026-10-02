@@ -41,6 +41,3 @@ pnpm-debug.log*
 # and the project registry. Committed copies would only ever go stale.
 public/robots.txt
 public/sitemap.xml
-
-# Optional: Archive folder (agar aap purani static html files tracking mein nahi chahte)
-archive/
