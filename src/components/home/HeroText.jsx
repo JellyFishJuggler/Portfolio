@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import styles from "./HeroText.module.css";
 
 /**
@@ -21,7 +21,7 @@ export function HeroText({ text, heroRef }) {
   return (
     <div className={styles.hero} ref={heroRef} aria-hidden="true">
       <AnimatePresence initial={false}>
-        <motion.div
+        <m.div
           key={text}
           initial={reduce ? false : { y: "100%" }}
           animate={{ y: 0 }}
@@ -29,7 +29,7 @@ export function HeroText({ text, heroRef }) {
           transition={{ duration: reduce ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}
         >
           {text}
-        </motion.div>
+        </m.div>
       </AnimatePresence>
     </div>
   );

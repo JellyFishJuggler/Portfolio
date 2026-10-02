@@ -22,7 +22,11 @@ export function ResultsTable({ caption, columns = [], rows = [] }) {
             <thead>
               <tr>
                 {columns.map((c) => (
-                  <th key={c} scope="col">
+                  /* A confusion matrix leaves the top-left cell blank by
+                     convention. An empty header is announced as an empty
+                     column, so it is hidden instead: the row headers below
+                     already say what the axis is. */
+                  <th key={c || "corner"} scope="col" {...(c ? null : { "aria-hidden": "true" })}>
                     {c}
                   </th>
                 ))}

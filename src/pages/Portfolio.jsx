@@ -1,31 +1,32 @@
 import { PageShell, SiteFooter, SiteHeader } from "../components/layout";
 import { ProjectGrid } from "../components/portfolio";
 import { PageHeading, Reveal } from "../components/ui";
-import { useDocumentTitle, useSmoothScroll } from "../hooks";
+import { useDocumentMeta, useSmoothScroll } from "../hooks";
 import { sortedProjects } from "../data/projects";
-
-export const PORTFOLIO_INTRO =
-  "Dive into a few projects that represent my most fulfilling AI and machine learning work";
+import { portfolioEmpty, portfolioIntro } from "../data/portfolio";
+import { routeMeta } from "../data/meta";
 
 /**
  * Project listing. Reads the registry and hands it to the grid; all layout
  * lives in the components.
  */
 export default function Portfolio() {
-  useDocumentTitle("Portfolio — Srijan Gupta");
+  useDocumentMeta(routeMeta["/portfolio"]);
   useSmoothScroll();
 
   return (
     <PageShell constrain>
       <SiteHeader variant="home" />
 
-      <Reveal group={0}>
-        <PageHeading>{PORTFOLIO_INTRO}</PageHeading>
-      </Reveal>
+      <main id="main" tabIndex={-1}>
+        <Reveal group={0}>
+          <PageHeading>{portfolioIntro}</PageHeading>
+        </Reveal>
 
-      <Reveal group={1}>
-        <ProjectGrid projects={sortedProjects} />
-      </Reveal>
+        <Reveal group={1}>
+          <ProjectGrid projects={sortedProjects} emptyMessage={portfolioEmpty} />
+        </Reveal>
+      </main>
 
       <SiteFooter topSpace={150} />
     </PageShell>

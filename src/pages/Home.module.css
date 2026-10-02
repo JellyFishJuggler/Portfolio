@@ -1,0 +1,10 @@
+/* The page content between the fixed header and the bottom edge: the
+   visually hidden h1, the wordmark, and the bento grid. It takes over the
+   flex column that PageShell.compact sets up, so the grid inside it still
+   fills the remaining height exactly as it did as a direct child. */
+.main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}

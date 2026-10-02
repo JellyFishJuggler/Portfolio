@@ -27,7 +27,13 @@
  * and change ONLY `src` below — the layout does not need to change.
  */
 export const portrait = {
-  src: "/img/pfp.png",
+  /**
+   * WebP, generated from pfp.png at the same pixel size. The PNG stays on disk
+   * as the onError fallback, so a bad encode degrades to the original instead
+   * of a broken-image glyph.
+   */
+  src: "/img/pfp.webp",
+  fallbackSrc: "/img/pfp.png",
   alt: "Srijan Gupta",
   /**
    * Fixed by the asset, not by layout: the box the portrait is allowed to

@@ -2,7 +2,8 @@ import { ContactDetails, ContactForm } from "../components/contact";
 import { PageShell, SiteFooter, SiteHeader } from "../components/layout";
 import { Card, PageHeading, Reveal } from "../components/ui";
 import { contact } from "../data/contact";
-import { useDocumentTitle, useSmoothScroll } from "../hooks";
+import { routeMeta } from "../data/meta";
+import { useDocumentMeta, useSmoothScroll } from "../hooks";
 import styles from "./Contact.module.css";
 
 /**
@@ -11,23 +12,25 @@ import styles from "./Contact.module.css";
  * falls back to the visitor's mail client otherwise.
  */
 export default function Contact() {
-  useDocumentTitle("Contact — Srijan Gupta");
+  useDocumentMeta(routeMeta["/contact"]);
   useSmoothScroll();
 
   return (
     <PageShell constrain>
       <SiteHeader variant="home" />
 
-      <Reveal group={0}>
-        <PageHeading>{contact.heading}</PageHeading>
-      </Reveal>
+      <main id="main" tabIndex={-1}>
+        <Reveal group={0}>
+          <PageHeading>{contact.heading}</PageHeading>
+        </Reveal>
 
-      <Reveal group={1} className={styles.grid}>
-        <ContactDetails />
-        <Card className={styles.card}>
-          <ContactForm />
-        </Card>
-      </Reveal>
+        <Reveal group={1} className={styles.grid}>
+          <ContactDetails />
+          <Card className={styles.card}>
+            <ContactForm />
+          </Card>
+        </Reveal>
+      </main>
 
       <SiteFooter topSpace={81} />
     </PageShell>

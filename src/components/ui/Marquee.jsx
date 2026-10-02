@@ -13,6 +13,8 @@ import styles from "./Marquee.module.css";
  * @param {boolean} [props.bleed=false] - wider edge fade, for full-bleed headings.
  * @param {boolean} [props.pauseOnHover=false]
  * @param {boolean} [props.decorative=false] - aria-hidden the whole thing.
+ * @param {string} [props.label] - accessible name for the whole strip. Needs
+ *   a role to sit on, so it is paired with role="group".
  * @param {string} [props.className] - extra classes for the viewport element.
  * @param {string} [props.trackClassName] - extra classes for the scrolling track.
  * @param {string} [props.groupClassName] - extra classes for one copy's wrapper.
@@ -23,6 +25,7 @@ export function Marquee({
   bleed = false,
   pauseOnHover = false,
   decorative = false,
+  label,
   className,
   trackClassName,
   groupClassName,
@@ -34,6 +37,7 @@ export function Marquee({
       <div
         className={cx(styles.marquee, bleed && styles.bleed, styles.static, className)}
         {...(decorative ? { "aria-hidden": "true" } : {})}
+        {...(label ? { role: "group", "aria-label": label } : {})}
       >
         <div className={cx(styles.group, groupClassName)}>{children}</div>
       </div>
@@ -44,6 +48,7 @@ export function Marquee({
     <div
       className={cx(styles.marquee, bleed && styles.bleed, pauseOnHover && styles.pause, className)}
       {...(decorative ? { "aria-hidden": "true" } : {})}
+      {...(label ? { role: "group", "aria-label": label } : {})}
     >
       <div
         className={cx(styles.track, trackClassName)}

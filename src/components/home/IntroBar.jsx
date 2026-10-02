@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { motion, useMotionValueEvent } from "framer-motion";
+import { m, useMotionValueEvent } from "framer-motion";
 import styles from "./IntroBar.module.css";
 
 /* Screen readers don't need 60 updates a second, and neither does React:
@@ -38,7 +38,7 @@ export function IntroBar({ progress, barRef, top }) {
       aria-valuemax={100}
       aria-valuenow={value}
     >
-      <motion.div className={styles.fill} style={{ scaleX: progress, originX: 0 }} />
+      <m.div className={styles.fill} style={{ scaleX: progress, originX: 0 }} />
     </div>
   );
 }

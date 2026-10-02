@@ -1,3 +1,6 @@
+/* Mirrors pages/NotFound.module.css so the two "something is wrong" pages read
+   as one pattern. Type and colour come from the shared components and tokens;
+   only spacing and the button reset are local. */
 .card {
   margin-top: var(--sp-48);
   padding: var(--sp-64) var(--sp-48);
@@ -10,8 +13,6 @@
   letter-spacing: var(--track-tight);
 }
 
-/* PageHeading owns the type; inside the card its own top margin would double
-   up with the card's padding, so only the spacing is overridden here. */
 .heading {
   margin: 0 0 var(--sp-24);
 }
@@ -23,10 +24,27 @@
   max-width: var(--measure);
 }
 
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-24);
+  align-items: baseline;
+}
+
 .link {
   font-size: var(--fs-body);
   color: var(--fg);
   text-underline-offset: var(--underline-offset);
+}
+
+/* The second action is a <button> so it can reload without a route change;
+   these four resets make it read as the same underlined link as the first. */
+button.link {
+  font: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
 }
 
 @media (max-width: 900px) {

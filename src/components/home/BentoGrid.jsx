@@ -13,7 +13,8 @@ import styles from "./BentoGrid.module.css";
  * About, Portfolio and Contact are internal routes and use a router <Link>.
  *
  * `photo` and `ticker` are passed in as nodes so the page owns what they
- * are; this component only decides where they sit.
+ * are; this component only decides where they sit. The grid is a plain div:
+ * Home owns the single <main> that wraps the wordmark and this grid.
  *
  * @param {object} props
  * @param {(label: string|null) => void} props.onActive
@@ -24,7 +25,7 @@ import styles from "./BentoGrid.module.css";
  */
 export function BentoGrid({ onActive, photo, ticker, inert = false }) {
   return (
-    <main className={styles.grid} inert={inert}>
+    <div className={styles.grid} inert={inert}>
       <BentoCard label="About" to="/about" onActive={onActive} className={styles.span3} />
       <BentoCard label="Portfolio" to="/portfolio" onActive={onActive} className={styles.span9} />
       <BentoCard label="Contact" to="/contact" onActive={onActive} className={styles.span6} />
@@ -40,7 +41,7 @@ export function BentoGrid({ onActive, photo, ticker, inert = false }) {
           onActive={onActive}
         />
       </div>
-    </main>
+    </div>
   );
 }
 

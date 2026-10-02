@@ -337,8 +337,75 @@ export const allProjects = projects.map((p) => ({
   ...p,
 }));
 
-/** Sorted by explicit `order`, then by declaration order for the rest. */
-export const sortedProjects = allProjects
+/**
+ * A project is safe to ship only once its copy is finished. Draft entries
+ * carry a literal "TODO" in the field that still needs writing, which is
+ * cheap to spot in review and impossible to miss in a search, so it doubles
+ * as the flag: anything matching is held back from the public listing, from
+ * the next-project link and from the sitemap, but stays visible in dev.
+ */
+const TODO_PATTERN = /\bTODO\b/;
+
+/**
+ * Every string in a project that still carries a TODO marker, as
+ * `"section[3].rows[0].body"`. Paths are dotted so a warning points at the
+ * exact field to finish.
+ *
+ * @param {object} project
+ * @returns {string[]} dotted paths, empty when the project is clean.
+ */
+export function todoFields(project) {
+  const hits = [];
+
+  const walk = (value, path) => {
+    if (typeof value === "string") {
+      if (TODO_PATTERN.test(value)) hits.push(path);
+      return;
+    }
+    if (Array.isArray(value)) {
+      value.forEach((item, i) => walk(item, `${path}[${i}]`));
+      return;
+    }
+    if (value && typeof value === "object") {
+      Object.entries(value).forEach(([key, child]) => walk(child, `${path}.${key}`));
+    }
+  };
+
+  walk(project, "");
+  /* The marker in the `slug` itself would break routing rather than copy, so
+     it is reported but not treated as a publish blocker. */
+  return hits.filter((path) => !path.startsWith(".slug"));
+}
+
+/**
+ * @param {object} project
+ * @returns {boolean} whether `project` is finished enough to show publicly.
+ */
+export function isPublishable(project) {
+  return todoFields(project).length === 0;
+}
+
+/**
+ * The projects the app is allowed to show. In a production build anything
+ * still holding a TODO is filtered out; in dev every project stays visible so
+ * work in progress is easy to click through.
+ *
+ * @param {object} [options]
+ * @param {boolean} [options.prod] - override the environment check. Build
+ *   scripts pass this explicitly since they run outside Vite.
+ * @returns {object[]}
+ */
+export function publishedProjects({ prod = import.meta.env?.PROD ?? false } = {}) {
+  return prod ? allProjects.filter(isPublishable) : allProjects;
+}
+
+/**
+ * The listing, in display order: publishable only, sorted by explicit
+ * `order` and then by declaration order for the rest. This is what the grid
+ * and the next-project link read, so a draft project is invisible in both
+ * without either consumer needing to know about the filter.
+ */
+export const sortedProjects = publishedProjects()
   .map((project, index) => ({ project, index }))
   .sort(
     (a, b) =>
@@ -347,15 +414,29 @@ export const sortedProjects = allProjects
   )
   .map(({ project }) => project);
 
-/** @returns {object|undefined} the project for `slug`. */
+/**
+ * A project for a URL, or undefined if there is nothing to show — which the
+ * case-study route turns into a redirect to the listing. Reading the
+ * published list rather than `allProjects` is what makes a draft's direct
+ * URL bounce in production while still being reachable in dev.
+ *
+ * @param {string} slug
+ * @returns {object|undefined}
+ */
 export function getProject(slug) {
-  return allProjects.find((p) => p.slug === slug);
+  return sortedProjects.find((p) => p.slug === slug);
 }
 
-/** @returns {object|undefined} the project after `slug`, wrapping at the end. */
+/**
+ * The project after `slug`, wrapping at the end.
+ *
+ * @param {string} slug
+ * @returns {object|undefined} undefined when `slug` isn't the only project,
+ *   since a "next" pointing back at itself is not a next.
+ */
 export function getNextProject(slug) {
   const i = sortedProjects.findIndex((p) => p.slug === slug);
-  if (i === -1) return undefined;
+  if (i === -1 || sortedProjects.length < 2) return undefined;
   return sortedProjects[(i + 1) % sortedProjects.length];
 }
 

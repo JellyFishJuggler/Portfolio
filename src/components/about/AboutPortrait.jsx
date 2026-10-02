@@ -26,8 +26,17 @@ export function AboutPortrait() {
           alt={portrait.alt}
           width={portrait.width}
           height={portrait.height}
+          /* Above the fold at every viewport tested, and `contain` means the
+             first paint without it would be an empty column. */
           loading="eager"
           decoding="async"
+          onError={(event) => {
+            /* One retry against the PNG the WebP was made from. React reuses
+               the node, so the guard keeps a genuinely missing file from
+               looping. */
+            const img = event.currentTarget;
+            if (img.src.endsWith(portrait.src)) img.src = portrait.fallbackSrc;
+          }}
         />
       </div>
     </aside>

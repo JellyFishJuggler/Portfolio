@@ -1,3 +1,12 @@
-@import "tailwindcss";
+/* Tailwind is imported for preflight and the theme layer only — every rule in
+   this codebase is a CSS Module apart from one utility on <body>. Its
+   automatic scanner reads the whole project and treats any word in prose as a
+   candidate utility, so words in data-file comments were being compiled into
+   dead rules. Scoping it to the files that can actually hold a class keeps the
+   generated CSS honest. */
+@import "tailwindcss" source(none);
+@source "../index.html";
+@source "./components/**/*.jsx";
+@source "./pages/**/*.jsx";
 @import "./styles/theme.css";
 @import "./styles/global.css";

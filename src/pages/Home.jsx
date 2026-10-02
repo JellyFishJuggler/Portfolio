@@ -2,9 +2,11 @@ import { useRef, useState } from "react";
 import { PageShell, SiteHeader } from "../components/layout";
 import { BentoGrid, HeroText, IntroBar, PhotoCard, StackTicker } from "../components/home";
 import { VisuallyHidden } from "../components/ui";
-import useDocumentTitle from "../hooks/useDocumentTitle";
+import useDocumentMeta from "../hooks/useDocumentMeta";
 import useIntro from "../hooks/useIntro";
 import { site } from "../data/site";
+import { routeMeta } from "../data/meta";
+import styles from "./Home.module.css";
 
 /**
  * Home. A fixed-viewport bento grid with an oversized wordmark behind it;
@@ -15,7 +17,7 @@ import { site } from "../data/site";
  * phase it reports rides on the shell as `data-intro` for the reveal styles.
  */
 export default function Home() {
-  useDocumentTitle("Srijan Gupta — AI/ML Engineer");
+  useDocumentMeta(routeMeta["/"]);
   const [active, setActive] = useState(null);
   const heroRef = useRef(null);
   const barRef = useRef(null);
@@ -31,25 +33,38 @@ export default function Home() {
     <PageShell compact introPhase={phase}>
       <SiteHeader variant="name" inert={running} />
 
-      {/* The wordmark behind the grid is decorative; this is the real h1. */}
-      <h1 inert={running}>
-        <VisuallyHidden>
-          {site.name} — {site.role}
-        </VisuallyHidden>
-      </h1>
+      {/* One main for the whole page: the wordmark and the real heading
+          belong inside the landmark, not loose beside it. */}
+      <main id="main" tabIndex={-1} className={styles.main}>
+        {/* The wordmark behind the grid is decorative; this is the real h1. */}
+        <h1 inert={running}>
+          <VisuallyHidden>
+            {site.name} — {site.role}
+          </VisuallyHidden>
+        </h1>
 
-      <HeroText text={active ?? site.name} heroRef={heroRef} />
+        <HeroText text={active ?? site.name} heroRef={heroRef} />
 
-      {/* Mounted with the wordmark, not before it: the bar's own fade-in is
-          timed from here. */}
-      {bar && <IntroBar progress={progress} barRef={barRef} top={barTop} />}
+        {/* Mounted with the wordmark, not before it: the bar's own fade-in is
+            timed from here. */}
+        {bar && <IntroBar progress={progress} barRef={barRef} top={barTop} />}
 
-      <BentoGrid
-        onActive={running ? undefined : setActive}
-        inert={running}
-        photo={<PhotoCard src={site.photo} alt={site.name} />}
-        ticker={<StackTicker items={site.stack} />}
-      />
+        <BentoGrid
+          onActive={running ? undefined : setActive}
+          inert={running}
+          photo={
+            <PhotoCard
+              src={site.photo}
+              fallbackSrc={site.photoFallback}
+              alt={site.name}
+              width={832}
+              height={1071}
+            />
+          }
+          ticker={<StackTicker items={site.stack} />}
+        />
+      </main>
+
     </PageShell>
   );
 }
