@@ -399,8 +399,13 @@ export function publishedProjects({ prod = import.meta.env?.PROD ?? false } = {}
   return prod ? allProjects.filter(isPublishable) : allProjects;
 }
 
-/** Sorted by explicit `order`, then by declaration order for the rest. */
-export const sortedProjects = allProjects
+/**
+ * The listing, in display order: publishable only, sorted by explicit
+ * `order` and then by declaration order for the rest. This is what the grid
+ * and the next-project link read, so a draft project is invisible in both
+ * without either consumer needing to know about the filter.
+ */
+export const sortedProjects = publishedProjects()
   .map((project, index) => ({ project, index }))
   .sort(
     (a, b) =>
@@ -409,15 +414,29 @@ export const sortedProjects = allProjects
   )
   .map(({ project }) => project);
 
-/** @returns {object|undefined} the project for `slug`. */
+/**
+ * A project for a URL, or undefined if there is nothing to show — which the
+ * case-study route turns into a redirect to the listing. Reading the
+ * published list rather than `allProjects` is what makes a draft's direct
+ * URL bounce in production while still being reachable in dev.
+ *
+ * @param {string} slug
+ * @returns {object|undefined}
+ */
 export function getProject(slug) {
-  return allProjects.find((p) => p.slug === slug);
+  return sortedProjects.find((p) => p.slug === slug);
 }
 
-/** @returns {object|undefined} the project after `slug`, wrapping at the end. */
+/**
+ * The project after `slug`, wrapping at the end.
+ *
+ * @param {string} slug
+ * @returns {object|undefined} undefined when `slug` isn't the only project,
+ *   since a "next" pointing back at itself is not a next.
+ */
 export function getNextProject(slug) {
   const i = sortedProjects.findIndex((p) => p.slug === slug);
-  if (i === -1) return undefined;
+  if (i === -1 || sortedProjects.length < 2) return undefined;
   return sortedProjects[(i + 1) % sortedProjects.length];
 }
 

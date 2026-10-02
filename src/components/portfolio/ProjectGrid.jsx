@@ -6,11 +6,14 @@ import styles from "./ProjectGrid.module.css";
  * than stretching across the row.
  *
  * @param {object} props
- * @param {object[]} props.projects - already-ordered entries from data/projects.
+ * @param {object[]} props.projects - already-ordered, already-filtered entries
+ *   from data/projects.
+ * @param {string} [props.emptyMessage] - what to say when `projects` is empty,
+ *   which is how the page reads when every entry is still a draft.
  */
-export function ProjectGrid({ projects }) {
+export function ProjectGrid({ projects, emptyMessage }) {
   if (projects.length === 0) {
-    return <p className={styles.empty}>No projects yet.</p>;
+    return <p className={styles.empty}>{emptyMessage}</p>;
   }
 
   return (
