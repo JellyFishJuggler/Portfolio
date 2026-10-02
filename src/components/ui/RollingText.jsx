@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { cx } from "../../utils/cx";
 import styles from "./RollingText.module.css";
 
@@ -111,7 +111,7 @@ export function RollingText({
   const layer = (variants) => (
     <span className={styles.layer} aria-hidden="true">
       {list.map((ch, i) => (
-        <motion.span
+        <m.span
           key={`${i}:${ch}`}
           className={styles.char}
           variants={variants}
@@ -119,7 +119,7 @@ export function RollingText({
           transition={{ ...spring, delay: i * step }}
         >
           {ch}
-        </motion.span>
+        </m.span>
       ))}
     </span>
   );

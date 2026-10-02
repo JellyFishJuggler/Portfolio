@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { cx } from "../../utils/cx";
 
 /* One soft rise per group, groups offset slightly so a page cascades in
@@ -31,7 +31,7 @@ export function Reveal({ children, className, as = "div", group }) {
     return <Tag className={className}>{children}</Tag>;
   }
 
-  const MotionTag = motion[as] ?? motion.div;
+  const MotionTag = m[as] ?? m.div;
   const from = { opacity: 0, y: 16 };
   const to = { opacity: 1, y: 0 };
   const transition = { duration: DURATION, ease: [0.22, 1, 0.36, 1] };

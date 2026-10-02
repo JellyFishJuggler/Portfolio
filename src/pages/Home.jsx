@@ -48,7 +48,15 @@ export default function Home() {
       <BentoGrid
         onActive={running ? undefined : setActive}
         inert={running}
-        photo={<PhotoCard src={site.photo} alt={site.name} />}
+        photo={
+          <PhotoCard
+            src={site.photo}
+            fallbackSrc={site.photoFallback}
+            alt={site.name}
+            width={832}
+            height={1071}
+          />
+        }
         ticker={<StackTicker items={site.stack} />}
       />
     </PageShell>

@@ -38,7 +38,18 @@ export const site = {
   /** Reused verbatim as the meta description and the og/twitter description. */
   description:
     "Srijan Gupta — AI/ML Engineer building machine learning systems and interfaces.",
-  photo: "/img/pfp.png",
+  /**
+   * The portrait, in WebP — same 832x1071 pixels as the PNG it was made from,
+   * so nothing is upscaled and the home tile's bottom-anchored crop is
+   * unchanged. 45 kB instead of 1.19 MB.
+   *
+   * The alpha channel is carried whenever the source has one; this particular
+   * PNG is fully opaque, so the encoder omits an empty channel. `pfp.png`
+   * stays on disk and is what PhotoCard falls back to if this file ever fails
+   * to load.
+   */
+  photo: "/img/pfp.webp",
+  photoFallback: "/img/pfp.png",
   /**
    * Resume. The PDF lives at public/resume/SRIJAN_RESUME.pdf and is served
    * from /resume/SRIJAN_RESUME.pdf by Vite. Opens in a new tab so the
