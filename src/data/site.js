@@ -29,6 +29,15 @@ export const site = {
   name: "Srijan Gupta",
   role: "AI/ML Engineer",
   timeZone: "Asia/Kolkata",
+  /**
+   * The canonical origin, no trailing slash. Used for the sitemap
+   * (scripts/generate-sitemap.mjs) and the share tags in index.html, so
+   * there is exactly one place to change if the domain moves.
+   */
+  siteUrl: "https://www.srijan.website",
+  /** Reused verbatim as the meta description and the og/twitter description. */
+  description:
+    "Srijan Gupta — AI/ML Engineer building machine learning systems and interfaces.",
   photo: "/img/pfp.png",
   /**
    * Resume. The PDF lives at public/resume/SRIJAN_RESUME.pdf and is served

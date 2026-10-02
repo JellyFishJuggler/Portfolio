@@ -337,6 +337,68 @@ export const allProjects = projects.map((p) => ({
   ...p,
 }));
 
+/**
+ * A project is safe to ship only once its copy is finished. Draft entries
+ * carry a literal "TODO" in the field that still needs writing, which is
+ * cheap to spot in review and impossible to miss in a search, so it doubles
+ * as the flag: anything matching is held back from the public listing, from
+ * the next-project link and from the sitemap, but stays visible in dev.
+ */
+const TODO_PATTERN = /\bTODO\b/;
+
+/**
+ * Every string in a project that still carries a TODO marker, as
+ * `"section[3].rows[0].body"`. Paths are dotted so a warning points at the
+ * exact field to finish.
+ *
+ * @param {object} project
+ * @returns {string[]} dotted paths, empty when the project is clean.
+ */
+export function todoFields(project) {
+  const hits = [];
+
+  const walk = (value, path) => {
+    if (typeof value === "string") {
+      if (TODO_PATTERN.test(value)) hits.push(path);
+      return;
+    }
+    if (Array.isArray(value)) {
+      value.forEach((item, i) => walk(item, `${path}[${i}]`));
+      return;
+    }
+    if (value && typeof value === "object") {
+      Object.entries(value).forEach(([key, child]) => walk(child, `${path}.${key}`));
+    }
+  };
+
+  walk(project, "");
+  /* The marker in the `slug` itself would break routing rather than copy, so
+     it is reported but not treated as a publish blocker. */
+  return hits.filter((path) => !path.startsWith(".slug"));
+}
+
+/**
+ * @param {object} project
+ * @returns {boolean} whether `project` is finished enough to show publicly.
+ */
+export function isPublishable(project) {
+  return todoFields(project).length === 0;
+}
+
+/**
+ * The projects the app is allowed to show. In a production build anything
+ * still holding a TODO is filtered out; in dev every project stays visible so
+ * work in progress is easy to click through.
+ *
+ * @param {object} [options]
+ * @param {boolean} [options.prod] - override the environment check. Build
+ *   scripts pass this explicitly since they run outside Vite.
+ * @returns {object[]}
+ */
+export function publishedProjects({ prod = import.meta.env?.PROD ?? false } = {}) {
+  return prod ? allProjects.filter(isPublishable) : allProjects;
+}
+
 /** Sorted by explicit `order`, then by declaration order for the rest. */
 export const sortedProjects = allProjects
   .map((project, index) => ({ project, index }))
