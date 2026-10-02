@@ -18,13 +18,15 @@ export default function Portfolio() {
     <PageShell constrain>
       <SiteHeader variant="home" />
 
-      <Reveal group={0}>
-        <PageHeading>{portfolioIntro}</PageHeading>
-      </Reveal>
+      <main id="main" tabIndex={-1}>
+        <Reveal group={0}>
+          <PageHeading>{portfolioIntro}</PageHeading>
+        </Reveal>
 
-      <Reveal group={1}>
-        <ProjectGrid projects={sortedProjects} emptyMessage={portfolioEmpty} />
-      </Reveal>
+        <Reveal group={1}>
+          <ProjectGrid projects={sortedProjects} emptyMessage={portfolioEmpty} />
+        </Reveal>
+      </main>
 
       <SiteFooter topSpace={150} />
     </PageShell>

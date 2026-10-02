@@ -1,0 +1,24 @@
+/* Off-screen until focused. Positioned rather than clipped so it never
+   occupies layout space, and lifted clear of the fixed header's own height
+   so the hidden state is completely outside the viewport. */
+.skip {
+  position: fixed;
+  top: var(--sp-24);
+  left: var(--sp-24);
+  z-index: 100;
+  /* 12px rather than the --sp-24 floor: this is a control's own padding, not
+     layout spacing, and the token scale would make the link a 71px slab. */
+  padding: 12px var(--sp-32);
+  border-radius: var(--radius-sm);
+  background: var(--fg);
+  color: var(--bg);
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label);
+  text-decoration: none;
+  transform: translateY(calc(-1 * var(--header-h) - var(--sp-48)));
+  transition: transform var(--dur) var(--ease);
+}
+
+.skip:focus {
+  transform: none;
+}

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { m, useReducedMotion } from "framer-motion";
 import { cx } from "../../utils/cx";
+import VisuallyHidden from "./VisuallyHidden";
 import styles from "./RollingText.module.css";
 
 /**
@@ -9,8 +10,8 @@ import styles from "./RollingText.module.css";
  * below, rippling character by character. Purely transform-driven, driven
  * by the boolean `active` state so it is interruptible and reversible.
  *
- * The root exposes the full label as its accessible name; both layers are
- * aria-hidden so the text is read exactly once. Text stays selectable.
+ * Both animated layers are aria-hidden duplicates, and a visually hidden copy
+ * carries the label, so it is announced exactly once. Text stays selectable.
  *
  * @param {object} props
  * @param {string} props.text - the label; also the accessible name.
@@ -95,11 +96,8 @@ export function RollingText({
   }, [reduce, trigger, set]);
 
   if (reduce) {
-    return (
-      <span className={cx(styles.root, className)} aria-label={text}>
-        {text}
-      </span>
-    );
+    /* No roll means no duplicate layers, so the text is the real thing. */
+    return <span className={cx(styles.root, className)}>{text}</span>;
   }
 
   /* A damped spring rather than a fixed-duration tween: reversing mid-roll
@@ -125,7 +123,10 @@ export function RollingText({
   );
 
   return (
-    <span ref={rootRef} className={cx(styles.root, className)} aria-label={text}>
+    <span ref={rootRef} className={cx(styles.root, className)}>
+      {/* aria-label is only valid on elements that can take a name; the root
+          here is a plain span, so the accessible name comes from real text. */}
+      <VisuallyHidden>{text}</VisuallyHidden>
       {layer({ idle: { y: "0%" }, active: { y: "-100%" } })}
       {layer({ idle: { y: "100%" }, active: { y: "0%" } })}
     </span>

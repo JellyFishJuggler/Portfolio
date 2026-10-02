@@ -15,7 +15,7 @@ export function StackTicker({ items }) {
 
   return (
     <Card frosted>
-      <Marquee duration={22} pauseOnHover aria-label={`Stack: ${items.join(", ")}`}>
+      <Marquee duration={22} pauseOnHover label={`Stack: ${items.join(", ")}`}>
         {tiles}
       </Marquee>
     </Card>

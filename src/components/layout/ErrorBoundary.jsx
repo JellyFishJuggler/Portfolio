@@ -43,21 +43,23 @@ export class ErrorBoundary extends Component {
       <PageShell constrain>
         <SiteHeader variant="home" />
 
-        <Card size="md" className={styles.card}>
-          <p className={styles.code}>Error</p>
-          <PageHeading className={styles.heading}>Something broke on this page.</PageHeading>
-          <p className={styles.body}>
-            The rest of the site is fine. Head back to the portfolio, or reload to try again.
-          </p>
-          <div className={styles.actions}>
-            <Link className={styles.link} to="/portfolio">
-              View portfolio
-            </Link>
-            <button className={styles.link} type="button" onClick={() => window.location.reload()}>
-              Reload this page
-            </button>
-          </div>
-        </Card>
+        <main id="main" tabIndex={-1}>
+          <Card size="md" className={styles.card}>
+            <p className={styles.code}>Error</p>
+            <PageHeading className={styles.heading}>Something broke on this page.</PageHeading>
+            <p className={styles.body}>
+              The rest of the site is fine. Head back to the portfolio, or reload to try again.
+            </p>
+            <div className={styles.actions}>
+              <Link className={styles.link} to="/portfolio">
+                View portfolio
+              </Link>
+              <button className={styles.link} type="button" onClick={() => window.location.reload()}>
+                Reload this page
+              </button>
+            </div>
+          </Card>
+        </main>
 
         <SiteFooter />
       </PageShell>

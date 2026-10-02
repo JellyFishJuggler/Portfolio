@@ -264,7 +264,12 @@
 html.light {
   --bg: #ecebe8;
   --fg: #111;
-  --muted: rgba(17, 17, 17, 0.62);
+  /* 0.68 and 0.64 rather than the dark theme's 0.7/0.55: a light page needs
+     more ink behind the text to reach the same contrast. Both clear 4.5:1
+     against --bg, --card and --card-hover, which the old 0.62/0.55 did not —
+     --muted-2 measured 3.96:1 on --bg, and it only ever labels 14-15px text.
+     The 0.68/0.64 gap keeps --muted reading as the stronger of the two. */
+  --muted: rgba(17, 17, 17, 0.68);
   --card: rgba(0, 0, 0, 0.045);
   --card-hover: rgba(0, 0, 0, 0.075);
   --edge: rgba(0, 0, 0, 0.08);
@@ -285,7 +290,7 @@ html.light {
   --bento-fg: var(--fg);
   --bento-arrow: var(--arrow);
   --grain-bento: 0.09;
-  --muted-2: rgba(17, 17, 17, 0.55);
+  --muted-2: rgba(17, 17, 17, 0.64);
   --body: rgba(17, 17, 17, 0.85);
   --footer-rule: rgba(0, 0, 0, 0.12);
   --rule: rgba(0, 0, 0, 0.12);

@@ -19,16 +19,18 @@ export default function Contact() {
     <PageShell constrain>
       <SiteHeader variant="home" />
 
-      <Reveal group={0}>
-        <PageHeading>{contact.heading}</PageHeading>
-      </Reveal>
+      <main id="main" tabIndex={-1}>
+        <Reveal group={0}>
+          <PageHeading>{contact.heading}</PageHeading>
+        </Reveal>
 
-      <Reveal group={1} className={styles.grid}>
-        <ContactDetails />
-        <Card className={styles.card}>
-          <ContactForm />
-        </Card>
-      </Reveal>
+        <Reveal group={1} className={styles.grid}>
+          <ContactDetails />
+          <Card className={styles.card}>
+            <ContactForm />
+          </Card>
+        </Reveal>
+      </main>
 
       <SiteFooter topSpace={81} />
     </PageShell>

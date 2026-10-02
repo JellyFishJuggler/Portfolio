@@ -22,16 +22,18 @@ export default function NotFound() {
     <PageShell constrain>
       <SiteHeader variant="home" />
 
-      <Card size="md" className={styles.card}>
-        <p className={styles.code}>404</p>
-        <PageHeading className={styles.heading}>This page doesn&apos;t exist yet.</PageHeading>
-        <p className={styles.body}>
-          This page doesn&apos;t exist. Head back to the portfolio.
-        </p>
-        <Link className={styles.link} to="/portfolio">
-          View portfolio
-        </Link>
-      </Card>
+      <main id="main" tabIndex={-1}>
+        <Card size="md" className={styles.card}>
+          <p className={styles.code}>404</p>
+          <PageHeading className={styles.heading}>This page doesn&apos;t exist yet.</PageHeading>
+          <p className={styles.body}>
+            This page doesn&apos;t exist. Head back to the portfolio.
+          </p>
+          <Link className={styles.link} to="/portfolio">
+            View portfolio
+          </Link>
+        </Card>
+      </main>
 
       <SiteFooter />
     </PageShell>
