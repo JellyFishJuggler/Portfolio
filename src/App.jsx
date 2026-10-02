@@ -1,6 +1,7 @@
 import { Suspense, lazy, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
+import { ErrorBoundary } from "./components/layout";
 import Home from "./pages/Home";
 import { markIntroSeen } from "./hooks/useIntro";
 
@@ -29,16 +30,20 @@ export default function App() {
     <>
       <ScrollToTop />
       {/* Each page keeps its own layout, so the gap between routes is meant to
-          be empty rather than a placeholder. */}
+          be empty rather than a placeholder. The boundary sits inside it so a
+          page that throws while rendering still lands on a styled fallback
+          instead of an empty document. */}
       <Suspense fallback={null}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/portfolio/:slug" element={<CaseStudy />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <ErrorBoundary>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/portfolio/:slug" element={<CaseStudy />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </ErrorBoundary>
       </Suspense>
     </>
   );
